@@ -1,0 +1,65 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+\large
+
+\noindent\textbf{B. 4019.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Bizonyítsuk be, hogy minden n pozitív egész számra
+\[\frac{1}{3^2} + \frac{1}{5^2} + \ldots + \frac{1}{{(2n+1)}^2} < \frac{1}{4}.\]
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Úgy fogjuk bebízonyítani az állítást, hogy megmutatjuk, hogy az $\frac{1}{4}$ egy felsõ korlátja a fenti sornak. Ehhez felhasználunk egy ismert határértéket:
+Tudjuk, hogy a négyzetszámok reciprokösszegének határértéke $\frac{\pi^2}{6}$ (Forrás: Urbán János - Határértékszámítás (I. fejezet/5., 75. gyakorlófeladat, megoldása megtalálható a fejezet utolsó részében)):
+\[\lim_{n\to\infty}\sum_{i=1}^{n}\frac{1}{i^2} = \frac{\pi^2}{6}\]
+
+Ebbõl az $a_n = \frac{1}{n^2}$ sorozatból ki kell vennünk a páros négyzetszámok reciprokát, illetve az 1-et.
+
+Vegyük ki elõszõr csak az 1-et, majd az elsõ két páros, illetve az elsõ két páratlan négyzetszám reciprok összegét ($\frac{1}{2^2}+\frac{1}{3^2}+\frac{1}{4^2}+\frac{1}{5^2}$). Mivel az $a_n$ sorozat szigorúan monoton nõ, ezért a határértéke egyben egy felsõ korlát is, tehát:
+
+\[\frac{\pi^2}{6} - 1 - \frac{1}{2^2} - \frac{1}{3^2} - \frac{1}{4^2} - \frac{1}{5^2} > \frac{1}{6^2}+\frac{1}{7^2}+\frac{1}{8^2}+\ldots+\frac{1}{(2n)^2}+\frac{1}{(2n+1)^2}\]
+
+Most ha megnézzük olyan lesz a sorozat, hogy felváltva jönnek a páros és páratlan négyzetszámok reciprokai. Tudjuk, hogy minden elem kisebb az elõtte lévõnél (hiszen a nevezõ folyamatosan nõ). Írjunk mindegyik páros négyzetszám reciprokának a helyére a nála nagyobb páratlan négyzetszám reciprokát (ami értékben kisebb, tehát végül az eredetinél egy kisebb sorozatot kapunk):
+
+\[\frac{1}{6^2}+\frac{1}{7^2}+\frac{1}{8^2}+\ldots+\frac{1}{(2n)^2}+\frac{1}{(2n+1)^2} >  \frac{1}{7^2}+\frac{1}{7^2}+\frac{1}{9^2}+\frac{1}{9^2}+\ldots+\frac{1}{(2n+1)^2}+\frac{1}{(2n+1)^2}\]
+
+Tehát ebbõl következik, hogy:
+
+\[\frac{\pi^2}{6} - 1 - \frac{1}{2^2} - \frac{1}{3^2} - \frac{1}{4^2} - \frac{1}{5^2} >  \frac{1}{7^2}+\frac{1}{7^2}+\frac{1}{9^2}+\frac{1}{9^2}+\ldots+\frac{1}{(2n+1)^2}+\frac{1}{(2n+1)^2}\]
+
+Osszuk le mindkét oldalt kettõvel:
+
+\[\frac{\frac{\pi^2}{6} - 1 - \frac{1}{2^2} - \frac{1}{3^2} - \frac{1}{4^2} - \frac{1}{5^2}}{2} >  \frac{1}{7^2}+\frac{1}{9^2}+\frac{1}{11^2}+\ldots+\frac{1}{(2n-1)^2}+\frac{1}{(2n+1)^2}\]
+
+Ha jól megnézzük ez a sorozat már majdnem olyan mint a feladatban kitûzött, csak hiányzik az elejérõl a $\frac{1}{3^2}+\frac{1}{5^2}$. Adjuk ezt hozzá:
+
+\[\frac{\frac{\pi^2}{6} - 1 - \frac{1}{2^2} - \frac{1}{3^2} - \frac{1}{4^2} - \frac{1}{5^2}}{2} + \frac{1}{3^2}+\frac{1}{5^2} > \frac{1}{3^2}+\frac{1}{5^2}+\frac{1}{7^2}+\frac{1}{9^2}+\frac{1}{11^2}+\ldots+\frac{1}{(2n-1)^2}+\frac{1}{(2n+1)^2}\]
+
+A bal oldalnak felsõ korlátja a 0,2418, így a jobb oldalnak is. Mivel a jobb oldalnak felsõ korlátja a 0,2418, ezért az $\frac{1}{4}$ is (hiszen $\frac{1}{4} > 0,2418$), tehát beláttuk az állítást:
+
+\[\mathbf{\frac{1}{4} > \frac{1}{3^2}+\frac{1}{5^2}+\frac{1}{7^2}+\frac{1}{9^2}+\frac{1}{11^2}+\ldots+\frac{1}{(2n-1)^2}+\frac{1}{(2n+1)^2}}\]
+
+\end{document}

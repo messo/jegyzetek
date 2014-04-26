@@ -1,0 +1,74 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3991.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:}\\ Az $ABC$ egyenlõszárú háromszögben $C$-nél derékszög van. Legyen $P$ a $BC$ oldal egy tetszõleges pontja, és jelölje $G$ a $C$ pont $AP$-re való merõleges vetületét. Legyen $H$ az $A$P szakasz azon pontja, amelyre $AH=CG$. Milyen szög alatt látszik $AB$ felezõpontjából a $GH$ szakasz?\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.87,-1.63)(6.37,6.87)
+\pspolygon(0.88,1.16)(1.05,0.85)(1.36,1.03)(1.19,1.34)
+\psline(-1.33,5.87)(-1.33,-0.07)
+\psline(-1.33,-0.07)(4.6,-0.07)
+\psline(4.6,-0.07)(-1.33,5.87)
+\psline(-1.33,5.87)(1.97,-0.07)
+\psplot[linestyle=dashed,dash=9pt 9pt]{-2.87}{6.37}{(--4--3.3*x)/5.93}
+\psline(1.19,1.34)(1.63,2.9)
+\psline(1.63,2.9)(0.07,3.35)
+\pscustom{\parametricplot{2.8637698662700406}{4.434566193064937}{0.67*cos(t)+1.63|0.67*sin(t)+2.9}\lineto(1.63,2.9)\closepath}
+\psline(-1.33,-0.07)(1.63,2.9)
+\psdots(-1.33,5.87)
+\rput[bl](-1.7,6.13){A}
+\psdots(-1.33,-0.07)
+\rput[bl](-1.67,-0.83){C}
+\psdots[linecolor=darkgray](4.6,-0.07)
+\rput[bl](4.83,-0.63){\darkgray{B}}
+\psdots(1.97,-0.07)
+\rput[bl](1.93,-0.67){P}
+\psdots[linecolor=darkgray](1.19,1.34)
+\rput[bl](0.6,1.43){\darkgray{G}}
+\psdots[linecolor=darkgray](0.07,3.35)
+\rput[bl](0.2,3.53){\darkgray{H}}
+\psdots[linecolor=darkgray](1.63,2.9)
+\rput[bl](1.77,3.1){\darkgray{F}}
+\rput[bl](1.1,2.7){$\alpha$}
+\end{pspicture*}}
+
+Sejtésünk az, hogy derékszög alatt látszik a $GH$ szakasz $F$-bõl, azaz az $AB$ oldal felezõpontjából.\\
+
+Forgassuk el az $AHF$ háromszöget $F$ körül $+90$°-al. $A$ képe $C$, hiszen tudjuk, hogy $CF$ merõleges $AB$-re, mivel egy egyenlõszárú háromszögben az alaphoz tartozó súlyvonal merõleges az alapra, illetve $CF=AF$, hiszen a derékszögû háromszögben az átfogóhoz tartozó súlyvonal hossza megegyezik az átfogó felével. Az $AH$ egyenese merõleges a $CG$ egyenesére, így $AH$ elforgatottja párhuzamos lesz vele, de mivel $A$ képe $C$, ezért $AH$ képe rajta lesz a $CG$ egyenesen. Mivel $AH=CG$ (feladat szerint), ezért $H$ képe $G$. Mivel $F$ a forgatás centruma, ezért õ helyben marad. Tehát az $AHF$ háromszög $+90$°-os elforgatásával a $CGF$ háromszögbe jutunk. Emiatt $HF$ képe $GF$, tehát $HF$ és $GF$ 90°-ot zárnak be, azaz $HFG\sphericalangle=90$°.\\
+
+Beláttuk, hogy a $GH$ szakasz az $AB$ oldal felezõpontjából derékszögben látszik.\\
+
+\textbf{Diszkusszió:}
+\par \hspace{5pt} Ha $P$ a $BC$ oldal tetszõleges belsõ pontja akkor ez teljesen jó megoldás. Ha viszont $P$ a $C$ csúcsra illeszkedik, akkor $P$, $G$ és $C$ egybe esik, illetve $A$ és $H$ is, így $HFG\sphericalangle=AFC\sphericalangle$, de $AFC\sphericalangle$-ról tudjuk, hogy derékszög, hiszen $CF$ az $AB$ oldalhoz tartozó súlyvonal, ami viszont merõleges az alapra, hiszen egyenlõszárú háromszögrõl van szó. Tehát ekkor is derékszög alatt látszik.
+\par \hspace{5pt} Ha viszont $P$ a $B$ csúcsra illeszkedik, akkor $H$, $F$ és $G$ egy pontba esnek, azaz nem keletkezik látószög.
+
+
+\end{document}

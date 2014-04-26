@@ -1,0 +1,45 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[top=2cm,inner=2cm,bottom=2cm,outer=2cm]{geometry}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{titletoc}
+\usepackage{titlesec}
+\title{,,Maxwell'' egyenletek}
+\date{}
+
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\ddiv}{div}
+
+\begin{document}
+
+\maketitle 
+  
+\parindent 0pt
+
+Integrális alakok:
+\[\oint \vec{H} d\vec{r} = \int \vec{j} d\vec{A} + \int \frac{\delta \vec{D}}{\delta t} d\vec{A}\]
+\[\oint \vec{E} d\vec{r} = -\int \frac{\delta \vec{B}}{\delta t} d\vec{A}\]
+\[\oint \vec{D} d\vec{A} = \int \rho dV\]
+\[\oint \vec{B} d\vec{A} = 0\]
+Anyagi:
+\[\vec{D} = \varepsilon_0\varepsilon_r\vec{E}\]
+\[\vec{B} = \mu_0\mu_r\vec{H}\]
+\[\vec{j} = \sigma \vec{E}\]
+Egyéb:
+\[\vec{F}_L = Q\vec{E} + Q\vec{v}\times\vec{B}\]
+\[\omega = \frac{1}{2}\vec{E}\vec{D} + \frac{1}{2}\vec{B}\vec{H}\]
+Differenciális:
+\[\rot \vec{H} = \vec{j} + \frac{\delta \vec{D}}{\delta t}\]
+\[\rot \vec{E} = -\frac{\delta \vec{B}}{\delta t}\]
+\[\ddiv \vec{D} = \rho\]
+\[\ddiv \vec{B} = 0\]
+  
+\end{document}

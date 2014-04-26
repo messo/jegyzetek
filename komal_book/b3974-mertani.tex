@@ -1,0 +1,69 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3974.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:}\\ Adott egy $ABC$ háromszög. Mi azon $P$ pontok mértani helye a síkban, amelyekre $AP^2+BP^2=CP^2$?\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+Vegyük fel a háromszöget egy koordináta-rendszerben, úgy hogy a $C$ pont legyen a $(0; 0)$, az $A$ pont legyen az $(x_1; y_1)$, a $B$ pont pedig az $(x_2; y_2)$. $P$ pontnak a koordinátája legyen $(x; y)$.
+
+\begin{figure}[ht]
+\centerline{\includegraphics{mertani_1.eps}}
+\caption{}
+\end{figure}
+
+Írjuk fel az állítást, és nézzük meg, hogy a szakaszokat, hogy írhatjuk fel a koordinátákkal:
+
+\[AP^2+BP^2=CP^2\]
+\[(x_1-x)^2+(y_1-y)^2\quad+\quad(x_2-x)^2+(y_2-y)^2=x^2+y^2\]
+\[x_1^2+x^2-2xx_1+y_1^2+y^2-2yy_1+x_2^2+x^2-2xx_2+y_2^2+y^2-2yy_2=x^2+y^2\]
+\[x_1^2+x^2-2xx_1+y_1^2+y^2-2yy_1+x_2^2-2xx_2+y_2^2-2yy_2=0\]
+\[x^2+y^2+x_1^2+y_1^2+x_2^2+y_2^2-2xx_1-2xx_2-2yy_1-2yy_2=0\]
+\[x^2-2x(x_1+x_2)+y^2-2y(y_1+y_2)=-(x_1^2+y_1^2+x_2^2+y_2^2)\]
+
+Ebbõl az alakból láthatjuk, hogy körrõl van szó. Alakítsuk át köregyenlet alakba (a bal oldalt teljes négyzeteket csinálunk, majd korrigálunk).
+
+\[\Big(x-(x_1+x_2)\Big)^2+\Big(y-(y_1+y_2)\Big)^2-\Big((x_1+x_2)^2+(y_1+y_2)^2\Big)=-\Big(x_1^2+y_1^2+x_2^2+y_2^2\Big)\]
+\[\Big(x-(x_1+x_2)\Big)^2+\Big(y-(y_1+y_2)\Big)^2=-\Big(x_1^2+y_1^2+x_2^2+y_2^2\Big)+\Big((x_1+x_2)^2+(y_1+y_2)^2\Big)\]
+
+Innen leolvashatjuk a jellemzõket, hiszen a kör egyenlete:
+
+\[(x-u)^2+(y-v)^2=r^2 \qquad \hbox{ahol $(u; v)$ a középpont, illetve $r$ a sugár}\]
+
+Tehát a $P$ pont egy $(x_1+x_2; y_1+y_2)$ középpontú és $\sqrt{-\Big(x_1^2+y_1^2+x_2^2+y_2^2\Big)+\Big((x_1+x_2)^2+(y_1+y_2)^2\Big)}$ sugarú körön lesz rajta.\\
+
+Ha a gyök alatti kifejezés negatív, akkor nem lesz a feladatnak megfelelõ tulajdonságú $P$ pont, ha nulla, akkor pedig csak egy pont lesz (hiszen 0 sugarú kör):
+\[-\Big(x_1^2+y_1^2+x_2^2+y_2^2\Big)+\Big((x_1+x_2)^2+(y_1+y_2)^2\Big) \leq 0\]
+\[-\Big(x_1^2+y_1^2+x_2^2+y_2^2\Big)+x_1^2+x_2^2+2x_1x_2+y_1^2+y_2^2+2y_1y_2 \leq 0\]
+\[2x_1x_2+2y_1y_2 \leq 0\]
+\[x_1x_2+y_1y_2 \leq 0\]
+
+Tehát ha $x_1x_2+y_1y_2 < 0$, akkor nincs olyan $P$ pont, amire teljesül, ha $x_1x_2+y_1y_2 = 0$, akkor pontosan egy ilyen pont van, mégpedig a $(x_1+x_2; y_1+y_2)$, ha pedig pozitív, akkor az elõbb felírt képlet által meghatározott kör a mértani helye a $P$ pontoknak.
+
+
+\end{document}

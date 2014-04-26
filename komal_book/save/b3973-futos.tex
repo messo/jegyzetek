@@ -1,0 +1,74 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 40pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3973.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:} Hányféleképpen lehet a sakktáblán elhelyezni 14 futót úgy, hogy semelyik kettõ ne üsse egymást?\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+Rakjunk fel 8 futót a táblára a legalsó sorba (világosszürke). Nézzük meg, hogy ekkor hova rakhatjuk a maradék 6 futót (sötétszürke):
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk__tabla.eps}}
+\caption{}
+\end{figure}
+
+Az ábrát megfigyelve, nyílvánvaló, hogy csak a legfelsõ sorba rakhatjuk õket, ha bárhová máshova raknánk a 6 közül az egyiket, akkor már nem tudnánk 6 futót odarakni.
+
+\textbf{Tehát egy megoldásunk már van} (illetve ezt forgathatjuk, hiszen számít a tábla betûzése/számozása (sakktábláról van szó), de ezt majd csak a végén vesszük figyelembe):
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk__tabla_megoldegy.eps}}
+\caption{Megoldás 1.}
+\end{figure}
+
+További megoldásokhoz, próbáljunk elvenni egy futót és rakjuk máshova. A felsõ 6-os futóból nem veszünk el, hiszen tudjuk, hogy azt a 6 futót csak oda rakhatjuk le, ha már alulra leraktuk a 8-at. Tehát az alsó 8-ból probálunk elvenni.\\
+
+Az nyílvánvaló, hogy a sarkokban lévõ 1-1 futót átrakhatjuk a vele átellenes sarokba, hiszen a sarkok csak az adott sarokból induló átlót fedik le. (Lásd \emph{3. ábra}). \textbf{Ezt is egy megoldásnak számítjuk} (forgatással kapjuk a többit, de majd a végén számoljuk).\\
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk__tabla_megoldketto.eps}}
+\caption{Megoldás 2.}
+\end{figure}
+
+Továbbá azt is észrevehetjük, hogy a széleknél lévõ futók - mondhatni - átlót fednek le (lefedett mezõ azt jelenti, hogy oda már nem tehetünk más futót, mert ütve lesz), ami meg van törve. Mozgassuk el a lent lévõ 8 futók közül egy futót (ami nem a sarokban van, hiszen azt az esetet már néztük) valamelyik törtátlón egészen a széléig. Ekkor észrevehetjük, hogy az elmozgatott futó üti a fent lévõ 6 futó közül valamelyiket. Ez a futó viszont szintén a tábla szélén van tehát egy törött átlót fed le. Az ütési problémát könnyen feloldhatjuk ha ezt a fent lévõ futót szintén az egyik törtátlón elmozgatjuk egészen a tábla széléig (természetesen úgy, hogy a két futó ne legyen egy mezõn, tehát a párhuzamos törtátlókon mozgatunk). A gondolatmenetet a \emph{4. ábra} mutatja be.
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk__tabla_megoldharom.eps}}
+\caption{Megoldás 3.}
+\end{figure}
+
+Mivel 6 pár ilyen futó van, akiket el tudunk mozgatni, ezért \textbf{ez az eset 6 megoldást ad}. (Nem kell megszoroznunk kettõvel, mert két irányba is mozgathatunk, hiszen a futók felállása ugyanaz lesz, csak az alsó és a felsõ csoportból elmozgatott 2 futó felcserélõdik, de a futókat nem különböztetjük meg, tehát ez nem ad új megoldást.)\\
+
+Viszont az elõzõ esetnél csak azt néztük, ha egyet mozgatunk. Mi történik, ha többet mozgatunk egy\-szerre? Hányféleképpen tehetjük ezt meg?
+Az biztos, hogy most is csak egy irányba érdemes csak mozgatni, mert ugyanaz lesz a vége az elõbbiekben tárgyaltak miatt. Most is mint az elõbb 6 db futót mozgathatunk összesen, hiszen a felsõ csoportba csak ennyi van. Ha kettõt mozgatunk, akkor az $\displaystyle{\binom{6}{2}=15}$, hiszen a 6 futó közül 2-t választunk ki, ha 3-at akkor: $\displaystyle{\binom{6}{3}=20}$, ha 4-et akkor:  $\displaystyle{\binom{6}{4}=15}$, ha 5-öt akkor: $\displaystyle{\binom{6}{5}=6}$. \textbf{Tehát akkor ez még 56 lehetõség.}\\
+
+Az elõbbi 56 lehetõség a \emph{2. ábrán} felrajzolt esetbõl következik. De hasonló mozgatásokat elvégezhetünk a \emph{3. ábrán} felrajzolt esetbõl is. Ám, ha ezeket megtesszük, akkor észrevehetjük, hogy ezek az esetek ugyanazok mint az elõzõek, csak elforgatva. Tehát ha \emph{2. ábrán} felrajzolt esetbõl 2 futót mozdítunk el, akkor az olyan mintha \emph{3. ábrán} felrajzolt esetbõl 4 futót mozgatnánk el, majd fordítanánk a táblán.\\
+
+\textbf{Minden esetet átnézve összesen 64 megoldást kaptunk.} Mivel sakktábláról van szó, ezért számít a betûzés/számozás, tehát a megoldást meg kell szoroznunk 4-el (hiszen a futók alatt a táblát háromszor elforgathatjuk 90°-al, plusz az eredeti állapot), hogy megkapjuk a valódi megoldást. \textbf{Tehát összesen 256-féleképpen tudunk elhelyezni 14 futót a sakktáblán, hogy ne üssék egymást.}
+
+\end{document}

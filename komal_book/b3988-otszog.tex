@@ -1,0 +1,118 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\noindent\textbf{B. 3988.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Egy konvex ötszög oldalainak felezõpontjai $F_1, F_2, F_3, F_4, F_5,$ ebben a sorrendben (az $F_5$ és az $F_1$ felezõpontokat tartalmazó oldalak közös csúcsa $A$). Legyen $P$ az a pont a síkban, amelyre a $PF_2F_3F_4$ négyszög paralelogramma. Bizonyítsuk be, hogy ekkor a $PF_5AF_1$ négyszög is paralelogramma. \\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+{\small\centerline{\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.17,-5.73)(9.13,5.07)
+\psline(-1.2,2.57)(3.77,3.93)
+\psline(3.77,3.93)(8.07,1.17)
+\psline(8.07,1.17)(6.5,-4.7)
+\psline(6.5,-4.7)(-0.17,-4.2)
+\psline(-0.17,-4.2)(-1.2,2.57)
+\psline(5.92,2.55)(7.28,-1.77)
+\psline(7.28,-1.77)(3.17,-4.45)
+\psline(3.17,-4.45)(1.8,-0.13)
+\psline(1.8,-0.13)(5.92,2.55)
+\psline[linestyle=dashed,dash=4pt 4pt](-0.68,-0.82)(1.8,-0.13)
+\psline[linestyle=dashed,dash=4pt 4pt](1.8,-0.13)(1.28,3.25)
+\psdots(-1.2,2.57)
+\rput[bl](-1.73,2.8){A}
+\psdots(3.77,3.93)
+\rput[bl](3.73,4.33){B}
+\psdots(8.07,1.17)
+\rput[bl](8.43,1.27){C}
+\psdots(6.5,-4.7)
+\rput[bl](6.73,-5.33){D}
+\psdots(-0.17,-4.2)
+\rput[bl](-0.77,-4.97){E}
+\psdots(1.28,3.25)
+\rput[bl](0.8,3.8){$F_1$}
+\psdots(5.92,2.55)
+\rput[bl](6.1,3.03){$F_2$}
+\psdots(7.28,-1.77)
+\rput[bl](7.77,-2.2){$F_3$}
+\psdots(3.17,-4.45)
+\rput[bl](2.93,-5.2){$F_4$}
+\psdots(-0.68,-0.82)
+\rput[bl](-1.53,-1.2){$F_5$}
+\psdots(1.8,-0.13)
+\rput[bl](1.43,-0.9){P}
+\end{pspicture*}}}
+
+Húzzuk be a $BE$ és a $BD$ szakaszokat:
+
+{\small\centerline{\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.17,-5.73)(9.13,5.07)
+\psline(-1.2,2.57)(3.77,3.93)
+\psline(3.77,3.93)(8.07,1.17)
+\psline(8.07,1.17)(6.5,-4.7)
+\psline(6.5,-4.7)(-0.17,-4.2)
+\psline(-0.17,-4.2)(-1.2,2.57)
+\psline(5.92,2.55)(7.28,-1.77)
+\psline(7.28,-1.77)(3.17,-4.45)
+\psline(3.17,-4.45)(1.8,-0.13)
+\psline(1.8,-0.13)(5.92,2.55)
+\psline[linestyle=dashed,dash=4pt 4pt](-0.68,-0.82)(1.8,-0.13)
+\psline[linestyle=dashed,dash=4pt 4pt](1.8,-0.13)(1.28,3.25)
+\psline[linestyle=dotted](3.77,3.93)(-0.17,-4.2)
+\psline[linestyle=dotted](3.77,3.93)(6.5,-4.7)
+\psdots(-1.2,2.57)
+\rput[bl](-1.73,2.8){A}
+\psdots(3.77,3.93)
+\rput[bl](3.73,4.33){B}
+\psdots(8.07,1.17)
+\rput[bl](8.43,1.27){C}
+\psdots(6.5,-4.7)
+\rput[bl](6.73,-5.33){D}
+\psdots(-0.17,-4.2)
+\rput[bl](-0.77,-4.97){E}
+\psdots(1.28,3.25)
+\rput[bl](0.8,3.8){$F_1$}
+\psdots(5.92,2.55)
+\rput[bl](6.1,3.03){$F_2$}
+\psdots(7.28,-1.77)
+\rput[bl](7.77,-2.2){$F_3$}
+\psdots(3.17,-4.45)
+\rput[bl](2.93,-5.2){$F_4$}
+\psdots(-0.68,-0.82)
+\rput[bl](-1.53,-1.2){$F_5$}
+\psdots(1.8,-0.13)
+\rput[bl](1.43,-0.9){P}
+\end{pspicture*}}}
+
+$F_2F_3$ a $CBD$ háromszög $BD$ oldalához tartozó középvonala, tehát $F_2F_3$ és $BD$ párhuzamos. Mivel $PF_2F_3F_4$ egy paralelogramma, ezért $PF_4$ és $F_2F_3$ párhuzamos. Összefoglalva:
+\[F_2F_3\parallel BD,\enskip \mbox{ illetve }\enskip F_2F_3\parallel PF_4 \enskip\rightarrow\enskip BD\parallel PF_4\]
+Tehát $BD$ és $PF_4$ is párhuzamosak. Azt is tudjuk, hogy $F_4$ felezõpontja az $ED$ oldalnak. Mivel $PF_4$ párhuzamos a $BD$-vel, és átmegy az $EBD$ háromszög $ED$ oldalának felezõpontján, ezért $PF_4$ nem lehet más, mint az $EBD$ háromszög $BD$ oldalához tartozó középvonala, azaz $P$ felezõpontja az $EB$ oldalnak.\\
+
+Mivel $P$ felezõpontja az $EB$ oldalnak, ezért $F_1P$ középvonala az $ABE$ háromszögnek, így $F_1P\parallel AE$, hasonlóan $F_5P\parallel AB$. Mivel $AE$ és $AF_5$ egyenese, illetve $AB$ és $AF_1$ egyenese egyebeesik, ezért
+\[F_1P\parallel AF_5 \enskip\mbox{ illetve }\enskip F_5P\parallel AF_1\]
+Ebbõl pedig rögtön következik, hogy \boldmath $PF_5AF_1$ \textbf{négyszög is egy paralelogramma.}
+
+\end{document}

@@ -1,0 +1,140 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4015.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Egy konvex négyszög átlói 45°-os szöget zárnak be. Állítsunk merõlegest a négyszög minden csúcsából a vele szomszédos két csúcsot összekötõ átló egyenesére. Hogyan aránylik a merõlegesek talppontjai által alkotott négyszög területe az eredeti négyszög területéhez?\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+\noindent Vegyünk fel egy koordinátarendszert és helyezzük bele a négyszöget. De úgy, hogy az egyik átlója az $x=y$ egyenes legyen, a másik pedig az $x$ tengely. Ekkor teljesül az, hogy 45°-os szöget zár be a két átló:\\
+
+\centerline{\normalsize
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-3.04,-3.4)(4.2,2.52)
+\psaxes[xAxis=true,yAxis=true,labels=none,Dx=1,Dy=1,ticksize=0pt 0,subticks=0]{->}(0,0)(-3.04,-3.4)(3.58,2.52)
+\psplot[linestyle=dashed,dash=5pt 5pt]{-3.04}{3.58}{(-0-1*x)/-1}
+\psline(-2.64,-2.64)(3,0)
+\psline(3,0)(2,2)
+\psline(2,2)(-2.14,0)
+\psline(-2.14,0)(-2.64,-2.64)
+\psdots(2,2)
+\rput[bl](2.22,1.9){$A(a;a)$}
+\psdots(3,0)
+\rput[bl](2.94,-0.52){$B(b;0)$}
+\psdots(-2.64,-2.64)
+\rput[bl](-2.72,-3.12){$C(c;c)$}
+\psdots(-2.14,0)
+\rput[bl](-3,0.24){$D(d;0)$}
+\end{pspicture*}\large}
+
+Vetítsük merõlegesen a megfelelõ átlókra az $A$, $B$, $C$ és $D$ pontokat, így kapjuk rendre $A'$, $B'$, $C'$ és $D'$ pontokat:\\
+
+\centerline{\normalsize
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-3.04,-3.4)(4.2,2.52)
+\psaxes[xAxis=true,yAxis=true,labels=none,Dx=1,Dy=1,ticksize=0pt 0,subticks=0]{->}(0,0)(-3.04,-3.4)(3.58,2.52)
+\pspolygon[linestyle=dashed,dash=1pt 3pt 5pt 3pt ,fillcolor=black,fillstyle=transp,transpalpha=0.1](-2.64,0)(-1.07,-1.07)(2,0)(1.5,1.5)
+\psplot[linestyle=dashed,dash=5pt 5pt]{-3.04}{3.58}{(-0-1*x)/-1}
+\psline(-2.64,-2.64)(3,0)
+\psline(3,0)(2,2)
+\psline(2,2)(-2.14,0)
+\psline(-2.14,0)(-2.64,-2.64)
+\psline[linestyle=dotted](2,-3.4)(2,2.52)
+\psplot[linestyle=dotted]{-3.04}{3.58}{(--3-1*x)/1}
+\psplot[linestyle=dotted]{-3.04}{3.58}{(-2.14-1*x)/1}
+\psline[linestyle=dotted](-2.64,-3.4)(-2.64,2.52)
+\psline[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](-2.64,0)(-1.07,-1.07)
+\psline[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](-1.07,-1.07)(2,0)
+\psline[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](2,0)(1.5,1.5)
+\psline[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](1.5,1.5)(-2.64,0)
+\psdots(2,2)
+\rput[bl](2.22,1.9){$A(a;a)$}
+\psdots(3,0)
+\rput[bl](2.94,-0.52){$B(b;0)$}
+\psdots(-2.64,-2.64)
+\rput[bl](-2.72,-3.12){$C(c;c)$}
+\psdots(-2.14,0)
+\rput[bl](-3,0.24){$D(d;0)$}
+\psdots(2,0)
+\rput[bl](2.08,0.12){$A'(a;0)$}
+\psdots(1.5,1.5)
+\rput[bl](1.12,0.98){$B'(\frac{b}{2};\frac{b}{2})$}
+\psdots(-1.07,-1.07)
+\rput[bl](-1.62,-1.54){$D'(\frac{d}{2};\frac{d}{2})$}
+\psdots(-2.64,0)
+\rput[bl](-2.92,-0.44){$C'(c;0)$}
+\psdots(0,0)
+\rput[bl](-0.35,0.16){$O$}
+\end{pspicture*}\large}
+
+Az magától adódik, hogy $A'(a;0)$ és $C'(c;0)$, hiszen $x$ tengelyre való merõleges vetítésnél, $x$ koordináta marad, $y$ koordináta 0 lesz. $B'(\frac{b}{2};\frac{b}{2})$ és $D'(\frac{d}{2};\frac{d}{2})$ pedig azért, mert $OB'B$ és $OD'D$ egyenlõszárú háromszög, tehát elsõ koordinátája $A'$-nek $B'$-nek, $A$ és $B$ elsõ koordinátájának a fele. $A'$ és $B'$ második koordinátája viszont azonos az elsõ koordinátával, hiszen mindkettõ az $x=y$ egyenesen van rajta.
+
+Nincs más dolgunk, mint kiszámolni az eredeti és a beszínezett négyszög területét és megvizsgálni a köztük lévõ kapcsolatot. Ezt úgy tesszük meg, hogy mindkét négyszöget felbontjuk 4-4 háromszögre, és ezeknek a területösszegét vesszük. A háromszög területeit pedig vektoriális szorzattal számoljuk ki (ha $\underline{x}$ és $\underline{y}$ a háromszög egy csúcsából indított oldalvektorai, akkor a háromszög területe $|\frac{\underline{x}\times\underline{y}}{2}|$).
+
+Írjuk fel az eredeti $ABCD$ négyszög területét:
+\[T_{ABCD} = T_{AOB} + T_{BOC} + T_{COD} + T_{DOA}\]
+\[T_{ABCD} = \frac{|\overrightarrow{OA}\times\overrightarrow{OB}| + |\overrightarrow{OB}\times\overrightarrow{OC}| + |\overrightarrow{OC}\times\overrightarrow{OD}| + |\overrightarrow{OD}\times\overrightarrow{OA}|}{2}\]
+
+Jelen esetben elhagyhatjuk az abszolútértékeket, hiszen a vektorokat úgy szoroztuk vektoriálisan, hogy a kapott vektorok mind egy irányba mutassanak, tehát ha elhagyjuk az abszolútértékeket, akkor mint elõjeles területekkel tudunk dolgozni. Egy háromszög elõjeles területét az alábbi módon számolhatjuk ki:
+\[T_{\hbox{háromszög}} = \Big|\frac{\underline{a}\times\underline{b}}{2}\Big| = \frac{\left|\begin{tabular}{cc}
+$a_1$ & $a_2$ \\
+$b_1$ & $b_2$
+\end{tabular}\right|}{2} = \frac{a_1\cdot b_2 - a_2\cdot b_1}{2}\]
+
+Tehát
+\[T_{ABCD} = \frac{(a\cdot 0 - a\cdot b) + (b\cdot c - 0\cdot c) +
+(c\cdot 0 - c\cdot d) + (d\cdot a - 0\cdot a)}{2} = \]
+\[\mathbf{= \frac{- a\cdot b + b\cdot c - c\cdot d + d\cdot a}{2}}\]
+
+Most vizsgáljuk meg, hogy mennyi az $A'B'C'D'$ négyszög területe:
+\[T_{A'B'C'D'} = T_{B'OA'} + T_{A'OD'} + T_{D'OC'} + T_{C'OB'}\]
+\[T_{A'B'C'D'} = \frac{|\overrightarrow{OB'}\times\overrightarrow{OA'}| + |\overrightarrow{OA'}\times\overrightarrow{OD'}| + |\overrightarrow{OD'}\times\overrightarrow{OC'}| + |\overrightarrow{OC'}\times\overrightarrow{OB'}|}{2}\]
+
+Hasonlóan, ahogy a $T_{ABCD}$-nél tettük átírjuk a vektorokat koordinátákba, illetve az elõjeles területet számoljuk ki (most is fontos, hogy egyirányba mutassanak a szorzatok)!
+
+\[T_{A'B'C'D'} = \frac{(\frac{b}{2}\cdot 0 - \frac{b}{2}\cdot a) + 
+(a\cdot\frac{d}{2} - 0\cdot\frac{d}{2}) + 
+(\frac{d}{2}\cdot 0 - \frac{d}{2}\cdot c) + 
+(c\cdot\frac{b}{2} - 0\cdot\frac{b}{2})}{2} = \]
+\[ = \frac{- \frac{b}{2}\cdot a + a\cdot\frac{d}{2} - \frac{d}{2}\cdot c + c\cdot\frac{b}{2}}{2} = \mathbf{\frac{- b\cdot a + a\cdot d - d\cdot c + c\cdot b}{4}}\]
+
+Látható, hogy
+\[T_{ABCD} = \frac{T_{A'B'C'D'}}{2} \]
+
+\textbf{Tehát a merõlegesek talppontjai által alkotott négyszög területe fele az eredeti négyszögének.}
+\end{document}

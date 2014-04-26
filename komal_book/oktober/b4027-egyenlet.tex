@@ -1,0 +1,93 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+\large
+
+\noindent\textbf{B. 4027.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Oldjuk meg az
+\[
+\frac{x^2 + 1}{x^2 + 11} = \frac{1}{6}\sqrt{\frac{11x - 6}{6-x}}
+\]
+egyenletet.\\
+\hrule
+\hskip 10pt
+
+\parindent 0pt\textbf{Megoldás:}\\
+
+\[\frac{x^2 + 1}{x^2 + 11} = \frac{1}{6}\sqrt{\frac{11x - 6}{6-x}}\]
+
+Értelmezési tartomány vizsgálatnál kiderül, hogy $x\neq 6$, illetve $x\neq \pm i\sqrt{11}$. Emeljünk négyzetre:
+\[\frac{(x^2 + 1)^2}{(x^2 + 11)^2} = \frac{1}{36}\cdot\frac{11x - 6}{6-x}\]
+\[\frac{x^4 + 2x^2 + 1}{x^4 + 22x^2 + 121} = \frac{1}{36}\cdot\frac{11x - 6}{6-x}\]
+Felszorozhatunk $36(6-x)(x^4+22x^2+121)$-el, hiszen a szorzat egyik tényezõje sem 0:
+\[36(6-x)(x^4 + 2x^2 + 1) = (11x - 6)(x^4+22x^2+121)\]
+Bontsuk ki fenti kifejezéseket:
+\[(216-36x)(x^4 + 2x^2 + 1) = - 36x^5 + 216x^4 -72x^3 + 432x^2 -36x + 216\]
+\[(11x - 6)(x^4+22x^2+121) = 11x^5 -6x^4 + 242x^3 - 132x^2 + 1331x - 726\]
+Tehát:
+\[- 36x^5 + 216x^4 -72x^3 + 432x^2 -36x + 216 = 11x^5 -6x^4 + 242x^3 - 132x^2 + 1331x - 726\]
+Egy oldalra rendezve:
+\[- 47x^5 + 222x^4 -314x^3 + 564x^2 -1367x + 942 = 0\]
+Ez az egyenlet csak értelmezési tartományában tér el az eredeti egyenlettõl, tehát ha ezt megoldjuk, akkor megkapjuk az eredeti egyenlet gyökeit, kivéve a hamis gyököket (hiszen $x\neq 6$, illetve $x\neq \pm i\sqrt{11}$).
+
+Mivel ötödfokú egyenletre nincs megoldóképlet, ezért a következõ eljárást alkalmazzuk: megvizsgálunk 1-2 számot, hogy gyöke-e a fenti egyenletnek, ha pedig igen, akkor kiemel\-jük a talált gyökhöz tartozó gyöktényezõt a Horner-elrendezés segítségével.\\
+
+Elsõnek megvizsgáljuk az $x=\pm 1$-et, hogy valamelyik kielégíti-e a fenti egyenletet. $x=1$ valóban megoldása a fenti egyenletnek, hiszen $-47+222-314+564-1367+942=0$, viszont $x=-1$-re nem teljesül a fenti egyenlõség, tehát õ nem gyöke az egyenletnek.
+
+Hasonlóan megvizsgálunk még 1-2 kicsi egész számot, és szerencsére nem kell sokáig próbálkoznunk: $x=2$, illetve $x=3$ is gyöke a fenti egyenletnek. Emeljük ki õket gyöktényezõs alakban az egyenletbõl:
+\[- 47x^5 + 222x^4 -314x^3 + 564x^2 -1367x + 942 = 0\]
+Horner-elrendezés:
+\[\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+& -47 & 222 & -314 & 564 & -1367 & 942\\
+\hline
+1 & -47 & 175 & -139 & 425 & -942 & 0\\
+\hline
+2 & -47 & 81 & 23 & 471 & 0 & \\
+\hline
+3 & -47 & -60 & -157 & 0 & & \\
+\hline
+\end{tabular}\]
+Tehát kiemelve az $(x-1)(x-2)(x-3)$-at a fenti egyenletbõl:
+\[(x-1)(x-2)(x-3)(-47x^2-60x-157) = 0\]
+
+Ötödfokú egyenletnél természetes, hogy csak 3 gyököt kerestünk, hiszen a gyöktényezõk kiemelése után másodfokú kifejezést kapunk, amit viszont már megoldhatunk a megoldó\-kép\-let\-tel:
+\[-47x^2-60x-157=0\]
+\[x=\frac{60\pm\sqrt{60^2-4\cdot-47\cdot-157}}{2\cdot-47} = \frac{60\pm\sqrt{-25916}}{-2\cdot47} = -\frac{30\pm\sqrt{-6479}}{47}\]
+
+Tehát a
+\[- 47x^5 + 222x^4 -314x^3 + 564x^2 -1367x + 942 = 0\]
+egyenletnek a gyökei:
+\[x = \left\{1; 2; 3; \frac{-30-i\sqrt{6479}}{47}; \frac{-30+i\sqrt{6479}}{47}\right\}\]
+
+Már csak meg kell vizsgálnunk, hogy ezek között van-e hamis gyök. $x\neq 6$, illetve $x\neq \pm i\sqrt{11}$, de ez egyik gyököt sem zárja ki, tehát a fent kapott 5 gyök gyöke a feladatban szereplõ egyenletnek is. Több gyöke pedig nem is lehet a feladatban szereplõ egyenletnek, hiszen a megoldás során az értelmezési tartomány csak tágítottuk, soha nem szûkült.\\
+
+\textbf{Tehát a}
+\[\mathbf{\frac{x^2 + 1}{x^2 + 11} = \frac{1}{6}\sqrt{\frac{11x - 6}{6-x}}}\]
+\textbf{egyenletnek a megoldásai:}
+\[\mathbf{x = \left\{1; 2; 3; \frac{-30-i\sqrt{6479}}{47}; \frac{-30+i\sqrt{6479}}{47}\right\}}\]
+
+(Behelyettesítéssel ellenõrizzük és valóban megoldás mindegyik.)
+
+\end{document}

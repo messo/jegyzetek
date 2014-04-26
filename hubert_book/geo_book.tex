@@ -1,0 +1,660 @@
+
+\documentclass[a4paper,twoside,openright]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar, hungarian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{fancyhdr}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-plot}
+\usepackage{multido}
+\usepackage{stmaryrd}
+\usepackage{picinpar}
+%\usepackage{t1enc} %elszarja a pdf-et
+\pagestyle{fancy}
+
+\marginparwidth 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\headwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}
+\vspace*{\fill}
+\begin{center}
+This page intentionally contains only this sentence.
+\end{center}
+\vspace{\fill}
+\thispagestyle{empty}
+\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\marginparwidth 0pt
+
+\title{Hubert-matek jegyzetek}
+\author{Kriván Bálint}
+\date{2007. március 4. - \today}
+
+\begin{document}
+\marginparwidth 0pt
+
+\maketitle
+
+\tableofcontents
+
+\newtheorem{defin}{Definíció}
+\newtheorem{tetel}{Tétel}
+\newcommand{\feladat}[1]{\textbf{\thesubsection.#1. Feladat}.}
+\newcommand{\determinans}[9]{\left|\begin{array}{ccc}
+#1 & #2 & #3 \\
+#4 & #5 & #6 \\
+#7 & #8 & #9 \\
+\end{array}\right|}
+
+\part{Koordinátageometria}
+
+\chapter{Kezdetek}
+\label{cha:kezdetek}
+
+\begin{itemize}
+\item A helyvektorokat és a koordinátákat 1-1 értelmûen rendeljük egymáshoz.
+\item A helyvektorokat és a pontokat 1-1 értelmûen rendeljük egymáshoz.
+\item $\Rightarrow$ \textbf{A pontokat és a koordinátákat 1-1 értelmûen rendeljük egymáshoz.}\\
+\end{itemize}
+
+A koordinátageometria segítségével a geometriai problémákat algebrai módon tudjuk majd megoldani.
+
+\begin{defin}
+Vonal és sík egyenlete:\\
+Olyan 2 vagy 3 ismeretlenes egyenlet, egyenletrendszer amelynek megoldásai, mint koordinátákhoz tartozó pontok, rajta vannak a vonalon ill. a síkon.
+\end{defin}
+
+\textbf{Az egyenlet(rendszer) megoldásai és az alakzat pontjai összefüggnek} $\rightarrow$ a megoldások rendezett számhármasokat alkotnak.\\
+
+\textbf{Ne felejtsük el:} A háttérben megmaradnak a vektorok!\\
+
+Elõször a síkgeometriával kezdünk.
+
+\chapter{Síkgeometria}
+\label{cha:sikgeo}
+
+\section{Egyenes egyenlete}
+\label{sec:egyenes}
+
+\begin{pspicture*}(-1.5,-1.5)(5,3)
+%\psset{xunit=.9,yunit=.9}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+\psline{->}(0,0)(0,1)
+\uput[180](0,0.5){\underline{j}}
+\psline{->}(0,0)(1,0)
+\uput[-90](0.5,0){\underline{i}}
+\pcline{->}(0,0)(2,1.5)
+\Aput{\underline{a}}
+\uput[45](2,1.5){A}
+\uput[0](3,2){\underline{a}($a_1$;$a_2$)}
+\uput[0](2.95,1.5){A($a_1$;$a_2$)}
+\end{pspicture*}\\
+Látható, hogy milyen szoros a kapcsolat a pont és a hozzátartozó helyvektor között.\\
+
+\begin{pspicture*}(-1.5,-1.5)(11,3)
+%\psset{xunit=.9,yunit=.9}
+\uput[-135](0,0){\small $O$}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+\pcline{->}(0,0)(1,0.75)
+\Aput{\small$\underline{n}$}
+\uput[45](1.25,1.5){$P_0$}
+\psline{<-*}(0.5,2.5)(1.25,1.5)
+\psline{->}(1.25,1.5)(3,-0.83)
+\pcline{->}(0,0)(2,0.5)
+\mput*{\small$\underline{r}$}
+\uput[0](4,2.75){Egyenes egyenlete:}
+\uput[0](4,2.25){$\rightarrow$ menjen át a $P_0$ ponton}
+\uput[0](4,1.75){$\rightarrow$ $\underline{n}$-re legyen merõleges}
+\uput[0](4,1){\underline{r} $\rightarrow$ futó pontokhoz tartozó helyvektor}
+\uput[0](4,0.25){$P_0(p_1;p_2) \quad \underline{r}(x;y) \quad \underline{n}(n_1;n_2)$}
+\end{pspicture*}\\
+
+Tudjuk, hogy $\underline{n}$ és a felírandó egyenes merõleges egymásra, így:
+\[(\underline{r}-\overrightarrow{OP_0})\cdot\underline{n}=0\]
+\[(x-p_1;y-p_2)\cdot\underline{n}=0\]
+\[n_1(x-p_1) + n_2(y-p_2)=0\]
+\centerline{\begin{tabular}{|c|}\hline
+$n_1x + n_2y=n_1p_1+n_2p_2$\\
+\textbf{Ez az egyenes normálvektoros alakja.}\\
+\hline
+\end{tabular}}
+
+\begin{defin}
+Az egyenes normálvektora ($\underline{n}$) bármely az egyenesre merõleges nem nullvektor.
+\end{defin}
+
+\newpage
+Most ne az egyenes \emph{normálvektora}, hanem az \emph{irányvektora} legyen adott:\\
+
+\begin{pspicture*}(-1.5,-1.5)(12,3)
+%\psset{xunit=.9,yunit=.9}
+\uput[-135](0,0){\small $O$}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+\pcline{->}(0,0)(1,0.75)
+\Aput{\small$\underline{n}$}
+\pcline{->}(0,0)(0.75,-1)
+\uput[0](0.375,-0.5){\small$\underline{v}(v_1;v_2)$}
+\uput[45](1.25,1.5){$P_0$}
+\psline{<-*}(0.5,2.5)(1.25,1.5)
+\psline{->}(1.25,1.5)(3,-0.83)
+%\pcline{->}(0,0)(2,0.5)
+%\mput*{\small$\underline{r}$}
+\uput[0](4,2.75){Hogy megtudjuk határozni az egyenes egyenletét}
+\uput[0](4,2.35){szükségünk van az egyik normálvektorra.}
+\uput[0](4,1.6){$\underline{v}\cdot\underline{n}=0$}
+\end{pspicture*}\\
+Egy vektor 90°-os elforgatottjait a következõ ábra mutatja:\\
+\begin{pspicture*}(-2.5,-2)(3,2.2)
+%\psset{xunit=.9,yunit=.9}
+\psline{<->}(-2,0)(2,0)
+\psline{<->}(0,-2)(0,2)
+\psline{->}(1,0.75)
+\uput[0](1,0.75){\small$\underline{v}(v_1;v_2)$}
+\psline{->}(-0.75,1)
+\uput[0](-2.5,1){\small$\underline{v}'(-v_2;v_1)$}
+\psline{->}(0.75,-1)
+\uput[0](0.75,-1){\small$\underline{v}'''(v_2;-v_1)$}
+\psline{->}(-1,-0.75)
+\uput[0](-2.5,-1){\small$\underline{v}''(-v_1;-v_2)$}
+\end{pspicture*}\\
+Észrevehetjük, hogy ha +90°-al forgatunk, akkor a koordinátákat felcseréljük, és az elsõ koordinátának vesszük a -1-szeresét.\\
+
+A mi esetünkben csak az a lényeg, hogy a $\underline{v}$ vektor egyik 90°-os elforgatottját találjuk meg, teljesen mindegy, hogy melyiket sõt nem is muszáj, hogy abszolútértékük megegyezzen, hiszen a definícióból tudjuk, hogy a \emph{normálvektor} bármilyen olyan vektor ami nem nullvektor, és merõleges a meghatározandó egyenesre. Tehát akkor mondjuk legyen a normálvektorunk $\underline{n}=(-v_2;v_1)$. Innen már az elõbb tanultak alapján felírhatjuk az egyenes normálvektoros egyenletét, $P_0$ ismeretében.\\
+
+Ha az egyenes két pontja adott, akkor könnyedén meghatározhatjuk az egyenes irányvektorát, majd abból az egyik normálvektorát:\\
+
+\begin{pspicture*}(-1.5,-1.5)(12,3)
+%\psset{xunit=.9,yunit=.9}
+\uput[-135](0,0){\small $O$}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+\uput[45](1.25,1.5){$P_0$}
+\psline{*->}(1.25,1.5)(2,0.5)
+\psline{-*}(1.25,1.5)(2,0.5)
+\uput[45](2,0.5){$Q_0$}
+%\pcline{->}(0,0)(2,0.5)
+%\mput*{\small$\underline{r}$}
+\uput[0](4,2.75){$\underline{v}=\overrightarrow{OQ_0}-\overrightarrow{OP_0}$}
+\uput[0](4,2.15){$\underline{v}=\underline{q_0}-\underline{p_0}$}
+\end{pspicture*}\\
+
+\newpage
+Csak az irányvektorból is felírhatjuk egy egyenesnek a képletét:\\
+
+\begin{pspicture*}(-1.5,-1.5)(12,3)
+%\psset{xunit=.9,yunit=.9}
+\uput[-135](0,0){\small $O$}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+\uput[45](1.25,1.5){$P_0$}
+\psline{<-*}(0.5,2.5)(1.25,1.5)
+\psline{->}(1.25,1.5)(1.75,0.8333)
+\uput[45](1.75,0.8333){$\underline{v}(v_1;v_2)$}
+\psline{->}(1.25,1.5)(3,-0.83)
+\pcline{->}(0,0)(1.25,1.5)
+\mput*{\small$\underline{p_0}$}
+\pcline{->}(0,0)(2,0.5)
+\mput*{\small$\underline{r}$}
+\uput[0](4,2.5){\begin{tabular}{|c|}\hline
+$\underline{r}=\underline{p_0}+t\underline{v} \qquad t\in \mathbb{R}$\\
+\textbf{Egyenes paraméteres vektoregyenlete}\\
+\hline
+\end{tabular}}
+\uput[0](4,1){\begin{tabular}{|c|}\hline
+$\left\{\begin{array}{ll}x=p_1+t\cdot v_1\\
+y=p_2+t\cdot v_2\end{array}\right.$\\
+\textbf{Egyenes paraméteres egyenletrendszere}\\
+\hline
+\end{tabular}}
+\end{pspicture*}\\
+
+Az egyenes normálvektoros egyenletét az alábbi alakra hozhatjuk:
+\[Ax+By=C \qquad A,B,C \in \mathbb{R}\]
+Az $x$ tengelyt ott metszi, ahol $y=0$, tehát:
+\[x_0=\frac{C}{A}\]
+Az $y$ tengelyt ott metszi, ahol $x=0$, tehát:
+\[y_0=\frac{C}{B}\]
+Ha a fenti alakot leosztjuk $C$-vel (Ha $C\ne 0$, azaz az egyenes nem megy át az origón), és kicsit átrendezzük, akkor a következõ alakot kapjuk:\\
+\[\frac{~~x~~}{\frac{C}{A}}+\frac{~~y~~}{\frac{C}{B}}=1\]
+Láthatjuk, hogy az $x$-et az $x$ tengellyel való metszéspontjával az $y$-t az $y$ tengellyel való metszéspontjával osztjuk le. Így elég könnyen megjegyezhetõ.
+\textbf{Ezt az alakot hívjuk tengelymetszetes alaknak.}
+
+\begin{defin}
+\label{def:abszcissza}
+Abszcisssza: A vektor/pont elsõ koordinátája.
+\end{defin}
+\begin{defin}
+\label{def:ordinata}
+Ordináta: A vektor/pont második koordinátája.
+\end{defin}
+
+\section{Egyszerû feladatok}
+\label{sec:egyszeru_feladatok}
+
+\subsection{Elõszó}
+A következõkben igencsak egyszerû, 1 perces feladatok lesznek bemutatva. A feladat szövegét általában beírom ide, hogy ne kelljen a jegyzet mellé a Geo II-t is forgatni. Aki az órán már elég rutint szerzett a következõ feladatok megoldásához az hagyja ki ezt a részt.
+
+\subsection{Feladatok}
+
+\feladat{1} [Geo. II./569/b.]\\
+Írjuk fel annak az egyenesnek az egyenletét, amely áthalad az origón és az $(5; -2)$ ponton:\\
+
+Ismerjük tehát az egyik irányvektorát, amit a 2 adott pontból kiszámolhatunk: $\underline{v}(5;-2)$. Ebbõl rögtön megadhatunk egy normálvektort (koordináta csere, és az egyiket beszorozzuk -1-el): $\underline{n}(2;5)$. Tehát tudjuk az egyenes egy normálvektorát, illetve 2 pontját, amibõl nekünk elég 1 is, mégpedig az origó, hogy felírjuk az egyenes normálvektoros egyenletét:
+\[2x+5y=2\cdot 0+5\cdot 0 = 0\]\\
+
+\feladat{2} [Geo. II./566/b.]\\
+Írjuk fel a $(-1;3)$ ponton áthaladó, és a koordináta-rendszer tengelyeivel párhuzamos egyenesek egyenletét:\\
+
+Elõször nézzük az $y$ tengellyel párhuzamos egyenest. Amiatt, hogy az $y$ tengellyel párhuzamos tudjuk, hogy a normálvektora merõleges az $y$ tengelyre, tehát pl. $\underline{n}(1;0)$. Megvan minden ami kellhet az egyenes normálvektoros egyenletéhez:
+\[1x+0y=-1\cdot -1+3\cdot 0\]
+\[x=-1 \quad y\in \mathbb{R}\]
+Tehát az egyenes olyan pontokból áll, aminek elsõ koordinátája mindig $-1$, a második pedig bármely valós szám.
+
+Az $x$ tengellyel párhuzamos egyenest hasonlóképpen írhatjuk fel. Tudjuk, hogy az $x$ tengellyel párhu\-zamos, tehát a normálvektora merõleges az $x$ tengelyre, így egy normálvektora pl.: $\underline{n}(0;1)$
+\[0x+1y=-1\cdot 0+3\cdot 1\]
+\[y=3 \quad x\in \mathbb{R}\]
+Tehát ez az egyenes pedig olyan pontokból áll, aminek elsõ koordinátája bármely valós szám, a második pedig mindig 3.\\
+
+\feladat{3} [Geo. II./556/b.]\\
+Mi az egyenlete annak az egyenesnek, amely áthalad a $(-2; 1)$ ponton és irányvektora $(3; \sqrt{3})$\\
+
+Az irányvektorból megadhatunk egy normálvektort: $\underline{n}(-\sqrt{3}; 3)$, majd egyszerûen felírjuk a normálvek\-toros alakot:
+\[-\sqrt{3}x+3y=2\sqrt{3}+3\]
+
+\feladat{4} [Geo. II./638.]\\
+\emph{Ennek a feladatnak a szövegét nem írom le ide, csak a megoldás\-menetet:}\\
+
+Nem kell mást tennünk, minthogy megvizsgáljuk az egyenesek normálvektorait. Ha azok párhuzamosak, akkor a két egyenes is párhuzamos, ha merõleges, akkor pedig merõlegesek. A feladat szövege sugallja, hogy csak merõleges és párhuzamos egyenesek vannak, így elég csak a merõlegességet vizsgálni. Mert ami nem merõleges, az párhuzamos. A merõlegességet, pedig nagyon egyszerûen vizsgáljuk: megnézzük a két normálvektor skaláris szorzatát.\\
+
+\feladat{5} [Geo. II./639./b.]\\
+Határozzuk meg $p$ értékét úgy, hogy az $y=\frac{p}{3}x-4$ és az $y=\frac{12}{p}x+3$ egyenesek párhuzamosak legyenek egymással.\\
+
+Ha párhuzamosak, akkor a normálvektorok koordinátáinak aránya megegyezik. Tehát:
+\[\frac{-\frac{p}{3}}{1}=\frac{-\frac{12}{p}}{1}\]
+\[\frac{p}{3}=\frac{12}{p}\]
+\[p^2=36\]
+\[p=\pm 6\]
+
+\feladat{6} [Geo. II./639./e.]\\
+Határozzuk meg $p$ értékét úgy, hogy a $3px-8y+13=0$ és a $(p+1)x-2py-20=0$ egyenesek párhuzamosak legyenek egymással.\\
+
+Ha párhuzamosak, akkor a normálvektorok koordinátáinak aránya megegyezik. Tehát:
+\[\frac{3p}{-8}=\frac{p+1}{-2p}\]
+\[-6p^2=-8p-8\]
+Ebbõl kapunk két gyököt: $p=\{2;-\frac{2}{3}\}$\\
+
+\feladat{7} [Geo. II./641./b.]\\
+Határozzuk meg $p$ értékét úgy, hogy az $y=\frac{a}{b}x-4$ egyenes merõleges legyen az $y=-px+2$ egyenesre.\\
+
+Nem kell másnak teljesülni, minthogy a normálvektorok skaláris szorzata egyenlõ legyen 0-val:
+\[(-\frac{a}{b};1)(p;1)=0\]
+\[-\frac{a}{b}\cdot p + 1=0\]
+\[\frac{a}{b}\cdot p =1\]
+\[p=\frac{b}{a}\]
+
+\feladat{8} [Geo. II./642./d.]\\
+Írjuk fel annak az egyenesnek az egyenletét, amely áthalad a $(\frac{\sqrt{3}}{2}; -\frac{\sqrt{3}}{4})$ ponton, és párhuzamos a $(-1; 3)$ irányvektorú egyenessel.\\
+
+Tehát egy olyan egyenessel párhuzamos, aminek az egyik irányvektora $(-1; 3)$, azaz az egyik nor\-málvektora $(3; 1)$, mivel ez a felírandó egyenesnek is a normálvektora, ezért könnyedén felírhatjuk az egyenletet:
+\[3x+y=\frac{3\sqrt{3}}{2}-\frac{\sqrt{3}}{4}=\frac{5\sqrt{3}}{4}\]
+
+\feladat{9} [Geo. II./643./b.]\\
+Írjuk fel annak az egyenesnek az egyenletét, amely áthalad az origón, és merõleges az $\frac{x}{a}+\frac{y}{b}=0$ egyenesre.\\
+
+Lényegében arról van szó, hogy az $\frac{x}{a}+\frac{y}{b}=0$ egyenes egy irányvektora megegyezik a felírandó egyenes egy normálvektorával. Mivel a megadott egyenes tengelymetszetes alakban van, így tudjuk, hogy mik a tengelymetszetei: $(a;b)$. Ebbõl rögtön adódik, hogy akkor egy irányvektora az $(a;-b)$. Tehát akkor a felírandó egyenes egyenlete:
+\[ax-by=0\]
+
+\feladat{10} [Geo. II./643./d.]\\
+Írjuk fel annak az egyenesnek az egyenletét, amely áthalad az (5;2) ponton, és merõleges az $y=\frac{2}{3}x-1$ egyenesre.\\
+
+Itt a megadott egyenes normálvektorának a 90°-os elforgatottja lesz a felírandó egyenes normálvektora. A megadott egyenes normálvektora $(-\frac{2}{3}; 1)$, ennek elforgatottja az $(1; \frac{2}{3})$, tehát:
+\[x+\frac{2}{3}y =5+\frac{4}{3} = \frac{19}{3}\]
+
+\feladat{11} [Geo. II./644./a.]\\
+Írjuk fel annak az egyenesnek az egyenletét, amely áthalad az (1;5) ponton és párhuzamos, illetve merõleges a $(4; -2)$ és az $(5; 3)$ pontokon áthaladó egyenesre.\\
+
+Elõször azt írjuk fel, ami merõleges a megadott egyenesre:\\
+A megadott két pontból könnyen kiszámolható az adott egyenes irányvektora: $(1;5)$. Mivel az adott egyenes merõleges a meghatározandó egyenesre, így annak irányvektora merõleges a meghatározandó egyenesre, azaz õ az egyik normálvektora, tehát a merõleges egyenes egyenlete:
+\[x+5y=1\cdot 1+5\cdot 5=26\]
+
+Ha párhuzamos, akkor az elõbb kapott egyenes normálvektora merõleges, a most használandóra, azaz a most meghatározandó egyenes normálvektora $(5; -1)$, így az egyenlet:
+\[5x-y=5\cdot 1-1\cdot 5=0\]
+
+\feladat{12} [Geo. II./645.]\\
+Egy egyenes áthalad a $(3\frac{2}{5}; -3)$ és az $(x; 4\frac{1}{3})$ pontokon, és merõleges az $y-4x+3=0$ egyenesre. Számítsuk ki a második pont ismeretlen abszcisszáját\footnote{lásd \ref{def:abszcissza}. definíció a \pageref{def:abszcissza}. oldalon}.\\
+
+A megadott egyenes egyik normálvektora az egyenlete alapján: $(-4; 1)$. Mivel a meghatározandó egyenes merõleges erre az egyenesre, ezért a normálvektorok is merõlegesek egymásra, így a meghatározandó egyenes normálvektora: $(1; 4)$. Ez alapján könnyen felírható a normálvektoros egyenlet:
+\[3\frac{2}{5}\cdot 1-3\cdot 4=1\cdot x+ 4\cdot 4\frac{1}{3}\]
+\[\frac{17}{5}-12=x+ \frac{52}{3}\]
+\[-\frac{389}{15}=x\]
+
+További feladatok: 651/a. 653/a. 655/a. 660.
+
+\section{Pont és egyenes távolsága, szakaszfelezõ}
+
+\subsection{Elmélet}
+
+\begin{pspicture*}(-1.5,-1)(13,3)
+%\psset{xunit=.9,yunit=.9}
+\uput[-135](0,0){\small $O$}
+\psline{<->}(-1,0)(3,0)
+\psline{<->}(0,-1)(0,3)
+
+\psline{<->}(0.5,2.5)(2,-0.5)
+
+\pcline{->}(0,0)(1,1.5)
+\mput*{\small$\underline{r}$}
+\uput[45](1,1.5){$R$}
+
+\psdots[dotstyle=*](3,1.25)
+\uput[45](3,1.25){$P$}
+
+\psline{->}(1,1.5)(3,1.25)
+
+\pcline{->}(0.75,2)(1.75,2.5)
+\mput*{\small$\underline{n}$}
+
+\pcline{->}(1.5,0.5)(3,1.25)
+\mput*{\small$\underline{d}$}
+
+\uput[0](4,2.75){$d(P; e)=|\underline{d}|$}
+\uput[0](4,2.25){$\underline{d}$ az az $\overrightarrow{RP}$ vektor $\underline{n}$-el párhuzamos komponense.}
+\uput[0](4,1){$\displaystyle{\Bigg|\frac{\underline{n}}{|\underline{n}|}\Big(\underline{p}-\underline{r}\Big)\Bigg|=|\underline{d}|}$}
+\uput[0](4,0){$\displaystyle{\Big|\underline{n}_0\underline{p}-\underline{n}_0\underline{r}\Big|=|\underline{d}|}$}
+
+\end{pspicture*}
+
+\[|\underline{d}|=\Big|\underline{n}_0\underline{p}-\underline{n}_0\underline{r}\Big|\]
+\[d=\Big|n_{0_1}p_1+n_{0_2}p_2-\big(n_{0_1}r_1+n_{0_2}r_2\big)\Big|\]
+
+Amikor a normálvektor abszolútértéke 1, akkor azt az egyenes normálegyenletének hívjuk. (Innen a \emph{normálás}: $|\underline{n}|$-el való osztás)\\
+
+A következõ egyenesek szakaszfelezõit fogjuk meghatározni:\\
+
+\begin{pspicture*}(0,0)(15.8,5)
+\pcline{-}(0,1)(5,3.5)
+\bput*(0){$e_2$}
+\pcline{-}(1,5)(2.66,0)
+\bput*(0){$e_1$}
+\pcline{->}(1.5,3.5)(2.56,3.853)
+\mput*{\small $\underline{n_0}$}
+
+\pcline{->}(4,3)(3.5,4)
+\mput*{\small $\underline{m_0}$}
+
+\uput[0](3.1,4.5){(2.1)}
+\uput[0](4.4,0.4){(2.2)}
+
+%\psplot[plotpoints=200]{0}{5}{8 3 x mul sub} %8-3x
+\psplot[plotpoints=200,linestyle=dashed]{0}{5}{1.4 x mul 1.64 sub 0.58 div} %(1.4x-1.64)/0.58
+\psplot[plotpoints=200,linestyle=dashed]{0}{5}{3.42 0.5 x mul sub 1.21 div} %(3.42-0.5x)/1.21
+
+\uput[0](5.3,4){$e_1: n_{0_1}x+n_{0_2}y+c=0$}
+\uput[0](5.3,3.5){$e_2: m_{0_1}x+m_{0_2}y+d=0$}
+\uput[0](5.3,2.5){A szögfelezõ(k) a két egyenestõl egyenlõ távolságra van(nak):}
+\uput[0](5.3,2){$\big|n_{0_1}x+n_{0_2}y+c\big|=\big|m_{0_1}x+m_{0_2}y+d\big|$}
+\uput[0](5.3,1.5){Ez az egyenlet két egyenest ad. Ha mindkét kifejezés abszolútérték}
+\uput[0](5.3,1){nélkül azonos (2.1), vagy ha egymás $-1$-szeresei (2.2).}
+
+\end{pspicture*}
+
+\begin{eqnarray}
+\big(n_{0_1}-m_{0_1}\big)x+\big(n_{0_2}-m_{0_2}\big)y+c-d=0 \\
+\big(n_{0_1}+m_{0_1}\big)x+\big(n_{0_2}+m_{0_2}\big)y+c+d=0
+\end{eqnarray}
+
+\subsection{Feladatok}
+
+\feladat{1}\\
+Határozzuk meg az $(-3; -2)$ és az $(5; 8)$ ponton áthaladó egyenes és a $(2; 7)$ pont távolságát!\\
+
+Ismerjük az irányvektorát az egyenesnek: $(4; 5)$, így egy normálvektorát is: $(5; -4)$. De nekünk a távolsághoz, egység hosszúságú normálvektor kell, tehát: $\underline{n_0}=\big(\frac{5}{\sqrt{41}};\frac{-4}{\sqrt{41}}\big)$.
+\[d=\Big|\frac{5}{\sqrt{41}}\cdot 2- \frac{4}{\sqrt{41}}\cdot 7-\Big(\frac{5}{\sqrt{41}}\cdot 5- \frac{4}{\sqrt{41}}\cdot 8\Big)\Big|=\frac{11}{\sqrt{41}}\]
+
+\feladat{2}\\
+Egyenlõ szárú háromszög száregyeneseinek egyenlete:
+\[2x-y+8=0\quad \hbox{és}\quad x-2y-12=0.\]
+Az alap egyik pontja $(5; 0)$. Határozzuk meg az alap egyenletét és a csúcsok koordinátáit.\\
+
+\centerline{
+\small
+\begin{pspicture*}(-2.438,-2.71)(2.738,2.276)
+\psset{xunit=0.2cm,yunit=0.2cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\psaxes[Dx=5,Dy=5,ticksize=-2pt 0,subticks=2]{->}(0,0)(-12.19,-13.55)(13.69,11.38)
+\psplot{-12.19}{13.69}{(-8-2*x)/-1}
+\psplot{-12.19}{13.69}{(--12-1*x)/-2}
+\rput[tl](2,9){$(2x-y+8=0)$}
+\rput[tl](1.2,-7){$(x-2y-12=0)$}
+\psdots(5,0)
+\rput[bl](5.38,0.61){A}
+\psdots(-9.33,-10.67)
+\end{pspicture*}
+\normalsize
+}
+
+A két egyenes egyenletébõl könnyen meghatározhatjuk a csúcspontot: $(\frac{-28}{3}; \frac{-32}{3})$\\
+
+Ha meghatározzuk a szögfelezõjét (a megfelelõt), akkor tudjuk, hogy annak az egyik normálvektora megegyezik az alap egyenes egyik irányvektorával, hiszen egyenlõ szárú háromszögben a szögfelezõ merõleges az alapra. Ha megvan ez az irányvektor, akkor abból rögtön megvan az egyik normálvektor, ami segítségével, és amiatt, hogy tudjuk, hogy átmegy az $(5; 0)$ ponton, könnyen meghatározhatjuk az alap egyenes egyenletét.\\
+
+Melyik szögfelezõrõl van szó? Ezt a normálvektorok állásából meghatározhatjuk. Ha jól megnézzük, akkor az $(1; -2)$, illetve a $(2; -1)$ normálvektorok nem befele mutatnak, tehát a szükséges szögfelezõnk egyenese:
+\[(1+2)x+(-2-1)y-4=0\]
+\[3x-3y-4=0\]
+Nem normáltuk az egyenletet, hiszen a normálvektorok abszolútértéke megegyezik, tehát a végén úgyis felszoroznánk az abszolútértékkel.\\
+Tehát a szögfelezõ egy normálvektora: $(1; -1)$. Így az alap egyenesének egy normálvektora, ennek a 90°-os elforgatottja, azaz $(1; 1)$. Az egyenes normálvektora és egy pontja segedelmével, felírhatjuk az egyenletét:
+\[1\cdot x+1\cdot y=1\cdot 5+1\cdot 0\]
+\[x+y=5\]
+Ezek után már csak a megfelelõ oldalegyenesek metszéspontjai alapján meghatározhatjuk a csúcsokat:
+\[\left.\begin{array}{rcl}
+2x-y+8 & = & 0\\
+x+y & = & 5
+\end{array}\right\}(x; y)=(-1; 6)\]
+
+\[\left.\begin{array}{rcl}
+x-2y-12 & = & 0\\
+x+y & = & 5
+\end{array}\right\}(x; y)=\Big(\frac{22}{3}; \frac{-7}{3}\Big)\]
+
+\feladat{3}\\
+Mi annak a szükséges és elégséges feltétele, hogy az
+\[a_1x+b_1y+c_1=0;\quad a_2x+b_2y+c_2=0;\quad a_3x+b_3y+c_3=0\]
+egyenesek egy pontban messék egymást?\\
+
+\[\left.\begin{array}{rcll}
+a_1x+b_1y+c_1 & = & 0 & \quad /\cdot b2\\
+a_2x+b_2y+c_2 & = & 0 & \quad /\cdot b1
+\end{array}\right\}\varominus\]
+\[(a_1b_2-a_2b_1)x=b_1c_2-b_2c_1\]
+\[x=\frac{b_1c_2-b_2c_1}{a_1b_2-a_2b_1}\]
+
+\[\left.\begin{array}{rcll}
+a_1x+b_1y+c_1 & = & 0 & \quad /\cdot a2\\
+a_2x+b_2y+c_2 & = & 0 & \quad /\cdot a1
+\end{array}\right\}\varominus\]
+\[(b_1a_2-b_2a_1)y=a_1c_2-a_2c_1\]
+\[y=\frac{a_1c_2-a_2c_1}{b_1a_2-b_2a_1}\]
+Kifejeztük $x$-et és $y$-t, írjuk vissza õket a 3. egyenletbe:
+\[a_3x+b_3y+c_3=0\]
+\[a_3\frac{b_1c_2-b_2c_1}{a_1b_2-a_2b_1}+b_3\frac{a_1c_2-a_2c_1}{b_1a_2-b_2a_1}+c_3=0\]
+\[a_3\frac{b_1c_2-b_2c_1}{a_1b_2-a_2b_1}-b_3\frac{a_2c_1-a_1c_2}{b_1a_2-b_2a_1}+c_3=0\]
+Ha jól meggondoljuk (kifejtjük és megvizsgáljuk), akkor ez egy 3$\times$3-ad determináns:
+\[\determinans{a_1}{b_1}{c_1}%
+				  {a_2}{b_2}{c_2}%
+				  {a_3}{b_3}{c_3}=0\]
+Tehát, ennek kell teljesülnie, ahhoz hogy a megadott 3 egyenes egy pontban messe egymást.\\
+
+\feladat{4}\\
+Bizonyítsuk be, hogy az
+\[mx+3y-4m+1=0\]
+egyenesek egy pontban metszik egymást.\\
+
+Helyettesítjünk be két $m$-et, praktikusan $m=0$, illetve $m=1$. Majd határozzuk meg a metszéspontot:
+\[\left.\begin{array}{r}3y+1=0 \qquad (m=0)\\
+x+3y-3=0 \qquad (m=1)\end{array}\right\} (x; y) = \Big(4; -\frac{1}{3}\Big)
+\]
+Majd ezután írjuk vissza $x$ és $y$ helyére a kapott értéket:
+\[mx+3y-4m+1=0\]
+\[4m+3\cdot -\frac{1}{3}-4m+1=0\]
+\[0=0\]
+Mivel ez igaz, ezért minden ilyen tulajdonságú egyenes átmegy a $\big(4; -\frac{1}{3}\big)$ ponton, tehát ott metszik egymást.\\
+
+\feladat{5}\\
+Bizonyítsuk be, hogy az
+\[(m^2+6m+3)x-(2m^2+18m+2)y-3m+2=0\]
+egyenesek egy ponton metszik egymást.\\
+
+Hasonlóan az elõzõekhez, kipróbálunk két $m$ értéket:
+\[\left.\begin{array}{r}3x-2y+2=0 \qquad (m=0)\\
+10x-22y-1=0 \qquad (m=1)\end{array}\right\} (x; y) = \Big(-1; -\frac{1}{2}\Big)
+\]
+Majd visszahelyettesítjük a kapott $x$, $y$ értéket:
+\[(m^2+6m+3)x-(2m^2+18m+2)y-3m+2=0\]
+\[-(m^2+6m+3)+(m^2+9m+1)y-3m+2=0\]
+\[0=0\]
+Tehát valóban egy pontban metszik egymást, mégpedig a $(-1; -\frac{1}{2})$ pontban.\\
+
+\feladat{6}\\
+Bizonyítsuk be, hogy ha egy egyenes úgy mozog a koodináta-síkon, hogy a tengelyekbõl lemetszett szeletek hosszának reciprok összege konstans, akkor ezek az egyenesek egy ponton mennek át.\\
+
+Ha jól meggondoljuk, akkor ezek az egyenesek az $y=x$ egyenesen fogják egymást metszeni, hiszen egy adott $e_1$ egyenest, tükrözünk, az $y=x$ egyenesre, akkor a tengelyekbõl lemetszett szeletek hosszának reciprok összege azonos lesz. De mivel tengelyes tükrözésnél a tükörtengelyen lévõ pontok helyben maradnak, ezért az $y=x$ egyenesen metszik egymást:\\
+
+\small
+\centerline{
+\begin{pspicture*}(-1.18,-1.21)(3.37,3.29)
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\psaxes[Dx=1,Dy=1,ticksize=-2pt 0,subticks=2]{->}(0,0)(-1.18,-1.21)(3.37,3.29)
+\psplot{-1.18}{3.37}{(--2-2*x)/1}
+\psplot[linestyle=dashed,dash=4pt 4pt]{-1.18}{3.37}{(-0-1*x)/-1}
+\psplot{-1.18}{3.37}{(--1-0.5*x)/1}
+\rput[bl](-0.86,2.76){$e_1$}
+\rput[bl](-0.99,1){$e_2$}
+\psdots[linecolor=darkgray](0.67,0.67)
+\end{pspicture*}}
+\normalsize
+
+Vegyünk fel három egyenest:
+\[a_1x+b_1y=c_1\]
+\[a_2x+b_2y=c_2\]
+\[a_3x+b_3y=c_3\]
+Írjuk át õket tengelymetszetes alakba:
+\[\frac{~~x~~}{\frac{c_1}{a_1}}+\frac{~~y~~}{\frac{c_1}{b_1}}=1\]
+\[\frac{~~x~~}{\frac{c_2}{a_2}}+\frac{~~y~~}{\frac{c_2}{b_2}}=1\]
+\[\frac{~~x~~}{\frac{c_3}{a_3}}+\frac{~~y~~}{\frac{c_3}{b_3}}=1\]
+Tudjuk, hogy:
+\[\frac{a_1+b_1}{c_1}=\frac{a_2+b_2}{c_2}=\frac{a_3+b_3}{c_3}\]
+(Hiszen a tengelyekbõl lemetszett szakaszok reciprok összege konstans.)\\
+
+Ahhoz, hogy az elõbbiekben felvett három egyenes egy ponton menjen át teljesülnie, kell, hogy:
+\[\determinans{a_1}{b_1}{c_1}%
+				  {a_2}{b_2}{c_2}%
+				  {a_3}{b_3}{c_3}=0\]
+Adjuk hozzá az elsõ oszlophoz a második oszlopot:
+\[\determinans{a_1+b_1}{b_1}{c_1}%
+				  {a_2+b_2}{b_2}{c_2}%
+				  {a_3+b_3}{b_3}{c_3}\]
+De mivel tudjuk, hogy
+\[\frac{a_1+b_1}{c_1}=\frac{a_2+b_2}{c_2}=\frac{a_3+b_3}{c_3}\]
+Ezért az elsõ oszlop a harmadiknak konstans szorosa, tehát a determináns értéke 0. Így valóban egy ponton mennek át az ilyen típusú egyenesek.\\
+
+\feladat{7}\\
+Egy négyzet két csúcsa $A(3; 5)$ és $C(4; 2)$. Határozzuk meg a másik két csúcs koordinátáit.
+
+\begin{window}[0,l,{
+\begin{pspicture*}(1.38,1.2)(5.82,5.77)
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\psline(3,5)(4,2)
+\psline[linestyle=dotted](2,3)(3.5,3.5)
+\psline[linestyle=dotted](3.5,3.5)(5,4)
+\psline(2,3)(3,5)
+\psline(3,5)(5,4)
+\psline(5,4)(4,2)
+\psline(4,2)(2,3)
+\psdots(3,5)
+\rput[bl](2.58,5.18){$A(3; 5)$}
+\psdots(4,2)
+\rput[bl](3.74,1.56){$C(4; 2)$}
+\psdots(3.5,3.5)
+\rput[bl](3.53,3.7){$M$}
+\psdots(2,3)
+\rput[bl](1.5,2.78){$D$}
+\psdots(5,4)
+\rput[bl](5.27,3.99){$B$}
+\end{pspicture*}},{}]
+Meghátrozzuk az $M$ pont koordinátáit: $(3\frac{1}{2};~ 3\frac{1}{2})$.\\
+Ezután ha jól megnézzük csak annyit kell tennünk, hogy például az $\overrightarrow{MA}$-t $\pm$90°-kal elforgatjuk, majd hozzáadjuk az $\underline{m}$-et. Ezáltal megkapjuk a $D$ és a $B$ csúcsok koordinátáit.\\
+$\overrightarrow{MA}=\underline{a}-\underline{m}=(-\frac{1}{2};~ \frac{3}{2})$.\\
+Órajárással megegyezõ irányban elforgatva: $(\frac{3}{2};~ \frac{1}{2})$. Tehát a $B$ csúcs koordinátája: $\underline{m}+(\frac{3}{2};~ \frac{1}{2})=(5;4)$.\\
+Hasonlóan órajárással ellentétes irányban elforgatva: $(-\frac{3}{2};~ -\frac{1}{2})$. Így a $D$ csúcs koordinátája: $\underline{m}+(-\frac{3}{2};~ -\frac{1}{2})=(2;3)$\\
+\\
+\\
+\end{window}
+\vskip 5pt
+
+\feladat{8}\\
+Egy paralelogramma három csúcsa $(-1; 1)$; $(0; -2)$ és $(3; 0)$. Számítsuk ki a hiányzó csúcs koordinátáit. (Hány megoldás van?)\\
+\small
+\begin{window}[0,l,{
+\begin{pspicture*}(-3,-2.75)(3.10,2.30)
+\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\psline(-1,1)(3,0)
+\psline(-1,1)(0,-2)
+\psline(0,-2)(3,0)
+\psline[linestyle=dashed,dash=7pt 7pt](0,-2)(4,-3)
+\psline[linestyle=dashed,dash=7pt 7pt](4,-3)(3,0)
+\psline[linestyle=dashed,dash=7pt 7pt](3,0)(2,3)
+\psline[linestyle=dashed,dash=7pt 7pt](2,3)(-1,1)
+\psline[linestyle=dashed,dash=7pt 7pt](-1,1)(-4,-1)
+\psline[linestyle=dashed,dash=7pt 7pt](-4,-1)(0,-2)
+\psline[linestyle=dotted](-1,1)(4,-3)
+\psline[linestyle=dotted](3,0)(-4,-1)
+\psline[linestyle=dotted](0,-2)(2,3)
+\psdots(-1,1)
+\rput[bl](-1.57,1.54){A}
+\psdots(0,-2)
+\rput[bl](-0.42,-3.25){B}
+\psdots(3,0)
+\rput[bl](3.52,-0.06){C}
+\psdots[linecolor=darkgray](1,0.5)
+\rput[bl](1.1,0.6){$F$}
+\psdots[linecolor=darkgray](1.5,-1)
+\rput[bl](1.5,-1.5){$G$}
+\psdots[linecolor=darkgray](-0.5,-0.5)
+\rput[bl](-1,-1.2){$E$}
+\psdots[linecolor=darkgray](-4,-1)
+\rput[bl](-5.31,-1.56){$D_3$}
+\psdots[linecolor=darkgray](2,3)
+\rput[bl](2.32,3.58){$D_1$}
+\psdots[linecolor=darkgray](4,-3)
+\rput[bl](4.57,-4.05){$D_2$}
+\end{pspicture*}},{}]
+\normalsize
+Felvettük a megadott 3 pontot $A(-1; 1)$, $B(0; -2)$ és $C(3; 0)$ személyében. A lehetséges $D$ pontot úgy kaphatjuk meg, hogy $AB$, $BC$, illetve $AC$ oldalak felezõpontjára tükrüzzük, azaz 3 megoldás lehetséges.\\
+$D_1$: Tükrözzük a $B$ pontot $F$-re. $F$ koordinátái: $(1; \frac{1}{2})$. $\overrightarrow{BF}=\underline{f}-\underline{b}=(1; 2\frac{1}{2})$.\\ Így $D_1$ koordinátái: $\underline{f}+\overrightarrow{BF}=(2; 3)$\\
+$D_2$: Tükrözzük a $A$ pontot $G$-re. $G$ koordinátái: $(\frac{3}{2}; -1)$. $\overrightarrow{AG}=\underline{g}-\underline{a}=(2\frac{1}{2}; -2)$.\\ Így $D_2$ koordinátái: $\underline{g}+\overrightarrow{AG}=(4; -3)$\\
+Hasonló módszerrel megkaphatjuk $D_3$ koordinátáit: $(-4; -1)$.
+\end{window}
+
+\section{Mértani helyek}
+\hrule
+\vskip 1pt
+\centerline{B E P Ó T O L N I ~~ A Z ~~ E L E J É T ! !}
+\vskip 4pt
+\hrule
+\vskip 10pt
+Coming soon...
+
+%\section{Kör egyenlete}
+
+\end{document}
+

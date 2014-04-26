@@ -1,0 +1,66 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3973.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:} Hányféleképpen lehet a sakktáblán elhelyezni 14 futót úgy, hogy semelyik kettõ ne üsse egymást?\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+Számoljuk meg, hogy hány olyan átló van a sakktáblán ami a bal alulról jobb felülre mutat:
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk_1.eps}}
+\caption{}
+\end{figure}
+
+Láthatjuk, hogy 15 darab. Mivel a két sarokban (bal felsõ, illetve jobb alsó) nem lehet egyszerre futó, így összesen csak 14 darab átló van ahova rakhatunk. Mivel 14 darab futót kell elhelyeznünk, így minden ilyen átlóba kell raknunk 1-1 futót.\\
+
+Az elsõ futót (nem különböztetjük meg a futókat, de valamilyen sorrendben elkezjük lepakolni õket a táblára) vagy a balfelsõ, vagy a jobbalsó sarokba rakhatjuk. Ez eddig 2 eset.\\
+
+A második átlóban is két helyre rakhatjuk a 2. futót (az ábrákon kicsi körrel jelezzük a már letett futókat):
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk_2.eps}}
+\caption{}
+\end{figure}
+
+Bármelyik helyre rakjuk a futót, a lerakott futó kizárja a jobb alsó sarok melletti átlóban (a mostani átlót tükrözve a középsõ, leghosszabb átlóra) az egyik lehetõséget a 2-bõl. Azaz ez a két átló összefügg, tehát ha valamelyikben leraktunk egy futót, akkor a másikban egyértelmûen megvan a másik futó helye. Így ez megkétszerezi az eseteket/lehetõségeket, azaz eddig $2\cdot 2=4$ lehetõség van.
+
+\begin{figure}[ht]
+\centerline{\includegraphics{sakk_3.eps}}
+\caption{}
+\end{figure}
+
+A harmadik átlóban hasonló a helyzet: A két szélére rakhatunk futót, de a jobbsaroktól számított harmadik átlóval összefügg, tehát ez is csak megkétszerezi a lehetõségeket, azaz eddig $2^3$ a lehetõségek száma.\\
+
+Ez a többi átlónál is fog folytatódni, azaz összesen 7 átlóban. A középsõ, leghosszabb átlónak nincsen olyan párja, mint az eddigieknek, de ettõl függetlenül itt is két eset van (hiszen minden mást az eddig lerakott futók kizárnak): balalsó vagy a jobbfelsõ sarok.
+
+Tehát összesen $2^8=256$ lehetõség van.\\
+
+\textbf{Tehát összesen 256-féleképpen tudunk elhelyezni 14 futót a sakktáblán, hogy ne üssék egymást.}
+
+\end{document}

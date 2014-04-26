@@ -1,0 +1,60 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 60pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4021.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Igazoljuk, hogy ha $n$ pozitív egész és az $a_1, a_2, \ldots, a_n$ számok mindegyike legalább 1, akkor
+
+\[(a_1+1) (a_2+1) \cdot \ldots \cdot (a_n+1)\ge 2^{n-1} (a_1+ a_2+\ldots + a_n-n+2).\]
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+\noindent Legyen $x_i = a_i - 1$, ahol $i \in \mathbb{Z^+}$ és $1\leqslant i \leqslant n$. Ha jól megnézzük a jobb oldalt, akkor:
+\[(a_1+ a_2+\ldots + a_n-n+2) = ((x_1+1)+ (x_2+1)+\ldots + (x_n+1)-n+2)\]
+A jobb oldalt $n$ darab 1-es, van, de a végén levonunk $n$-et, tehát tulajdonképpen:
+\[(a_1+ a_2+\ldots + a_n-n+2) = ((x_1+1)+ (x_2+1)+\ldots + (x_n+1)-n+2) = \]
+\[ = (x_1+ x_2+\ldots + x_n+2)\]
+Így végül az alábbi egyenlõtlenséget kaptunk, ami teljesen ekvivalens a feladatban megfogalmazott egyenlõtlenséggel:
+\[(x_1+2) (x_2+2) \cdot \ldots \cdot (x_n+2)\ge 2^{n-1} (x_1+ x_2+\ldots + x_n+2)\]
+Bontsuk ki a jobb oldalt:
+\[2^{n-1} (x_1+ x_2+\ldots + x_n+2) = 2^n + 2^{n-1}\cdot x_1 + 2^{n-1}\cdot x_2 + \ldots + 2^{n-1}\cdot x_n\]
+Tehát kapunk egy $2^n$-t, illetve az $x_i$-ket, $2^{n-1}$-es együtthatóval.
+Gondolatban fejtsük ki a bal oldalt is:
+
+Nyílvánvaló, hogy, ha a zárójelekbõl mindenhonnan a 2-t választjuk, akkor lesz egy $2^n$-es tag. Ha minden zárójelbõl kiválasztjuk az $x_i$-t, a többibõl pedig a 2-t, akkor lesznek $2^{n-1}\cdot x_i$-s tagok. Emelett pedig lesz $x_1x_2\cdot\ldots\cdot x_n$-es tag, illetve még jó pár tag, attól függõen, hogy hogyan választjuk meg az egyes tagokat a zárójelekbõl.
+Tehát ha jól megnézzük, akkor kibontás után, az egyenlõtlenség ilyen alakú lesz:
+\[\underbrace{x_1x_2\cdot\ldots\cdot x_n + \ldots}_{\geqslant 0} + 2^{n-1}( x_1 + x_2 + \ldots + x_n ) + 2^n\ge 2^n + 2^{n-1}( x_1 + x_2 + \ldots + x_n )\]
+Mindkét oldalból levonjuk a $2^{n-1}( x_1 + x_2 + \ldots + x_n ) + 2^n$-t, akkor a jobb oldalt 0-át kapunk a bal oldalt, pedig olyan szorzatok összegét, amik biztosan nagyobb egyenlõ mint 0, hiszen a szorzatok tényezõi között 2-k, illetve $x_i$-k szerepelnek, de $x_i$-rõl tudjuk, hogy $x_i \geqslant 0$, mivel $a_i \geqslant 1$ és $x_i = a_i - 1$. Tehát igaz a fenti egyenlõtlenség, és mivel ekvivalens átalakításokat végeztünk, ezért a kezdõ egyenlõtlenségünk is igaz, tehát \textbf{ha $\mathbf{n}$ pozitív egész és az $\mathbf{a_1, a_2, \ldots, a_n}$ számok mindegyike legalább 1, akkor:}
+\[\mathbf{(a_1+1) (a_2+1) \cdot \ldots \cdot (a_n+1)\ge 2^{n-1} (a_1+ a_2+\ldots + a_n-n+2).}\]
+
+
+
+
+\end{document}

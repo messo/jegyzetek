@@ -1,0 +1,67 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\noindent\textbf{B. 3983.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Néhányan paintball-ütközetet vívnak egymással. Egy adott helyzetben a játékosok egymástól való távolsága mind különbözõ. Ekkor mindenki rálõ a hozzá legközelebb álló emberre. Keresztezhetik-e egymást a golyók pályái? \\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Pontokkal ábrázoljuk az embereket, és kössünk össze két pontot, ha õk egymásra lõnek. Ha két ember kölcsönösen egymásra lõ, akkor azt nem tekintjük keresztezésnek, illetve ezt külön nem is tüntetjük fel, hiszen csak a golyók pályája érdekel minket, az irány nem.\\
+
+Bizonyítsuk be, hogy ha 4 ember van, akik paintball-ütközetet vívnak, akkor a golyók pályái nem keresztezik egymást. Ha ezt belátjuk, akkor tudjuk, hogy bármely 4 ember golyóinak pályái nem keresztezik egymást, tehát bárhány ember esetén nem fogják egymást a golyók keresztezni.\\
+
+Ha négy embert pontokkal ábrázolunk, akkor tulajdonképpen egy négyszöget ábrázolunk. Ha össze\-kö\-tünk minden pontot minden másik ponttal, akkor láthatjuk, hogy csak a két átló keresztezheti egymást (konvex négyszög esetében, ha viszont konkávról (olyan, amelyben az oldalak nem keresztezik egymást, hiszen akkor az konvex, csak nem jól jelöltük meg a csúcsok sorrendjét) van szó, akkor sehogyan se keresztezheti egymást a golyók röppályája, hiszen akkor az átlók nem metszik egymást).
+
+Az a kérdés, hogy lehet-e az, hogy mindkét átlót egyszerre behúzzuk a négyszögben (azaz keresztezik egymást a golyók röppályája)? Mivel egy négyszög belsõ szögeinek összege 360°, ezért átlagosan mindegyik szög 90°. Ebbõl következik, hogy legalább 1 tompaszög lesz a négyszögben:\\
+\centerline{\small\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-0.6,-4.03)(11.47,5.1)
+\psline(6,4)(0.5,2.4)
+\psline(0.5,2.4)(4.2,-2.63)
+\psline(4.2,-2.63)(9.8,1.23)
+\psline(9.8,1.23)(6,4)
+\psline(6,4)(4.2,-2.63)
+\psline(0.5,2.4)(9.8,1.23)
+\pscustom{\parametricplot{-2.8584968682902976}{-0.6293176628019754}{1*cos(t)+6|1*sin(t)+4}\lineto(6,4)\closepath}
+\psdots(6,4)
+\rput[bl](6,4.57){A}
+\psdots(0.5,2.4)
+\rput[bl](-0.13,2.3){B}
+\psdots(4.2,-2.63)
+\rput[bl](3.93,-3.47){C}
+\psdots(9.8,1.23)
+\rput[bl](10.17,0.9){D}
+\end{pspicture*}\normalsize}
+
+Legyen az ábrán berajzolt szög ($BAD\sphericalangle$) az egyik tompaszög. Mivel egy háromszögben max. egy tompaszög lehet, ezért biztos, hogy ezzel a szöggel ($BAD\sphericalangle$) szemközti oldal a leghosszabb a $BAD$ háromszögben. Ebbõl viszont az következik, hogy $B$ és $D$ biztosan nem fog egymásra lõni, hiszen mindenki a legközelebbire lõ, így $B$, illetve $D$ vagy $A$-ra vagy $C$-re lõnek (nem feltétlenül mindeketten ugyanarra lõnek).
+
+Tehát 4 ember esetében biztosan nem keresztezik egymást a golyók röppályája, hiszen legalább az egyik átló mentén nem lesz röppálya.\\
+
+Mivel 4 ember esetében nem keresztezik egymást, ezért bármely négy ember esetében nem keresztezik egymást a golyók röppályája. Ezzel beláttuk, hogy bárhány ember esetén, akik paintball ütközetet vívnak,  nem keresztezik egymást a golyók röppályája.
+
+ 
+
+\end{document}

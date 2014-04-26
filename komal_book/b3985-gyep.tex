@@ -1,0 +1,41 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\noindent\textbf{B. 3985.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Kertünkben a gyep $n$ fûszálból áll. Úgy szeretnénk lenyírni a füvet, hogy minden fûszál egyenlõ hosszú legyen, de a fûszálak összhossza ne változzék. Összesen a fûszálakon $n-1$ vágást végezhetünk, és a levágott darabokat egymáshoz, illetve a megmaradt részekhez ragaszthatjuk. Megoldható-e mindig a kívánalmaknak megfelelõen a fûnyírás? \\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Mivel azt szeretnénk, hogy minden fûszál egyenlõ hosszú legyen, ezért mindegyiket átlagos (fûszálak összhossza/$n$) hosszúságra vágjuk. Mivel nem volt arról szó, hogy a fû ,,darabos'', azaz egységekbõl áll, így akár az átlagos magasság lehet nem egész is.
+
+A fûnyírás pedig az alábbi módon történik: Legelõször vesszük a leghosszabb füvet (lényegében mindegy, hogy a leghosszabb-e, csak az fontos, hogy az átlagosnál magasabb legyen, tehát hogy nyírhassunk belõle), és levágjuk átlagosra, majd a levágott darabot ráragasztjuk a leghosszabbra (mivel az eddigi leghosszabbat most nyírtuk le, ezért valószínûleg más lesz a leghosszabb). Amire ráragasztottunk, szintén levágjuk átlagos hosszúságra, majd megint a levágott darabot ráragasztjuk a jelenleg leghosszabbra, és így tovább\ldots
+
+Legrosszabb esetben $n-1$ füvön kell vágnunk, de az utolsón biztosan nem, hiszen, amit az utolsó elõtti azaz az $n-1.$ fûszálról levágtunk, úgy egészíti ki az $n.$ fûszálat, hogy az is átlagos hosszúságú legyen (hiszen mindegyik fûszál rajta kívül átlagos hosszúságú, így kénytelen õ is az lenni).\\
+
+\textbf{\boldmath Tehát mindig megoldható, hogy max. $n-1$ fûszálon kelljen vágnunk.}
+
+\end{document}

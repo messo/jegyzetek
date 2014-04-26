@@ -1,0 +1,45 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+\large
+
+\noindent\textbf{B. 4024.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Az elsõ 1000 pozitív egész szám közül legfeljebb hányat választhatunk ki úgy, hogy semelyik két kiválasztott szám összege ne legyen osztható a különbségükkel?\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Ha meggondoljuk, akkor a kiválasztott számok között nem lehet 2 olyan szám, aminek a különbsége 1, hiszen 1-el minden szám osztható. Nem választhatunk olyan számokat se, amik között van 2 olyan szám aminek különbsége 2, hiszen ha különbségük 2, akkor mindkét szám vagy páros, vagy páratlan, viszont két páros, illetve két páratlan összege páros, ami viszont osztható 2-vel.\\
+
+Így legfeljebb olyan számokat választhatunk ki, amik közül bármelyik két szám különbsé\-ge legalább 3. Akkor választhatjuk ki az elsõ 1000 pozitív szám közül a maximális darab számot, ha kiválasztjuk az összes olyan számot, amelyek közül bármelyik két szám különb\-sé\-ge legalább 3, magyarán ha minden 3. számot kiválasztjuk. Így kiválasztjuk az 1, 4, 7, 10, \ldots, 1000 számokat. Ez összesen 334 db szám.\\
+Kérdés, hogy biztosan jó-e az összes szám, nem fordulhat-e elõ az, hogy lesz ezek között 2 olyan szám, aminek az összege osztható a különbségükkel?\\
+Ha jól megnézzük, akkor mindegyik számnak a 3-al való osztási maradéka 1. Így válasszunk ki két számot ebbõl a 334 db számból: legyen az egyik a $3k+1$, a másik pedig $3l+1$ ahol $k, l\in \mathbb{N}$ és $l\neq k$, akkor igaznak kell lennie, hogy:
+\[\frac{3k+1~+~3l+1}{3k+1~-~(3l+1)} \notin \mathbb{Z}\]
+\[\frac{3k+1~+~3l+1}{3k+1~-~(3l+1)} = \frac{3(k+l)+2}{3(k-l)}\]
+Tehát egy 3-al osztva 2 maradékot adó számot osztunk el egy 3-al osztható számmal, ez triviálisan nem ad egész számot, tehát valóban nem lesz két olyan szám, amik összege osztható a különbségükkel.\\
+
+\textbf{Tehát legfeljebb 334 db számot választhatunk ki az elsõ 1000 pozitív szám közül úgy, hogy semelyik két kiválasztott szám összege ne legyen osztható a különbségükkel.}
+
+\end{document}

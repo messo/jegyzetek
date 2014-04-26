@@ -1,0 +1,138 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4014.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Az $ABC$ hegyesszögû háromszög csúcsainak a körülírt kör középpontjára vonatkozó tü\-kör\-ké\-pe\-i rendre $A'$, $B'$ és $C'$. Bizonyítsuk be, hogy az $A'BC$, $AB'C$, $ABC'$ háromszögek területének összege egyenlõ az $ABC$ háromszög területével.\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Rajzoljunk egy ábrát:\\
+
+\centerline{\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(0.1,-0.68)(5.70,4.76)
+\pspolygon[fillcolor=black,fillstyle=transp,transpalpha=0.1](0.72,1.18)(3.86,4.24)(0.99,3.43)
+\pspolygon[fillcolor=black,fillstyle=transp,transpalpha=0.1](3.86,4.24)(4.86,0.68)(5.13,2.93)
+\pspolygon[fillcolor=black,fillstyle=transp,transpalpha=0.1](0.72,1.18)(4.86,0.68)(1.99,-0.13)
+\psline(0.72,1.18)(3.86,4.24)
+\psline(3.86,4.24)(4.86,0.68)
+\psline(4.86,0.68)(0.72,1.18)
+\pscircle(2.93,2.06){2.37}
+\psline(0.72,1.18)(1.99,-0.13)
+\psline(1.99,-0.13)(4.86,0.68)
+\psline(4.86,0.68)(5.13,2.93)
+\psline(5.13,2.93)(3.86,4.24)
+\psline(3.86,4.24)(0.99,3.43)
+\psline(0.99,3.43)(0.72,1.18)
+\psline{->}(2.93,2.06)(0.72,1.18)
+\psline{->}(2.93,2.06)(3.86,4.24)
+\psline{->}(2.93,2.06)(4.86,0.68)
+\psline{->}(2.93,2.06)(1,3.44)
+\psline{->}(2.93,2.06)(5.14,2.94)
+\psline{->}(2.93,2.06)(2,-0.12)
+\psline(0.72,1.18)(3.86,4.24)
+\psline(3.86,4.24)(0.99,3.43)
+\psline(0.99,3.43)(0.72,1.18)
+\psline(3.86,4.24)(4.86,0.68)
+\psline(4.86,0.68)(5.13,2.93)
+\psline(5.13,2.93)(3.86,4.24)
+\psline(0.72,1.18)(4.86,0.68)
+\psline(4.86,0.68)(1.99,-0.13)
+\psline(1.99,-0.13)(0.72,1.18)
+\psdots(0.72,1.18)
+\rput[bl](0.38,0.9){$A$}
+\psdots(3.86,4.24)
+\rput[bl](3.94,4.36){$B$}
+\psdots(4.86,0.68)
+\rput[bl](5.02,0.44){$C$}
+\psdots(2.93,2.06)
+\rput[bl](3.24,1.92){$O$}
+\psdots(2.93,2.06)
+\psdots(1.99,-0.13)
+\rput[bl](1.68,-0.54){$B'$}
+\psdots(0.99,3.43)
+\rput[bl](0.76,3.56){$C'$}
+\psdots(5.13,2.93)
+\rput[bl](5.32,2.9){$A'$}
+\rput[bl](1.86,1.46){$a$}
+\rput[bl](3.02,2.82){$b$}
+\rput[bl](3.92,1.44){$c$}
+\rput[bl](1.94,2.88){$c'$}
+\rput[bl](3.64,2.48){$a'$}
+\rput[bl](2.76,1.18){$b'$}
+\end{pspicture*}}
+
+Vegyük fel az $\underline{a}, \underline{b}$ és $\underline{c}$, illetve $\underline{a'}, \underline{b'}$ és $\underline{c'}$ vektorokat, az ábrán látható módon ($O$, azaz a körülírt kör középpontja legyen a vektorok kezdõpontja a végpontok pedig rendre $A, B$ és $C$, illetve $A', B'$ és $C'$). Nyílvánvaló, hogy $\underline{a}=-\underline{a'}$, $\underline{b}=-\underline{b'}$ és $\underline{c}=-\underline{c'}$, hiszen egy egyenesre esnek, abszolút értékük azonos (a körülírt kör sugara), de ellentétes irányúak.
+
+Írjuk fel a szürkén megjelölt háromszögek, azaz az $A'BC$, $AB'C$, $ABC'$ háromszögek területeit a vektorok segedelmével. Ehhez a vektoriális szorzatot használjuk, amirõl tudjuk, hogy ha $\underline{x}$ és $\underline{y}$ egy háromszög egy csúcsából indított oldalvektorai, akkor e két vektor vektoriális szorzatának abszolútértékének a fele egyenlõ a háromszög területével (ezért hívjuk az $\frac{\underline{x}\times\underline{y}}{2}$-t a háromszög területvektorának). Jelen esetben nem foglalkozunk az abszolútértékkel, hanem mint elõjeles területvektorral dolgozunk. Viszont fontos, hogy a területvektorokat úgy írjuk fel, hogy egy irányba mutassanak.
+
+\[T_{A'BC} = \frac{\overrightarrow{CB}\times\overrightarrow{CA'}}{2} =\frac{(\underline{b}-\underline{c})\times(\underline{a'}-\underline{c})}{2} = \frac{\underline{b}\times\underline{a'}+\underline{b}\times\underline{-c}+\underline{-c}\times\underline{a'}}{2} =\]
+\[ = \frac{\underline{a}\times\underline{b}+\underline{c}\times\underline{b}+\underline{c}\times\underline{a}}{2}\]
+
+A $(\underline{-c}\times\underline{-c})$-t, azért nem írjuk le, mert rögtön tudjuk róla, hogy nullvektor, hiszen párhuzamos vektorok vektoriális szorzata nullvektor. Az átalakításoknál a vektoriális szorzás tulajdonságait használjuk fel. Hasonlóan a másik két háromszög területe:
+
+\[T_{AB'C} = \frac{\overrightarrow{AC}\times\overrightarrow{AB'}}{2} =\frac{(\underline{c}-\underline{a})\times(\underline{b'}-\underline{a})}{2} = \frac{\underline{c}\times\underline{b'}+\underline{c}\times\underline{-a}+\underline{-a}\times\underline{b'}}{2} =\]
+\[ = \frac{\underline{b}\times\underline{c}+\underline{a}\times\underline{c}+\underline{a}\times\underline{b}}{2}\]
+
+\[T_{ABC'} = \frac{\overrightarrow{BA}\times\overrightarrow{BC'}}{2} =\frac{(\underline{a}-\underline{b})\times(\underline{c'}-\underline{b})}{2} = \frac{\underline{a}\times\underline{c'}+\underline{a}\times\underline{-b}+\underline{-b}\times\underline{c'}}{2} =\]
+\[ = \frac{\underline{c}\times\underline{a}+\underline{b}\times\underline{a}+\underline{b}\times\underline{c}}{2}\]
+
+Vizsgáljuk meg, hogy mit kapunk ezen területek összegére:
+
+\[T_{A'BC}+T_{AB'C}+T_{ABC'} =\]
+\[ = \frac{
+\underline{a}\times\underline{b}+\underline{c}\times\underline{b}+\underline{c}\times\underline{a}+
+\underline{b}\times\underline{c}+\underline{a}\times\underline{c}+\underline{a}\times\underline{b}+
+\underline{c}\times\underline{a}+\underline{b}\times\underline{a}+\underline{b}\times\underline{c}
+}{2} = \]
+\[\mathbf{= \frac{\underline{a}\times\underline{b}+\underline{c}\times\underline{a}+\underline{b}\times\underline{c}}{2}}\]
+
+Nagyon szépen tudtunk egyszerûsíteni felhasználva, hogy $\underline{x}\times\underline{y} = -\underline{y}\times\underline{x}$, ha $\underline{x}$ és $\underline{y}$ két vektor, amit vektoriálisan szorzunk.
+
+Vizsgáljuk meg, hogy mit kapunk az $ABC$ háromszög területére, de figyeljünk, hogy úgy írjuk fel a területvektort, hogy az eddigiekkel egy irányba mutasson.
+
+Az $ABC$ háromszög felbontható 3 db háromszögre: $AOB$, $BOC$ és $COA$ háromszögek\-re.
+\[T_{AOB} = \frac{\underline{a}\times\underline{b}}{2}\]
+\[T_{BOC} = \frac{\underline{b}\times\underline{c}}{2}\]
+\[T_{COA} = \frac{\underline{c}\times\underline{a}}{2}\]
+
+Tehát:
+\[T_{ABC} = T_{AOB}+T_{BOC}+T_{COA} = \mathbf{\frac{\underline{a}\times\underline{b}+\underline{b}\times\underline{c}+\underline{c}\times\underline{a}}{2}}\]
+
+Észrevehetjük, hogy ugyanazt kaptunk $T_{ABC}$-re, illetve $T_{A'BC}+T_{AB'C}+T_{ABC'}$-re, tehát beláttuk az állítást. 
+
+\end{document}

@@ -1,0 +1,177 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4023.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Egy háromszög egyik oldalán adott egy pont. Szerkesszünk ezen át két olyan egyenest, amelyek a háromszög területét harmadolják.\\
+\hrule
+\hskip 10pt
+
+\parindent 0pt\textbf{Megoldás:}\\
+
+Legyen az adott pont $D$.
+Legelõször nézzünk meg 2 speciális esetet: $D$ rajta van az oldalhoz tartozó valamelyik csúcson (1. ábra), vagy $D$ rajta van valamelyik az oldalon lévõ harmadolóponton (2. ábra):\\
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-1.4,-1.12)(7.64,4.6)
+\psline(-0.88,-0.58)(3.2,4.22)
+\psline(3.2,4.22)(7.12,-0.22)
+\psline(7.12,-0.22)(-0.88,-0.58)
+\psline(-0.88,-0.58)(4.51,2.74)
+\psline(-0.88,-0.58)(5.81,1.26)
+\psdots(-0.88,-0.58)
+\rput[bl](-1.22,-0.9){$A$}
+\psdots(3.2,4.22)
+\rput[bl](2.78,4.14){$B$}
+\psdots(7.12,-0.22)
+\rput[bl](7.28,-0.58){$C$}
+\psdots(-0.88,-0.58)
+\rput[bl](-1.24,-0.44){$D$}
+\psdots(4.51,2.74)
+\rput[bl](4.68,2.74){$H$}
+\psdots(5.81,1.26)
+\rput[bl](5.88,1.5){$I$}
+\end{pspicture*}
+}\\
+\centerline{\textit{1. ábra}}\\
+
+Ilyenkor nyilvánvaló, hogy a 2 egyenes a szemköztes oldalt 1-1 pontban metszi, ekkor 3 háromszög jön létre, de mivel mindhárom háromszögnek a $D$ csúcshoz tartozó ma\-gas\-sága azonos (megegyezik az eredeti $ABC$ háromszög magasságával), ezért a $D$ csúccsal szemköztes oldalak is egyenlõnek kell lennie egymással ($BH=HI=IC$), hogy mindhárom háromszög területe azonos legyen, így egy kis háromszög területe valóban a nagy háromszög területének harmada lesz. Ahhoz, hogy $BH=HI=IC$ igaz legyen, $H$-nak és $I$-nek a $BC$ oldalnak a harmadolópontjának kell lennie. Így ahhoz hogy megszerkesszük a kérdéses 2 egyenest, amivel harmadoljuk a háromszöget, nem kell mást tennünk, mint megszerkeszteni a szemköztes oldal 2 harmadolópontját, majd õket összekötni a $D$-vel.\\
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-1.4,-1.12)(7.64,4.6)
+\psline(-0.88,-0.58)(3.2,4.22)
+\psline(3.2,4.22)(7.12,-0.22)
+\psline(7.12,-0.22)(-0.88,-0.58)
+\psline(0.48,1.02)(7.12,-0.22)
+\psline(0.48,1.02)(5.16,2)
+\psdots(-0.88,-0.58)
+\rput[bl](-1.22,-0.9){$A$}
+\psdots(3.2,4.22)
+\rput[bl](2.78,4.14){$B$}
+\psdots(7.12,-0.22)
+\rput[bl](7.28,-0.58){$C$}
+\psdots(0.48,1.02)
+\rput[bl](0.24,1.2){$D$}
+\psdots(1.84,2.62)
+\rput[bl](1.68,2.9){$E$}
+\psdots(5.16,2)
+\rput[bl](5.38,2.02){$F$}
+\end{pspicture*}
+}\\
+\centerline{\textit{2. ábra}}\\
+
+Ilyenkor, amikor a $D$ pont rajta van valamelyik harmadolóponton, akkor is 3 darab háromszög keletkezik. Legyen $F$ a $BC$ oldal felezõpontja. Mivel a $BF$ fele a $BC$-nek, a $BF$-hez tartozó magassága pedig az $ABC$ háromszögben $BC$-hez tartozó magasság $\frac{2}{3}$-a, ezért az $DBF$ háromszög területe $\frac{1}{2}\cdot\frac{2}{3}=\frac{1}{3}$-a az eredeti $ABC$ háromszögnek, hasonlóan $DFC$ háromszög területe is harmada az eredeti háromszögnek, így a maradék $ADC$ háromszög területének is az eredeti háromszög harmadának kell lennie, tehát valóban $DF$ és $DC$ egyenese harmadolja az $ABC$ háromszög területét. Így a két egyenes meg\-szerkesztése nem más, mint a $D$-t összekötjük a szemköztes csúccsal, illetve a távolabbi oldal felezõpontjával.\\
+
+A fent bemutatott speciális eseteken kívül van még 2 eset: ha $D$ az oldal középsõ harmadában van (3. ábra), illetve ha $D$ az oldal valamelyik szélsõ harmadában van (4. ábra), hiszen mindkét esetben 1 négyszög, illetve 2 háromszög jön létre, de elsõ esetben a 2 háromszög közrefogja a négyszöget, a másik esetben pedig nem $-$ a szélén lesz a négyszög.\\
+\centerline{\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-1.42,-1.18)(5.88,3.8)
+\psline(-0.88,-0.58)(2.54,3.14)
+\psline(2.54,3.14)(5.38,-0.48)
+\psline(5.38,-0.48)(-0.88,-0.58)
+\psplot[linestyle=dashed,dash=5pt 5pt]{-1.42}{5.88}{(-16.61--3.42*x)/-3.72}
+\psline(1.08,1.56)(4.76,0.31)
+\psline(1.08,1.56)(2.65,-0.52)
+\psplot[linestyle=dotted]{-1.42}{5.88}{(-123.85--59.56*x)/-64.79}
+\psplot[linestyle=dotted]{-1.42}{5.88}{(-399.94--78.47*x)/-85.36}
+\psdots(-0.88,-0.58)
+\rput[bl](-1.22,-0.9){$A$}
+\psdots(2.54,3.14)
+\rput[bl](2.42,3.34){$B$}
+\psdots(5.38,-0.48)
+\rput[bl](5.4,-0.9){$C$}
+\psdots(1.08,1.56)
+\rput[bl](0.72,1.66){$D$}
+\psdots(4.76,0.31)
+\rput[bl](4.96,0.46){$G$}
+\psdots(2.65,-0.52)
+\rput[bl](2.48,-0.98){$H$}
+\psdots(0.76,1.21)
+\rput[bl](0.32,1.12){$T_1$}
+\psdots(2.15,2.71)
+\rput[bl](2,2.94){$T_2$}
+\psdots(2.04,2.59)
+\rput[bl](1.68,2.44){$T$}
+\end{pspicture*}
+}\\
+\centerline{\textit{3. ábra}}\\
+
+Azt szeretnénk, ha $T_{DBG\vartriangle}=T_{ADH\vartriangle}=\frac{T_{ABC\vartriangle}}{3}$ (így a maradék négyszög területe is egyharmad). $DBG$ háromszög területe $\frac{DB\cdot T_2G}{2}$, hasonlóan $ADH$ háromszög területe $\frac{AD\cdot T_1H}{2}$, $ABC$ háromszög területe pedig $\frac{AB\cdot TC}{2}$.\\
+\[\frac{DB\cdot T_2G}{2}=\frac{AB\cdot TC}{6}\]
+\[\frac{DB}{AB}=\frac{TC}{3T_2G}\]
+\[\frac{AB}{3DB}=\frac{T_2G}{TC}\]
+Innen $T_2G$-n kívül mindent ismerünk, tehát párhuzamos szelõk tételek alapján meg\-szerkeszthetjük a $T_2G$ távolságot.
+\[\frac{AD\cdot T_1H}{2}=\frac{AB\cdot TC}{6}\]
+\[\frac{AD}{AB}=\frac{TC}{3T_1H}\]
+\[\frac{AB}{3AD}=\frac{T_1H}{TC}\]
+Itt is $T_1H$-n kívült mindent ismerünk, tehát az õ hossza is megszerkeszthetõ a párhuzamos szelõk tétele alapján.\\
+
+Ismerjük $T_2G$ és $T_1H$ hosszát. A $TC$ egyenesre rámérjük $T$-tõl $T_2G$ és $T_1H$ hosszát. A végpontokban merõlegeseket állítunk a $BC$-re, és ahol ezek az egyensek elmetszik a megfelelõ oldalakat, ott lesz a $H$, illetve $G$ pont.\\
+Mivel $D$-t $AB$ középsõ harmadában vettük fel, ezért mindig lesz az oldalakkal metszéspont, tehát mindig kapunk $H$, illetve $G$ pontokat.\\
+~\\
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-1.34,-1.08)(5.3,3.58)
+\psline(-0.88,-0.58)(2.54,3.14)
+\psline(2.54,3.14)(4.93,-0.26)
+\psline(4.93,-0.26)(-0.88,-0.58)
+\psplot[linestyle=dashed,dash=5pt 5pt]{-1.34}{5.3}{(-15.88--3.42*x)/-3.72}
+\psline(-0.1,0.26)(3.57,1.67)
+\psplot[linestyle=dotted]{-1.34}{5.3}{(-377.91--70.11*x)/-76.26}
+\psplot{-1.34}{5.3}{(-13.76--3.67*x)/-1.41}
+\psplot{-1.34}{5.3}{(--16.13-3.4*x)/2.39}
+\psplot{-1.34}{5.3}{(--17.18-3.67*x)/1.41}
+\psline(-0.1,0.26)(4.6,0.21)
+\psdots(-0.88,-0.58)
+\rput[bl](-1.17,-0.87){$A$}
+\psdots(2.54,3.14)
+\rput[bl](2.54,3.27){$B$}
+\psdots(4.93,-0.26)
+\rput[bl](4.89,-0.6){$C$}
+\psdots(-0.1,0.26)
+\rput[bl](-0.43,0.35){$D$}
+\psdots(3.57,1.67)
+\rput[bl](3.59,1.79){$G$}
+\psdots(2.28,2.86)
+\rput[bl](2.02,3.06){$T_2$}
+\psdots(1.94,2.49)
+\rput[bl](1.63,2.35){$T$}
+\psdots(4.6,0.21)
+\rput[bl](4.68,0.31){$J$}
+\end{pspicture*}
+}\\
+\centerline{\textit{4. ábra}}\\
+
+Ebben az utolsó esetben, részben felhasználjuk az elõzõ esetet. Megszerkesztjük az elõzõ esetben megszerkeszthetõ egyeneset, jelen esetben az $DG$-t (ha $D$ a másik szélsõ harmadban lenne, akkor a $DH$-t tudnánk megszerkeszteni). Mivel tudjuk, hogy $DBG$ háromszög területe egyharmada a nagy háromszögnek, ezért vele már nem foglalkozunk, mert õ biztosan jó. $DGJ$ háromszög területének is egyharmadának kell lennie a nagy háromszög területének, tehát $T_{DGJ\vartriangle}=T_{DBG\vartriangle}$. Mivel $DG$-ben közös a két háromszög, ezért a $DG$-hez tartozó magasságoknak is egyenlõnek kell lennie. Meghúzzuk a $DBG$ háromszög $DG$-hez tartozó magasságát, majd centrálisan tükrözzük $G$-re. Ahol ez az egyenes elmetszi a $BC$ oldalegyenesét, az lesz a $J$ pont. $D$-t $J$-vel összekötve megkapjuk a második egyenest.
+\end{document}

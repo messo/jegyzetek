@@ -1,0 +1,57 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\noindent\textbf{B. 3982.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ 100 friss diplomás matematikus állást keres, ezért két fejvadász céget is felkeresnek. Mindkét cég kínálatában ugyanaz a 100 állás szerepel. Mindkét cég javaslatot tesz mindegyik jelentkezõnek, mindegyiknek különbözõt. Mindegyik jelentkezõ a két javaslat közül választ. Szerencsére így minden állás gazdára talál.\\
+
+\noindent Három hónap próbaidõ után azonban mindenkiben felmerül a változtatás gondolata, és inkább a másik cég által ajánlott munkahelyet választja (ha ez megegyezett az éppen aktuális állással, akkor marad). Mutassuk meg, hogy ekkor ismét minden állás gazdára talál. \\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+\centerline{
+\begin{tabular}{|c|c|c|}
+\hline
+diplomások & 1. & 2. \\
+\hline
+1. & $\bigcirc$ & \\
+2. & $\bigcirc$ & \\
+3. &  & $\bigcirc$\\
+4. &  & $\bigcirc$\\
+5. & $\bigcirc$ & \\
+\vdots & \vdots & \vdots\\
+99. & $\bigcirc$ & \\
+100. &  & $\bigcirc$\\
+\hline
+\end{tabular}\bigskip }
+
+A fenti táblázat egy vázlat, hogy a diplomások melyik fejvadász céget választják (a karika, azt jelenti, hogy az adott ember melyik cég által kínált állást választotta, de természetesen a táblázat csak egy sablon, hisz nem tudjuk, hogy ki melyiket választotta).\\
+
+Mivel minden diplomás választott, illetve mindegyik állás gazdára talált, ezért tudjuk, hogy a karikás állások (azaz a választott) között szerepel mind a 100 állás, mégpedig csak egyszer, hiszen 2 ember ugyanoda nem ment dolgozni. Viszont mivel mind a két cég kínálatában ugyanaz a 100 állás szerepel, tehát a táblázatban mindegyik kétszer szerepel, ezért a nem bekarikázott, azaz a nem választott állások között is szerepel mind a 100, de szintén csak egyszer.
+
+Tehát ha váltásra kerül a sor, akkor megint minden állás gazdára talál. (A váltásnál bezavarhat az, hogy aki ugyanazt az állás kapta az nem vált, de vehetjük úgyis, hogy õ is vált, hiszen ugyanazt az állást kapja meg, hiszen a másik állás amit nem választott az ugyanaz.)
+
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4018.}\\
+Krivn Blint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Az $AB$ tmrj kr $B$-beli rintjn adott egy $P$ pont. A $P$-bl a krhz hzott msik rint rintsi pontja $C$. A $C$ pont merleges vetlete az $AB$ egyenesen $T$. Bizonytsuk be, hogy $AP$ felezi a $CT$ szakaszt.\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megolds:}\\
+
+Vegynk fel egy koordinta rendszert, mgpedig gy, hogy a kr sugara egysgnyi legyen, illetve a kr kzppontjt rakjuk a koordintarendszer kzppontjba:\\
+
+\centerline{\normalsize
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-3.04,-2.88)(4.24,3.03)
+\psaxes[xAxis=true,yAxis=true,labels=none,Dx=2.5,Dy=2.5,ticksize=-2pt 0,subticks=0]{->}(0,0)(-3.04,-2.88)(3.24,3.03)
+\pscircle(0,0){2.5}
+\psline(2.5,-2.88)(2.5,3.03)
+\psdots(0,0)
+\rput[bl](0.06,0.08){$O(0;0)$}
+\psdots(2.5,0)
+\rput[bl](2.58,0.11){$B(1;0)$}
+\rput[bl](-1.25,1.87){$c$}
+\psdots(-2.5,0)
+\rput[bl](-2.77,0.12){$A(-1;0)$}
+\psdots(2.5,2.19)
+\rput[bl](2.55,2.27){$P(1;p_2)$}
+\end{pspicture*}\large}
+
+Els feladatunk, hogy egy msik (nem a $PB$) rintt szerkessznk a $P$ pontbl a $c$ krhz. Legyen az rintsi pont $C(c_1; c_2)$.
+
+Tudjuk, hogy az rint egyenlete
+\[ c_1\cdot x + c_2\cdot y = r^2 \]
+ahol $c_1$ s $c_2$ az rintsi pont ($C$) koordintja $r$ pedig a kr sugara.\\
+Azt is tudjuk, hogy a $P$ pont rajta lesz az rintn, teht ki fogja elgteni a fenti egyenletet a $P$ pont:
+\[ c_1\cdot 1 + c_2\cdot p_2 = r^2 = 1 \]
+Illetve mivel a $C$ pont rajta van a krn ezrt a kr egyenlett kielgti a $C$ pont:
+\[ c_1^2 + c_2^2 = r^2 = 1\]
+Teht az elz kt egyenletbl kifejezhetjk $c_1$-et s $c_2$-t $p_2$-vel:
+\[\left.\begin{tabular}{ll}
+$(1a) \quad c_1 + c_2\cdot p_2 = 1$\\
+$(1b) \quad c_1^2 + c_2^2 = 1$
+\end{tabular}\right\} \quad \begin{tabular}{ll}
+teht (1a)-bl $c_1 = 1-c_2\cdot p_2$ \hbox{ s ezt behelyettestve (1b)-be: }\\
+$(1-c_2\cdot p_2)^2 + c_2^2 = 1$\end{tabular} \]
+Megoldjuk $c_2$-re a msodfok egyenletet:
+\[(1-c_2\cdot p_2)^2 + c_2^2 = 1\]
+\[1+c_2^2\cdot p_2^2 -2c_2\cdot p_2 + c_2^2 = 1\]
+\[c_2^2\cdot p_2^2 -2c_2\cdot p_2 + c_2^2 = 0\]
+\[(p_2^2+1)c_2^2 -2p_2\cdot c_2  = 0\]
+Ha $c_2=0$, akkor kapjuk azt, hogy $C=B$, ami jelen esetben nem j, hiszen a $PB$ rintjtl klnbz rintt keressk, teht $c_2\ne 0$, gy leoszthatunk vele:
+\[(p_2^2+1)c_2 -2p_2  = 0\]
+\[c_2 = \frac{2p_2}{(p_2^2+1)}\]
+Innen $c_1$-et knnyen kapjuk (1b)-bl:
+\[c_1 = 1-c_2\cdot p_2\]
+\[c_1 = 1-\frac{2p_2}{(p_2^2+1)}\cdot p_2 = 1-\frac{2p_2^2}{(p_2^2+1)}\]
+
+Teht a $P$-bl a krhz hzott $PB$-tl klnbz rint a krt $C\left(1-\frac{2p_2^2}{(p_2^2+1)};\frac{2p_2}{(p_2^2+1)}\right)$ pontban rinti.\\
+Ezt nagyon egyszeren tudjuk merlegesen vetteni az $AB$ szakaszra, hiszen $x$ koordi\-n\-t\-ja marad, $y$ koordintja pedig 0 lesz: $T\left(1-\frac{2p_2^2}{(p_2^2+1)};0\right)$\\
+
+\centerline{\normalsize 
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-3.04,-2.88)(3.24,3.03)
+\psaxes[xAxis=true,yAxis=true,labels=none,Dx=2.5,Dy=2.5,ticksize=-2pt 0,subticks=0]{->}(0,0)(-3.04,-2.88)(3.24,3.03)
+\pscircle(0,0){2.5}
+\psline(2.5,-2.88)(2.5,3.03)
+\psplot{-3.04}{3.24}{(-5.47--0.29*x)/-2.17}
+\psline[linestyle=dashed,dash=3pt 3pt](0.33,-2.88)(0.33,3.03)
+\psline(-2.5,0)(2.5,2.19)
+\psdots(0,0)
+\rput[bl](0.06,0.08){$O$}
+\psdots(2.5,0)
+\rput[bl](2.58,0.11){$B$}
+\rput[bl](-1.25,1.87){$c$}
+\psdots(-2.5,0)
+\rput[bl](-2.77,0.12){$A$}
+\psdots(2.5,2.19)
+\rput[bl](2.55,2.27){$P$}
+\psdots(0.33,2.48)
+\rput[bl](0.43,2.57){$C$}
+\psdots(0.33,0)
+\rput[bl](0.46,-0.35){$T$}
+\psdots(0.33,1.24)
+\rput[bl](0.43,1.05){$F$}
+\end{pspicture*}\large}
+
+Mr csak $AP$ s $CT$ metszspontjt azaz az $F$ pontot keressk. rjuk fel az $AP$ s a $CT$ egyenesek egyenlett. $AP$-nek $\overrightarrow{AP}$ egy irnyvektora, azaz $\overrightarrow{AP} = \overrightarrow{OP}-\overrightarrow{OA} = (2; p_2)$. gy az $AP$-nek a $(p_2; -2)$ egy normlvektora, teht az $AP$ egyenes egyenlete:
+\[p_2\cdot x + -2\cdot y = (p_2\cdot -1)+(-2\cdot 0) = -p_2\]
+$CT$-nek nylvnvalan
+\[x = 1-\frac{2p_2^2}{(p_2^2+1)}\]
+az egyenlete, hiszen merleges az $x$ tengelyre, illetve a rajta lv $C$ pontnak az els koordintja $1-\frac{2p_2^2}{(p_2^2+1)}$.
+
+Megvan mind a kt egyenes egyenlete, s mivel az $F$ pont (a metszspont) rajta van a kt egyenesen, ezrt $F(x;y)$ kielgti mindkt egyenletet:
+
+\[\left.\begin{tabular}{ll}
+$(2a) \quad p_2x + -2y = -p_2$\\
+$(2b) \quad x = 1-\frac{2p_2^2}{(p_2^2+1)}$
+\end{tabular}\right\}\]
+
+$x$-et behelyettestjk (2a)-ba:
+
+\[p_2\Big(1-\frac{2p_2^2}{(p_2^2+1)}\Big) + -2y = -p_2\]
+\[p_2\Big(1-\frac{2p_2^2}{(p_2^2+1)}\Big) + p_2 = 2y\]
+
+Ha jl megnzzk, ha most leosztannk 2-vel, akkor megkapnnk az $y$-t, azaz az $F$ pont msodik koordintjt ($f_2$). De ha neknk azt kell beltnunk, hogy $TF=FC$, akkor elg beltnunk azt, hogy $2f_2=c_2$, hiszen $F$-nek s $C$-nek az els koordintja azonos. Elzek alapjn
+\[p_2\Big(1-\frac{2p_2^2}{(p_2^2+1)}\Big) + p_2 = 2f_2\]
+\[\frac{2p_2}{(p_2^2+1)} = c_2\]
+Ebbl (felhasznlva, hogy $2f_2=c_2$):
+\[p_2\Big(1-\frac{2p_2^2}{(p_2^2+1)}\Big) + p_2 = \frac{2p_2}{(p_2^2+1)}\]
+Ha ez igaz, akkor belttuk a feladatban szerepl lltst.\\
+Szorozzunk fel $(p_2^2+1)$-vel:
+\[p_2((p_2^2+1)-2p_2^2) + p_2(p_2^2+1) = 2p_2\]
+\[p_2(1-p_2^2) + p_2(p_2^2+1) = 2p_2\]
+Ez trivilisan igaz, teht $2f_2=c_2$. Azaz, $C$ pont msodik koordintja ktszerese az $F$ pont msodik koordintjnak, de mivel $C$ s $F$ els koordintja azonos, ezrt $2\cdot TF=TC$, teht $TF=FC$, azaz \textbf{belttuk az lltst}.
+
+
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3986.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:}\\ Tetszõleges pozitív egész $m$-re jelölje $s(m)$ az $m$ számjegyeinek az összegét. Határozzuk meg az összes olyan $n$ pozitív egészt, amelynek egyetlen számjegye sem nulla, és teljesíti az
+
+\[s(n^2)=2^{s(n)}\]
+
+összefüggést.\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+Mivel jegyek összegérõl van szó, ezért nyugodtan vizsgálhatjuk oszthatóság szempontjából az egyenletet. Bal oldalon az $s(n^2)$ egy négyzetszámnak a számjegyeinek összege. Vizsgáljuk meg 9-el való oszthatóság szempontjából a négyzetszámokat:\medskip\\
+\bigskip \centerline{
+\begin{tabular}{|c|c|}
+\hline
+$\mathstrut n^2$ & $n^2 \bmod 9$\\
+\hline
+1 & 1\\
+4 & 4\\
+9 & 0\\
+16 & 7\\
+25 & 7\\
+36 & 0\\
+49 & 4\\
+64 & 1\\
+81 & 0\\
+\hline
+\end{tabular}}\\
+További négyzetszámoknál ($10^2$, $11^2$, \ldots), már ugyanezek a maradékok lesznek (azaz ez a sorozat ismétlõdik), hiszen felírtuk az összes 9-el osztva más maradékot adó számok négyzetét. A $10^2$ 9-el oszt\-va ugyanannyi maradékot ad, mint az $1^2$, hiszen 10 is és 1 is, 9-el osztva 1 maradékot ad.\\
+Így a maradékok: 0, 1, 4 vagy 7. Vizsgáljuk meg, hogy a 2 hatványok között, hogy alakul a 9-el való oszthatóság:\medskip\\
+\bigskip \centerline{
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+2 hatványok & $2^0$ & $2^1$ & $2^2$ & $2^3$ & $2^4$ & $2^5$ & $2^6$ & $2^7$ & $2^8$ & $2^9$ & $2^{10}$ & \ldots\\
+\hline
+maradékok & \textbf{1} & 2 & \textbf{4} & 8 & \textbf{7} & 5 & \textbf{1} & 2 & \textbf{4} & 8 & \textbf{7} & \ldots\\
+\hline
+\end{tabular}}\\
+
+Itt is megjegyezzük, hogy azért ismétlõdik az $1, 2, 4, 8, 7, 5$ maradék, hiszen minden egyes szám a sorozatban az elõzõ 2-szerese, hiszen kettõhatványokról van szó. Így a maradékok is egymásnak a kétszeresei (ha így a maradék nagyobb mint 9, akkor természetesen a ,,valódi'' maradék ennek a 9-el vett osztási maradéka), tehát az 5-ös maradék után megint az 1 jön, hiszen $(5\cdot 2) \bmod 9 = 1$.\\
+Összevetve a táblázat két sorát látható, hogy csak páros kitevõjû kettõ hatvány felel meg a 9-el való oszthatóság miatt, azaz $s(n)$ páros.\\
+
+Már tudjuk, hogy az $2^{s(n)}$ számok maradékai 1, 4 vagy 7 (hiszen $s(n)$ páros). Ugyanígy az $s(n^2)$ maradékairól is felállíthatunk egy sorozatot. Folyamatosan vesszük sorra az $s(n)$ értékeit (2, 4, 6, 8, 10, \ldots). Ezek az $n$ szám számjegyeinek összege, azaz innen meghatározhatjuk a 9-el való osztási maradékát. Tehát: 2, 4, 6, 8, 1, \ldots. Innen könnyen meghatározhatjuk az $s(n^2)$ 9-el való osztási maradékát, hiszen ez $n^2$-nek a 9-el való osztási maradéka, amit pedig úgy kapunk, hogy az $n$ osztási maradékait négyzetre emeljük, és vesszük annak a 9-el való osztási maradékát, hiszen:
+\[(9k+l)^2 = \underbrace{81k^2}_{9|}+\underbrace{18kl}_{9|}+l^2 \qquad k, l \in \mathbb{Z}\]
+\centerline{$\downarrow$}
+\[(9k+l)^2 \bmod 9 = l^2 \bmod 9\]
+
+Így párban felállíthatjuk $s(n^2)$ és $2^{s(n)}$ osztási maradékait, és természetesen csak ott kaphatunk meg\-ol\-dást, ahol ez a kettõ egyenlõ:\medskip\\
+\bigskip \centerline{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c||c|c|c|c|c|c|}
+\hline
+$s(n)$ & 2 & 4 & 6 & 8 & 10 & 12 & 14 & 16 & 18 & 20 & 22 & 24 & 26 & 28 & \ldots\\
+\hline
+$s(n^2) \bmod 9$ & 4 & 7 & 0 & 1 & 1 & 0 & 7 & 4 & 0 & 4 & 7 & 0 & 1 & 1 & \ldots \\
+\hline
+$2^{s(n)} \bmod 9$ & 4 & 7 & 1 & 4 & 7 & 1 & 4 & 7 & 1 & 4 & 7 & 1 & 4 & 7 & \ldots\\
+\hline
+\end{tabular}}\\
+Itt sem meglepõ az $s(n^2)$ 9-el vett osztási maradékának 9 hosszú sorozatának ismétlõdése, illetve az $2^{s(n)}$ 9-el vett osztási maradékának 3 hosszú sorozatának ismétlõdése (a kettõhatványok 9-el vett osztási maradéka 6 féle lehet, de mivel $s(n)$ páros, ezért csak minden második jön szóba).\\
+Láthatjuk, hogy {\boldmath$s(n)=\{\, 2, 4, \quad 20, 22, \quad 38, 40, \ldots \,\}$} esetekben lehet megoldás.\\
+
+Kezdjük el nézni a lehetséges eseteket.\\
+(1.) Ha $s(n)=2$.\\
+Olyan számokat kell keresnünk, amikben a számjegyek összege 2, illetve nem tartalmaz 0-át:
+\[n=\{\, 2, 11 \,\}\]
+Mindkettõ teljesíti az egyenletet, így ezek megoldások.\\
+
+(2.) Ha $s(n)=4$.\\
+Hasonlóan, megkeressük azokat a számokat, amikben a számjegyek összege 4, illetve nem tartalmaz 0-át:
+\[n=\{\, 4, 13, 31, 22, 112, 121, 211, 1111 \,\}\]
+Ezek közül csak az $n=4$ nem megoldás, hiszen $s(4^2)\ne 2^4$, az összes többi teljesíti az egyenletet.\\
+
+(3.) Ha $s(n)=20$, akkor $2^{s(n)}=1048576$, így $s(n^2)=1048576$. Ebbõl az következik, hogy az $n^2$ legalább (1048579/9$\approx$) 116509 jegyû, hiszen akkor max. a számjegyek összege és min. a számjegyek darabszáma, ha csupa 9-esbõl áll. Viszont ha $s(n)=20$, akkor $n$ max. 20 számjegybõl állhat, hiszen akkor kapjuk a lehetõ legtöbb számjegybõl álló számot, ha mindegyik számjegye csupa 1-es (feladat miatt $n$-ben nincsen 0-ás számjegy). Az pedig nyílvánvaló, hogy egy 20 számjegybõl álló szám négyzetének számjegyeinek száma meg se közelíti a 116509-et.\\
+Ha $s(n)$ további értékeit vesszük, akkor ez a távolság mégjobban nõ. Tehát nem találunk további megoldásokat. Így $n$ lehetséges értékei:
+{\boldmath
+\[n= \{\,2, 11, 13, 31, 22, 112, 121, 211, 1111\,\}\]
+}
+
+\end{document}

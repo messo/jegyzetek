@@ -1,0 +1,82 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\noindent\textbf{B. 3992.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Néhányan paintball-ütközetet vívnak egymással. Egy adott helyzetben egymástól való távolságaik mind különbözõk. Ekkor mindenki rálõ a hozzá legközelebb álló emberre. Legfeljebb hányan lõhetnek ugyanarra az emberre?\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Legyen $A$ személy az, akire megnézzük, hogy rá max. hányan lõhetnek.
+
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(0.8,-1.3)(6.98,4.4)
+\psline(3.16,3.76)(1.48,1.72)
+\psline(2.42,-0.54)(1.48,1.72)
+\pscustom{\parametricplot{3.0756506638085233}{4.20448983565102}{0.6*cos(t)+3.6|0.6*sin(t)+1.58}\lineto(3.6,1.58)\closepath}
+\pscustom{\parametricplot{1.7699555532464701}{3.0756506638085233}{0.6*cos(t)+3.6|0.6*sin(t)+1.58}\lineto(3.6,1.58)\closepath}
+\pscustom{\parametricplot{-2.078695471528567}{-0.980619813628405}{0.6*cos(t)+3.6|0.6*sin(t)+1.58}\lineto(3.6,1.58)\closepath}
+\psline(2.42,-0.54)(5.02,-0.54)
+\psline{->}(3.16,3.76)(3.6,1.58)
+\psline{->}(1.48,1.72)(3.6,1.58)
+\psline{->}(2.42,-0.54)(3.6,1.58)
+\psline{->}(5.02,-0.54)(3.6,1.58)
+\psdots(3.6,1.58)
+\rput[bl](3.76,1.6){$A$}
+\psdots(3.16,3.76)
+\rput[bl](3.24,3.88){$B$}
+\psdots(1.48,1.72)
+\rput[bl](1.16,1.72){$C$}
+\psdots(2.42,-0.54)
+\rput[bl](2.22,-0.88){$D$}
+\psdots(5.02,-0.54)
+\rput[bl](5.16,-0.9){$E$}
+\psdots(6.24,1)
+\rput[bl](6.32,1.12){$F$}
+\psdots(5.72,2.86)
+\rput[bl](5.8,2.98){$G$}
+\rput[bl](3.15,1.25){$\beta$}
+\rput[bl](3.26,1.78){$\alpha$}
+\rput[bl](3.54,1.05){$\gamma$}
+\end{pspicture*}}
+
+Ahhoz, hogy $B$ $A$-ra lõjön, és $C$ is, ahhoz teljesülnie kell, hogy:
+\[CB>AB \mbox{ és } CB>AC\]
+Mivel egy háromszögben, a legnagyobb oldallal szemközt a legnagyobb szög van, így $BAC\sphericalangle=\alpha$ szög a legnagyobb az $ABC$ háromszögben, így $\alpha>60°$ (belsõ szögek összege 180°, így átlagban 60°-osak, tehát ennél kisebb biztos nem lehet, hiszen akkor a másik két szög közül valamelyik biztosan nagyobb.)\\
+
+Hasonlóan az $ACD$, $ADE$, és a körbe lévõ háromszögeknek rendre $\beta$, $\gamma$, stb. szögek a legnagyobbak, azaz mind nagyobb mint 60°. Viszont az $A$ pont körül max. 360° lehet, ezért max. 5 háromszög csúcsa lehet az $A$, hiszen 6 akkor lehetne ha egyenlõség is fent állhatna.
+
+Tehát ha $A$ pont körüli 360°-ot ilyen módon max. 5 háromszöggel fedhetjük le, akkor egy emberre legfeljebb 5 ember lõhet.
+
+\end{document}

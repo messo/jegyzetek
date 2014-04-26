@@ -1,0 +1,100 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4028.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Két gömb sugara 5 és 3 egység, középpontjaik távolsága 4 egység. Számítsuk ki a két gömb közös részének térfogatát.\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+A következõ két kör a két gömb síkmetszete egy olyan síkkal, ami tartalmazza a két gömb középpontját:\\
+\centerline{\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-5.16,-5.12)(7.08,5.08)
+\pscircle(0,0){2.5}
+\pscircle(4,0){1.5}
+\psdots(0,0)
+\rput[bl](-0.4,0.28){$O_1$}
+\rput[bl](-3.42,4.36){$k_1$}
+\psdots(4,0)
+\rput[bl](3.6,0.26){$O_2$}
+\rput[bl](1.96,2.88){$k_2$}
+\end{pspicture*}}
+
+Tulajdonképpen a két gömb közös részét feloszthatjuk 2 db gömbszeletre. Ehhez nem kell mást tudnunk, mint a fenti ábrán lévõ két kör hatványvonalát, mert ha tudjuk, akkor tudni fogjuk a két gömbszelet ,,magasságát''.\\
+
+Segítségül hívjuk a koordinátageometriát: Legyen a $k_1$ kör középpontja a $(0; 0)$-ban, a $k_2$ kör középpontja pedig a $(4; 0)$-ban (tehát az egyik feltételnek, hogy a két középpont távolsága 4 egység eleget tettünk). Feladat szövege alapján tudjuk, hogy $k_1$ sugara 5, $k_2$ sugara 3:
+\[\left.\begin{tabular}{l}$x^2+y^2=5^2$\\
+$(x-4)^2+y^2=3^2$
+\end{tabular}\right\}\begin{tabular}{l}egymásból kivonva õket\\
+megkapjuk a hatványvonalat.\end{tabular}\]
+\[8x-16=25-9\]
+\[8x=32\]
+\[x=4\]
+
+Tehát az $x=4$ egyenes a fenti ábrán lévõ két kör hatványvonala, ami jelen esetben pont átmegy a $k_2$ kör középpontján:\vskip 5pt
+\centerline{
+\psset{xunit=0.5cm,yunit=0.5cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-5.16,-5.12)(7.08,5.08)
+\pscircle(0,0){2.5}
+\pscircle(4,0){1.5}
+\psline(4,-5.12)(4,5.08)
+\psdots(0,0)
+\rput[bl](-0.4,0.28){$O_1$}
+\rput[bl](-3.42,4.36){$k_1$}
+\psdots(4,0)
+\rput[bl](3.6,0.26){$O_2$}
+\rput[bl](1.96,2.88){$k_2$}
+\psdots(4,3)
+\rput[bl](4.16,3.24){$A$}
+\psdots(4,-3)
+\rput[bl](4.2,-3.82){$C$}
+\end{pspicture*}}
+
+Az elõzõ ábra segítségével könnyen kiszámolhatjuk a két gömbszelet térfogatát:
+Az egyik gömbszelet térfogata a $k_2$ gömb térfogatának a fele, vagyis:
+\[V_{k_{2_{\hbox{\small szelet}}}} = \frac{\frac{\pi}{6}d_2^3}{2} = \frac{\pi}{6}4r_2^3 = \frac{2\pi}{3}r_2^3 = \frac{2\pi}{3}3^3 \quad \hbox{ahol $d_2$ a $k_2$ gömb átmérõje, $r_2$ a sugara}\]
+A másik pedig (a $k_1$-hez tartozó):
+\[V_{k_{1_{\hbox{\small szelet}}}} = \frac{\pi}{3}m^2(3r_1-m) \quad \hbox{(ahol $r_1$ a gömb sugara, $m$ a gömbszelet ,,magassága'')}\]
+Mivel $k_1$ gömb sugara 5, illetve $O_1O_2=4$, ezért $m=1$:
+\[\frac{\pi}{3}m^2(3r_1-m) = \frac{\pi}{3}1^2(3r_1-1) =\]
+\[= \frac{\pi}{3}1^2(15-1) = \frac{\pi}{3}14 \]
+
+\[V_{k_{2_{\hbox{\small szelet}}}}+V_{k_{1_{\hbox{\small szelet}}}} =18\pi + \frac{14\pi}{3} = \Big(18+\frac{14}{3}\Big)\pi \]
+\\
+\textbf{Tehát a két gömb közös részének térfogata $\Big(18+\frac{14}{3}\Big)\pi$.}
+
+\end{document}

@@ -1,0 +1,594 @@
+\documentclass[12pt,a4paper,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[top=2cm,inner=1.6cm,bottom=2cm,outer=1.6cm]{geometry}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{titletoc}
+\usepackage{titlesec}
+\title{Fizika2 összefoglaló}
+\author{Kriván Bálint}
+\date{}
+
+\setlength{\columnsep}{0.8cm}
+%\setlength{\columnseprule}{0.3pt}
+
+\DeclareMathOperator{\tg}{tg}
+
+\begin{document}
+  \maketitle 
+  
+  \parindent 0pt
+
+  \section{Entrópia}
+  
+  \[dS = \frac{\delta Q}{T}\]
+  Reverzibilis esetben az entrópia változása nulla (a körfolyamat mentén).\\
+  1. főtétel: $\Delta U = Q - W$\\
+  Egyensúlyi állapotok a maximális entrópiájú állapotok.\\
+  Az entrópia izolált rendszerben nem csökkenhet, csak változatlan maradhat, vagy nőhet.\\
+  Az entrópia az energia munkára fel nem használhatóságának a mértéke.
+  
+  \section{Columb-törvény és az elektromos erőtér}
+  
+  \[\vec{F}_{12} = \left(\frac{1}{4\pi\varepsilon_0}\right)\frac{q_1q_2}{r^2}\vec{r}_{12}\]
+  Ez az erő a $q_1$ töltés által a $q_2$-re kifejtett erő (ahol $\vec{r}_{12}$ a $q_1$-től $q_2$-be mutató egységvektor)\\
+
+  Elektromos térerősség:
+  \[E = \lim_{q_0 \to 0} \frac{F}{q_0} = \left(\frac{1}{4\pi\varepsilon_0}\right)\frac{q}{r^2}\vec{r}\]
+  Erővonalak: ha $q$ pozitív az erővonalak kifelé mutatnak, ha negatív, akkor befelé.\\
+  
+  Elektromos dipólusmomentum:
+  \[\mathbf{p} = q\mathbf{l} \qquad \hbox{ahol $\mathbf{l}$ a pozitív töltés felé mutat}\]
+  \[\mathbf{M} = q\mathbf{l} \times \mathbf{E} = \mathbf{p} \times \mathbf{E}\]
+  Potenciális energiája van a dipólusnak:
+  \[U = - (\mathbf{p}\cdot\mathbf{E})\]
+  Mivel az elektromos erőtér konzervatív, ezért az általa végzett munka
+  csökkenti a rendszer potenciális energiáját. Maximális ha ellenkező irányúak és minimális, ha azonos irányúak.
+  
+  \section{Gauss-törvény}
+  
+  \[\Phi_E = \mathbf{E}\cdot \mathbf{A}\]
+  Általánosan:
+  \[\Phi_E = \int_{A} \mathbf{E}\cdot d\mathbf{A}\]
+  Ha egy zárt felület belsejében $q$ töltés van, akkor:
+  \[\Phi_E = \frac{q}{\varepsilon_0}\]
+  Gauss-törvény:
+  \[\int_{A} \mathbf{E}\cdot d\mathbf{A} = \frac{q}{\varepsilon_0}\]
+  ahol $q$ az $A$ felület belsejében lévő töltések.\\
+
+  Vezető belsejében nincsen térerősség, tehát ha van többlettöltés az a felületen helyezkedik el.\\
+
+  \textit{Elektrosztatikus egyensúlyban} az elektromos erővonalak mindig a vezetők felületére \textit{merőlegesen} futnak be. (Ha lenne
+  felülettel párhuzamos komponense, akkor a felületen lévő töltések elmozdulnának, nem lenne egyensúly)
+  
+  \section{Az elektromos potenciál}
+  
+  Elektromos potenciális energia megváltozása:
+  \[dU = - q_0 \mathbf{E} \cdot dl\]
+  \[U_b - U_a = - \int_{a}^b q_0 \mathbf{E} \cdot dl\]
+  Elektromos potenciál:
+  \[dV = \lim_{q_0\to 0} \frac{dU}{q_0} = - \mathbf{E} \cdot d\mathbf{l}\]
+  Az elektromos erővonalak irányába \textit{csökken} a potenciál.
+  \[V_b - V_a = - \int_{a}^b \mathbf{E} \cdot dl\]
+  
+  Pontszerű $q$ töltés környezetében az elektromos potenciál ($V \equiv 0$, ha $r \to \infty$):
+  \[V = k\frac{q}{r}\]
+  
+  Két egymástól $r$ távolságra lévő töltés $U$ elektromos potenciális energiája:
+  \[U = Vq \Rightarrow k\frac{q_1 q_2}{r}\]
+  (Az az energia, amit be kell fektetni, hogy az egyik töltést a másikhoz a végtelenből $r$ távolságra hozzuk)
+  
+  \[E = -\nabla V\]
+  
+  Az elektromos erővonalak a vezető felületére merőlegesek.\\
+  Ott a \textit{ legnagyobb } a \textit{ térerősség }, ahol a vezető keresztmetszetének a \textit{ görbületi sugara a legkisebb }.\\
+
+  \textit{Megjegyzés}: Az 1 elektronvolt (eV) az az energia mennyiség, amelyet az elektronéval
+  megegyező töltéssel rendelkező objektum nyer, amikor 1 Volt potenciálkülönbségen keresztülhaladva gyorsul.\\
+
+  \section{Kondenzátor és az elektromos erőtér energiája}
+  
+  \[C = \frac{Q}{V}\]
+  Síkkondenzátor kapacitása: $\displaystyle C = \frac{A\varepsilon_0}{d}$\\
+  Izolált gömb kapacitása: $C = 4\pi\varepsilon_0 R$\\
+  
+  Párhuzamosan kapcsolt kondenzátorok:
+  \[C_e = C_1 + C_2 + \ldots\]
+  Sorosan kapcsolt:
+  \[\frac{1}{C_e} = \frac{1}{C_1} + \frac{1}{C_2} + \ldots\]
+  
+  Dielektromos állandó:
+  \[\kappa = \frac{C}{C_0}\]
+  
+  Kondenzátor potenciális energiája:
+  \[U = \frac{1}{2} \frac{Q^2}{C} = \frac{1}{2} CV^2\]
+  
+  Elektromos erőtér energiasűrűsége (vákuumban):
+  \[u_E = \frac{1}{2} \varepsilon_0 E^2\]
+  Megj.: dielektrikumban meg kell szorozni $\kappa$-val.
+  
+  \section{Az elektromos áram és az ellenállás}
+  
+  \[I = \frac{dQ}{dt}\]
+  
+  Ohm-törvény:
+  \[V = IR\]
+  \[R = \frac{\varrho l}{A} \qquad \hbox{ahol $\varrho$ a fajlagos ellenállás}\]
+  
+  Feszültségforrás által végzett munkavégzés sebessége:
+  \[\frac{dW}{dt} = \mathcal{E}I\]
+  
+  Disszipált $P$ teljesítmény (joulehő):
+  \[P = I^2 R\]
+  
+  Differenciális Ohm-törvény:
+  \[\mathbf{j} = \sigma \mathbf{E}\]
+  ahol $\sigma$ a \textbf{fajlagos vezetőképesség} (mértékegysége a siemens (S)), ami a fajlagos ellenállásnak a reciproka.\\
+  
+  Áramsűrűség az egységnyi felületen átfolyó áramerősség.
+  \[I_{\hbox{teljes}} = \int \mathbf{j}\cdot d\mathbf{A}\]
+  
+  \section{Egyenaramú áramkörök}
+  
+  Sorba kapcsolt ellenállások:
+  \[R_e = R_1 + R_2 + \ldots\]
+  Párhuzamosan kapcsolt ellenállások:
+  \[\frac{1}{R_e} = \frac{1}{R_1} + \frac{1}{R_2} + \ldots\]
+  
+  \subsection{RC körök}
+  
+  Feltöltés:
+  \[Q(t) = C\mathcal{E}(1-e^{-t/(RC)})\]
+  \[I(t) = \frac{\mathcal{E}}{R}(e^{-t/(RC)})\]
+  Kisütés:
+  \[Q(t) = Q_0(e^{-t/(RC)})\]
+  \[I(t) = -\frac{\mathcal{E}}{R}(e^{-t/(RC)})\]
+  Időállandó:
+  \[\tau = RC\]
+  
+  \section{Mágneses erőtér}
+  
+  $\mathbf{B}$ mágneses indukció vektorú térben (fluxussűrűség) $v$ sebességgel haladó $q$ töltésre ható erő (mágneses Lorentz-erő):
+  \[\mathbf{F} = q \mathbf{v}\times \mathbf{B}\]
+  Mivel merőleges az $F$ a $v$-re, ezért a Lorentz-erő munkát nem végez a töltésen.\\
+  
+  Lorentz-erő:
+  \[\mathbf{F} = q(\mathbf{E} + \mathbf{v}\times\mathbf{B})\]
+  
+  Vezetőre (abban lévő töltésekre) ható erő:
+  \[\mathbf{F} = I\cdot \mathbf{l}\times\mathbf{B}\]
+  ahol $\mathbf{l}$ iránya megegyezik az áram irányával.\\
+  
+  Mágneses dipólusmomentum:
+  \[\hbox{\boldmath$\mu$} = I\mathbf{A}\]
+  (N menetű hurok esetén $\hbox{\boldmath$\mu$} = NI\mathbf{A}$)\\
+  Mágneses dipólusra ható forgatónyomaték:
+  \[\mathbf{M} = \hbox{\boldmath$\mu$} \times \mathbf{B}\]
+  Mágneses dipólus potenciális energiája:
+  \[U = -\hbox{\boldmath$\mu$} \cdot \mathbf{B}\]
+  
+  Mágneses fluxus (mértékegysége Wb):
+  \[\Phi_{B} = \int_A \mathbf{B} \cdot d\mathbf{A}\]
+  
+  \section{Mágneses erőtér forrása}
+
+  Biot-Savart törvény:
+	\[d\mathbf{B} = \left(\frac{\mu_0}{4\pi}\right) I\cdot \frac{d\mathbf{l} \times \mathbf{\hat{r}}}{r^2}\]
+  (Az $\mathbf{\hat{r}}$ a \textit{tér forrásától} a vizsgált pontba mutató egységvektor)\\
+
+  Hosszú egyenes huzalban folyó áram mágneses terének fluxussűrűsége $a$ távolságra a huzaltól:
+	\[B = \frac{\mu_0 I}{2\pi a}\]
+
+  Ampère törvény:
+  \[\oint \mathbf{B}\cdot dl = \mu_0 I\]
+
+  Toroid belsejében (középvonalon):
+  \[B = \frac{\mu_0 N I}{2\pi R}\]
+
+  Szolenoid:
+  \[B = \mu_0 n I\]
+  ahol $n$ az egységnyi hosszra jutó menetek száma.
+ 
+  \section{Faraday törvény és az induktivitás}
+
+  Faraday-féle indukció törvény:
+  \[\mathcal{E} = -\frac{d\Phi_B}{dt} \qquad \hbox{1 menetű hurok esetén}\]
+  ($N$ menet esetén ennek $N$-szerese)\\
+
+  Mozgási indukció:
+  \[\mathcal{E} = -Blv\]
+
+  Faraday-féle indukció törvény általános alakja:
+  \[\oint_C \mathbf{E}\cdot d\mathbf{l} = -\frac{d\Phi_B}{dt} = -\frac{d}{dt}\int_S \mathbf{B}\cdot d\mathbf{A}\]
+  ahol a $d\mathbf{l}$ az $S$ felületet körülvevő $C$-n fut végig.\\
+
+  Az indukált elektromos erőtér \textit{nem konzervatív}! (Elektromos potenciál nem definiálható)\\
+
+  \textbf{Lenz-törvény}: A zárt hurokban olyan irányú áram indukálódik, hogy mágneses erőtere az áramot létrehozó \textit{fluxusváltozást}
+  csökkentse.\\
+
+  L induktivitáson kialakuló ellenfeszültség:
+  \[\mathcal{E}_L = -L\cdot \frac{dI}{dt} \qquad [L] = 1H\]
+  \[L = \frac{N\Phi_B}{I}\]
+
+  Ideális toroid v. szolenoid:
+  \[L = \frac{\mu_0 N^2 A}{l}\]
+
+  Kölcsönös indukció:
+  \[\mathcal{E}_1 = -M \frac{dI_2}{dt}\]
+  \[M = \frac{N_2\Phi_{B_2}}{I_1} = \frac{N_1\Phi_{B_1}}{I_2}\]
+
+  \subsection{RL áramkörök}
+
+  \[I_{\hbox{\scriptsize fel}}(t) = \frac{\mathcal{E}}{R}\left(1-e^{-(R/L)t}\right)\]
+  \[I_{\hbox{\scriptsize le}}(t) = \frac{\mathcal{E}}{R}e^{-(R/L)t}\]
+
+  Tekercsben tárolt energia:
+
+  \[U_L = \frac{1}{2}LI^2\]
+
+  Mágneses tér energia sűrűsége:
+
+  \[u_B = \frac{B^2}{2\mu_0}\]
+
+  \section{Az anyag mágneses tulajdonságai}
+
+  Mágneses szuszceptibilitás: $\chi$. Pozitív, ha \textit{paramágnes}, negatív, ha \textit{diamágnes}ről van szó.
+
+  \[\mathbf{B} = \mu_0\underbrace{(1+\chi)}_{\mu_r}\mathbf{H}\]
+  ahol $\mathbf{H}$ a \textit{mágneses térerősség} vektora ($\mathbf{B}$ a mágneses indukció vektora).
+  \[\mu = \mu_0\mu_r \quad \hbox{az anyag permeabilitása}\]
+
+  Ferromágneses anyagoknál: hiszterézis görbe $\to$ kemény és lágy ferromágneses anyagok.
+
+  \section{Elektromágneses hullámok}
+
+  Eltolási áram:
+  \[I_d = \varepsilon_0 \frac{d\Phi_E}{dt}\]
+
+  Maxwell által kiegészített Ampère-törvény:
+  \[\boxed{\oint \mathbf{B}\cdot d\mathbf{l} = \mu_0\left(I + \varepsilon_0\frac{d\Phi_E}{dt}\right)}\]
+
+  Fontosabb egyenletek (képletgyűjteményben benne van a legtöbb):
+  \[\frac{\delta B_z}{\delta x} = -\mu_0\varepsilon_0\frac{\delta E_y}{\delta t}\]
+  \[\frac{\delta E_y}{\delta x} = -\frac{\delta B_z}{\delta  t}\]
+  Ezeket parciálisan deriválgatva a hullámegyenletek ($B_z$-re és $E_z$-re):
+  \[\frac{\delta^2 B_z}{\delta x^2} = \mu_0\varepsilon_0\frac{\delta^2 B_z}{\delta t^2}\]
+  \[\frac{\delta^2 E_y}{\delta x^2} = \mu_0\varepsilon_0\frac{\delta^2 E_y}{\delta t^2}\]
+  \[E_y = E_{y0} \sin(kx - \omega t)\]
+  \[B_z = B_{z0} \sin(kx - \omega t)\]
+  \[c = \frac{1}{\sqrt{\mu_0\varepsilon_0}}\]
+  Az EM hullám terjedési sebessége a vákuumban megegyezik a fénysebességgel!
+  \[\frac{E_y}{B_z} = \frac{\omega}{k} = c\]
+  Poynting-vektor pillanatnyi értéke:
+	\[\mathbf{S} = \frac{1}{\mu_0} \mathbf{E}\times\mathbf{B}\]
+  (Az egységnyi felületen áthaladó energiáramlás sebességének pillanatnyi értéke).
+
+  Átlagos nagysága:
+  \[S_{\hbox{\scriptsize átl}} = \frac{1}{2\mu_0}E_{y0}B_{z0}\]
+
+  Mivel $u_B=u_E$, ezért a teljes energiasűrűség:
+  \[u = e_0E^2 = \frac{1}{\mu_0}B^2\]
+  Átlagos energiasűrűség:
+  \[u_{\hbox{\scriptsize átl}} = \frac{1}{2}e_0{E_{y0}}^2 = \frac{1}{2\mu_0}{B_{z0}}^2\]
+
+  A hullám intenzitása:
+  \[S_{\hbox{\scriptsize átl}} = c\cdot u_{\hbox{\scriptsize átl}}\]
+
+  $U$ energiájú hullám által szállított impulzus:
+  \[U = pc\]
+  (teljes reflexiónál $2U = pc$)\\
+
+  Sugárnyomás (fénynyomás):
+  \[\frac{F}{A} = \frac{S_{\hbox{\scriptsize átl}}}{c} \qquad \hbox{teljes abszorpció}\]
+  \[\frac{F}{A} = \frac{2S_{\hbox{\scriptsize átl}}}{c} \qquad \hbox{teljes reflexió}\]
+
+  \section{Geometriai optika I.}
+
+  Azonos fázisú felületek a \textit{hullámfrontok}.\\
+ 
+  \textbf{Huygens-elv}: A hullámfront minden pontja elemi gömbhullámok kiindulópontja. Az elemi hullámok
+  a fény sebességével terjednek tova. A hullámfront új helyzete az elemi hullámok burkológörbéje.\\
+
+  \textbf{Fermat-elv}: A fénysugár egyik pontból a másikba olyan úton terjed, amely ugyanannyi, vagy kevesebb
+  időt vesz igénybe, mintha bármely más úton haladna.
+
+  \subsection{Gömbtükrök}
+
+  \[\frac{1}{t} + \frac{1}{k} = \frac{2}{R}\]
+
+  \textit{Fókuszpont}: tengellyel vízszintes sugarak ide verődnek vissza (vagy mintha innen erednének):
+  \[\frac{1}{\infty} + \frac{1}{f} = \frac{2}{R} \quad \Rightarrow \quad f = \frac{R}{2}\]
+  Leképezési törvény alternatív alakja:
+  \[\frac{1}{t} + \frac{1}{k} = \frac{1}{f}\]
+  Nagyítás:
+  \[N = -\frac{k}{t}\]
+
+  \section{Geometriai optika II.}
+
+  Törésmutató:
+  \[n = \frac{c}{v}\]
+  Ahol $c$ a vákuumbeli, $v$ a közegbeli fénysebesség.\\
+
+  \textit{Diszperzió}: törésmutató ($n$) hullámhossztól ($\lambda$) való függése.\\
+
+  Snellius-Descartes fénytörési törvénye:
+  \[n_1 \sin \theta_1 = n_2 \sin \theta_2\]
+
+  Teljes visszaverődés határszöge:
+  \[\theta_c = \frac{n_2}{n_1} \quad n_2 < n_1\]
+  ($n_1$ törésmutatójú közegből megy a fény $n_2$-be)\\
+
+  Fénytörés gömb alakú határfelületen:
+  \[\frac{n_1}{t} + \frac{n_2}{t} = \frac{n_2-n_1}{f}\]
+ 
+  Vékonylencséknél:
+  \[\frac{1}{t}+\frac{1}{k} = (n-1)\left(\frac{1}{R_1}+\frac{1}{R_2}\right)\]
+  ahol $n = \frac{n_2}{n_1}$ a relatív törésmutató. Itt is igaz, hogy:
+  \[\frac{1}{f} = \frac{1}{t}+\frac{1}{k}\]
+
+  \[D = \frac{1}{f}\]
+  ahol $f$-et méterben mérjük!
+
+  \[N = -\frac{k}{t}\]
+
+  Két vékony lencse eredő fókusztávolsága, ha egymás mellett vannak:
+  \[\frac{1}{f}=\frac{1}{f_1}+\frac{1}{f_2}\]
+
+  \section{Fizikai optika I.}
+
+  [...]
+
+  \section{Fizikai optika II.}
+
+  [...]
+
+  \section{A poláros fény}
+
+  Malus törvénye:
+  \[I = I_0\cdot \cos^2 \theta\]
+  ahol $I_0$ az \textit{analizátor}ra eső már \textit{polarizált} fény intenzitása.\\
+
+  Ha olyan szögben ($\theta_p$ - Brewster-szög) esik be a fény, hogy a megtört és a visszavert fénysugarak derékszöget zárnak be,
+  akkor a visszavert fénysugár polarizált.
+\begin{center}
+  \psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=o,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-4.0,-1.0)(4,3)
+\psaxes[labelFontSize=\scriptstyle,xAxis=true,yAxis=true,labels=none,Dx=1,Dy=1,ticksize=-2pt 0,subticks=2]{-}(0,0)(-7.38,-9.22)(13,7.56)
+\pspolygon(0.32,-0.28)(0.6,0.05)(0.28,0.32)(0,0)
+\psplot{0}{13}{(-0--1.22*x)/1.04}
+\psplot{0}{13}{(-0-1.04*x)/1.22}
+\psplot{-7.38}{0}{(-0--1.22*x)/-1.04}
+\pscustom{\parametricplot{1.5707963267948966}{2.2767162455841383}{1*cos(t)+0|1*sin(t)+0}\lineto(0,0)\closepath}
+\rput[tl](-3.74,1.5){polarizálatlan fény}
+\rput[tl](1.08,1.16){polarizált fény}
+\rput[tl](-1.82,0.56){$n_1$}
+\rput[tl](-1.86,-0.18){$n_2$}
+\psdots[dotstyle=*,linecolor=darkgray](0,0)
+\rput[bl](-0.4,0.42){$\theta_p$}
+\end{pspicture*}
+\end{center}
+  \[\tg \theta_p = \frac{n_2}{n_1} = n\]
+
+  \section{Speciális relativitáselmélet}
+
+  Alapkérdés: Ha egy jelenséget két különböző vonatkoztatási rendszerben vizsgálunk, amelyek egymáshoz képest egyesvonalú
+  egyenletes mozgást végeznek, akkor hogyan kell a két rendszerben végzett mérések eredményeit összehasonlítani?\\
+
+  Galilei relativitási elve: Newton mechanikájának törvényei minden inercia-rendszerben ugyanolyanok.\\
+  
+  Legyen $S'(x', y', z', t');$ és $S(x, y, z, t)$ rendszerünk, és $S'$ rendszer haladjon az $x$ irányban $V$-vel.\\
+  Galilei transzformációk:
+  \[x = x' + Vt' \quad x' = x - Vt\]
+  \[y = y' \quad z = z' \quad t = t'\]
+
+  Spec. relativitáselmélet posztulátumai:
+  \begin{enumerate}
+    \item A fizika minden törvényének ugyanaz a matematikai alakja minden inerciarendszerben
+    \item A vákuumbeli fénysebesség értéke ugyanaz minden inerciarendszeben
+  \end{enumerate}
+
+  Lorentz-transzformáció ($\beta = V/c$, ahol $V$ a két rendszer relatív sebesség az $x$ tengely mentén):
+  \[x = \frac{x'+Vt'}{\sqrt{1-\beta^2}}\]
+  \[y = y' \quad z = z'\]
+  \[t = \frac{t'+Vx'/c^2}{\sqrt{1-\beta^2}}\]
+
+  Idődilatáció:
+  \[\boxed{T = \frac{T_0}{\sqrt{1-\beta^2}}}\]
+  ahol $T_0$ az egy órán mért időintervallum (mozgó). Mivel $T>T_0$, ezért a mozgó órák \textit{lassabban} járnak,
+  mint a nyugalomban lévők.\\
+
+  Hosszúság kontrakció:
+  \[\boxed{L = L_0\sqrt{1-\beta^2}}\]
+  ahol $L_0$-at abban a rendszerben kell mérni, ahol a rúd nyugalomban van. Mivel $L < L_0$, ezért a mozgó rudakat,
+  \textit{rövidebb}nek mérjük.\\
+
+  Sebességösszeadási törvény:
+  \[u = \frac{u' + V}{1 + Vu'/c^2}\]
+  Ahol az $u'$ sebesség az $S'$-ben mért sebesség, ami $S$-hez képest $V$ relatív sebességgel mozog.\\
+
+  Relativisztikus impulzus:
+  \[\mathbf{p} = \frac{m\mathbf{v}}{\sqrt{1-\beta^2}}\]
+
+  Teljes relativisztikus energia: 
+  \[E = E_0 + K = mc^2 + K = \frac{mc^2}{\sqrt{1-\beta^2}}\]
+
+  Órák aszinkronitása (az órák az $S'$ rendszerben szinkronizáltak, távolságuk $\Delta x'$):
+  \[|\varepsilon| = \frac{V \Delta x'}{c^2}\]
+  A hátulsó óra későbbi időpontot mutat, mint az elülső.\\
+
+  \textbf{Üzenet}: Ha a természettörvények helyesen vannak megfogalmazva, akkor minden
+  megfigyelő számára \textit{azonos} alakúak.
+
+  \subsection{Általános relativitáselmélet}
+
+  \begin{enumerate}
+    \item A természet törvényei megfogalmazhatóak úgy, hogy tetszőleges tér-idő-vonatkoztatási
+    rendszerben bármely megfigyelő szerint azonos matematikai alakúak legyenek, akár
+    gyorsul a vonatkoztatási rendszer, akár nem. (Ez a kovariancia-elve)
+
+    \item Tetszőleges pont közelében a gravitációs tér minden tekintetben egyenertékű egy olyan
+    gyorsuló vonatkoztatási rendszerrel, amelyben nincs gravitáció. (Ez az ekvivalencia-elve)
+
+  \end{enumerate}
+
+  \section{A sugárzás kvantumos természete}
+
+  Stefan-Boltzmann-féle sugárzási törvény:
+  \[\boxed{R = \sigma T^4} \quad \sigma = 5.672\cdot 10^{-8} \frac{W}{m^2 K^4}\]
+  ahol $R$ a fekete test által egységnyi idő alatt, egységnyi felületen kisugárzott energia.\\
+
+  Harmonikus oszcillátorok megengedett kvantált energiaállapotai:
+  \[E_n = nhf\]
+  \[\Delta E = hf\]
+  Ekkora energiát (kvantumokat) vehet fel vagy sugározhat ki az oszcillátor.\\
+
+  Planck sugárzási törvénye:
+  \[du_\lambda = \frac{8\pi h c \lambda^{-5}}{\left(e^{hc/\lambda kT}-1\right)}d\lambda\]
+  ($\lambda$ és $\lambda + d\lambda$ hullámhosszintervallumba eső spektrális energiasűrűség $J/m^3$-ben)
+
+  \subsection{Fotoelektromos hatás}
+
+  Fény hatására a fémből elektronok lépnek ki.
+
+  \[eV_0 = \frac{1}{2}mv_{\hbox{\scriptsize max}}^2\]
+  
+  Az elektromágneses hullám is kvantált (fotonok - $hf$ méretű energia csomagok):
+  \[hf = K_{\hbox{\scriptsize max}} + W_0\]
+  ahol $K_{\hbox{\scriptsize max}}$ a maximális kinetikus energia, $W_0$ a kilépési energia.\\
+
+  Foton impulzusa:
+  \[p = \frac{hf}{c} = \frac{h}{\lambda}\]
+  Mivel
+  \[p = \frac{E}{c} \quad \hbox{és} \quad E^2 = (mc^2)^2 + (pc)^2\]
+  ezért a fotonnak a nyugalmi tömege zérus.\\
+
+  Compton-eltolódás:
+  \[\lambda' - \lambda_0 = \frac{h}{mc} (1-\cos \theta)\]
+  ahol $\lambda_0$ a beeső sugarak hullámhossza, $\lambda'$ a $\theta$ szögben szórt sugarak hullámhossza,
+  $m$ pedig az elektron tömege.\\
+
+  Párkeltés ($\gamma \to e^- + e^+$):
+  \[hf = 2m_ec^2 + K_1 + K_2\]
+
+  \section{A részecskék hullámtermészete}
+
+  Bohr-féle pusztulátumok:
+  \begin{enumerate}
+  \item Az elektron a proton körül körpályán kering (Columb-féle vonzóerő szolgáltatja a centripetális erőt)
+  \item Csak bizonyos megengedett pályákon keringhetnek, itt nem sugároznak, $E_n$ állandó, stacionárius állapotban vannak.
+  \item Megengedett pályák azok, ahol az $mvr$ impulzus-nyomatéka a $2\pi$-vel osztott Planck-állandó egész számú többszöröse:
+   \[mvr = n\hbar\]
+  \item Stacionárius állapotok között ,,valahogyan'' ugrál. Ekkor elektromágneses hullámot bocsájt ki vagy nyel el:
+   \[hf = E_{\hbox{\scriptsize végső}} - E_{\hbox{\scriptsize kezdeti}}\]
+  \end{enumerate}
+ 
+  Megengedett pálya $r_n$ sugara a hidrogén atomban ($Z=1$):
+  \[r_n = \frac{\varepsilon_0 h^2 n^2}{\pi m Z e^2} \quad (n=1,2,\ldots)\]
+  Energia állapotok:
+  \[E_n = -\frac{mZ^2e^4}{8\varepsilon_0^2 h^2 n^2} \quad (n=1,2,\ldots)\]
+
+  Korrespondencia-elv: Minden új elméletnek a megfelelő klasszikus elméletre kell redukálódnia, amikor a klasszikus
+  elméletnek megfelelő körülménykre alkalmazzuk.
+
+  \begin{center}\rule{235pt}{0.3pt}\end{center}
+
+  $p$ impulzusú részecske De Broglie féle hullámhossza:
+  \[\lambda = \frac{h}{p}\]
+
+  \subsection{Hullámmechanika}
+
+  Időtől független Schrödinger egyenlet:
+  \[\frac{\delta^2 \psi}{\delta x^2} + \left(\frac{2m(E-V)}{\hbar^2}\right)\psi = 0\]
+  ahol
+  \[\psi(x) = \psi_{\hbox{\scriptsize max}} \sin\left(\frac{2\pi x}{\lambda}\right)\]
+  és $\psi_{\hbox{\scriptsize max}}$ értékét úgy határozzuk meg, hogy
+  \[\int_{\hbox{\scriptsize tér}} |\Psi|^2 dV = 1\]
+
+  Dobozba zárt részecske normált hullámfüggvénye:
+  \[\psi(x) = \sqrt{\frac{2}{D}}\sin\left(\frac{n\pi x}{D}\right)\]
+
+  Dobozba zárt részecske energiaállapotai:
+  \[E_n = \frac{\hbar^2\pi^2}{2mD^2}n^2\]
+
+  \subsection{A határozatlansági elv}
+
+  Nem lehet az objektumon mérést végezni anélkül, hogy meg ne zavarnánk, méghozzá ismeretlen mértékben.\\
+
+  Heisenberg féle határozatlansági összefüggés:
+  \[\Delta x \Delta p_x \gtrsim \hbar\]
+  \[\sigma_x \sigma_{p_x} \geq \frac{\hbar}{2}\]
+  (bal oldalt a részecske helyének és impulzusának egyidejű mérésekor a határozatlanságok szorzata áll)
+  \[\Delta E \Delta t \geq \frac{\hbar}{2} \qquad \hbox{\scriptsize (szórás??)}\]
+  \[\Delta L_z \Delta \phi \geq \frac{\hbar}{2} \qquad \hbox{\scriptsize (szórás??)}\]
+
+  \section{Atomfizika I.}
+
+  $L$ pálya-impulzusmomentum:
+  \[L = \hbar\sqrt{l(l+1)}\]
+  ahol $l = 0, 1, \ldots, n-1$. (orbitális, vagy mellékvantumszám)\\
+  $L$ pálya-impulzusmomentum $z$-irányú komponense:
+  \[L_z = m_l\hbar \quad (m_l = 0, \pm1, \ldots, \pm l)\]
+  ahol $m_l$ a mágneses kvantumszám.\\
+  Az $L$ pálya-impulzusmomentumhoz $\mu_l$ mágneses dipólusmomentum tartozik:
+  \[\mu_l = -\left(\frac{e}{2m}\right)L \qquad (\mu_l)_z = -\left(\frac{e\hbar}{2m}\right)m_l\]
+  Az utóbbi zárójeles kifejezés a Bohr-magneton.\\
+
+  Spin-impulzusmomentum:
+  \[S = \hbar\sqrt{s(s+1)} \quad s = \frac{1}{2}\]
+  \[S_z = m_s\hbar \quad m_s = \pm\frac{1}{2}\]
+  Spin-mágnesmomentum:
+  \[(\mu_s)_z = -m_s\left(\frac{e\hbar}{m}\right) \quad m_s = \pm\frac{1}{2}\]
+
+  Tehát a kvantumszámok:
+  \[n(1,2,3,\ldots), l(0,1,\ldots,n-1),\]
+  \[m_l(0,\pm 1,\ldots,\pm l), m_s=\frac{1}{2}\]
+
+  Spin-pálya:
+  \[\mathbf{J} = \mathbf{L} + \mathbf{S}\]
+  \[J = \hbar\sqrt{j(j+1)}\]
+  $j$ a belső kvantumszám, $j = l \pm \frac{1}{2}$.
+  \[J_z = m_j\hbar\]
+  $m_j = j, (j-1), \ldots, -(j-1), -j$.\\
+
+  Pauli-féle kizárási elv: Egy atomban nem lehet két olyan elektron, amelynek mind a négy -- $n$, $l$, $m_l$, $m_s$ vagy
+  $n$, $l$, $j$, $m_j$ -- kvantumszáma azonos.\\
+
+  Röntgensugarak: Nagy energiájú elektronok céltárgyba ütköznek, az atom belső héjain elektronhiányt idéznek elő. Ha a hiányt
+  külső elektronok töltik be, akkor röntgen sugárzás keletkezik.
+
+  \subsection{Lézer}
+
+  Elemi elektronátmenet: indukált emisszió.\\
+  Populációinverzió!
+
+  \section{Atommagfizika}
+
+  Atommag sugara:
+  \[R = R_0 A^{1/3}\]
+  ahol $A$ a tömegszám, $R_0 = 1.2fm$ (femtométer - fermi).\\
+
+  Radioaktív bomlás törvénye:
+  \[N = N_0e^{-\lambda t}\]
+  ahol $N_0$ a magok száma a kezdeti időpillanatban, $N$ pedig $t$ idő múlva ($\lambda$ a bomlási állandó).\\
+
+  $\alpha$-bomlás: új elem ($^4_2$He) keletkezik a magból\\
+  $\beta$-bomlás:
+  \[^A_Z X \to ^A_{Z+1} Y + ^{0}_{-1}e + \overline{v}\]
+  \[^A_Z X \to ^A_{Z-1} Y + ^{0}_{+1}e + v\]
+  $\gamma$-bomlás: gamma-sugarak (em sugárzás nagyenergiájú fotonjai) energiaállapot-átmenet következtében sugárzódnak ki.\\
+
+  Azon részecskék száma, melyek a céltárgyba $x$ mélységig kölcsönhatás nélkül hatolnak be:
+  \[N = N_0e^{-n\sigma x}\]
+  ahol $\sigma$ az atommag hatáskeresztmetszete. $n$ az atommagok száma a céltárgy egységnyi felületén.\\
+
+  Kritikus tömeg: a hasadó anyagnak a legkisebb tömege ami még fent tudja tartani a láncreakciót.
+
+\end{document}

@@ -1,0 +1,76 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+\large
+
+\noindent\textbf{B. 4022.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Van-e olyan számrendszer, amelyben a 9-cel való oszthatóság szabálya olyan, mint a tízes számrendszerben a 4-gyel való oszthatósági szabály; a 4-gyel való oszthatóság szabálya olyan, mint a tízes számrendszerben a 9-cel való oszthatósági szabály; a 7-tel való oszthatóság pedig pusztán az utolsó számjegy alapján eldönthetõ?\\
+\hrule
+\hskip 10pt
+
+\parindent 0pt\textbf{Megoldás:}\\
+
+A példák kedvéért vegyünk fel egy tetszõleges számot a $k$ számrendszerben, amire megpró\-bál\-juk igazzá tenni a feltételeket: $\overline{a_na_{n-1}a_{n-2}\ldots a_1a_0}_k$
+
+Természetesen ennek az értéke:
+\[\overline{a_na_{n-1}a_{n-2}\ldots a_1a_0}_k = a_0+ k\cdot a_1 + k^2\cdot a_2 + \ldots + k^n\cdot a_n\]
+
+Haladjunk szépen sorjában, nézzük meg, hogy hanyas számrendszernek kell lennie a feladatban szereplõ számrendszernek, hogy teljesüljenek a feltételek:\\
+
+1.) \underline{7-tel való oszthatóság eldönthetõ az utolsó számjegy alapján.}\\
+\parindent 10pt
+
+Ez azt jelenti, hogy a kérdéses számunkat helyiértékenként felírva (ahogy azt fent tettük), mindegyik tag osztható 7-tel, kivéve az $a_0$. Így $a_0$ 7-tel való osztása alapján dönthetjük el, hogy maga a szám osztható-e 7-tel, ahogy azt a feltétel kéri tõlünk (hiszen $a_0$ az utolsó számjegy). Ahhoz, hogy mindegyik tag az $a_0$-on kívül, tehát $k\cdot a_1, k^2\cdot a_2, \ldots$ és $k^n\cdot a_n$ biztosan (tehát a számjegyektõl függetlenül) osztható legyen 7-tel, igaznak kell lennie, hogy $k$ osztható 7-tel.\\
+
+\noindent 2.) \underline{9-cel való oszthatóság szabálya olyan, mint a tízes számrendszerben a 4-gyel való}\\
+\underline{oszthatósági szabály.}\\
+
+Ahhoz, hogy csak az utolsó két számjegybõl alkotott szám döntse el, hogy 9-cel osztható-e a szám, vagy sem, igaznak kell lennie, hogy
+\[9| (k^2\cdot a_2 + \ldots + k^n\cdot a_n).\]
+
+Ez csak akkor igaz feltétlenül (tehát a számjegyektõl függetlenül), ha $k^2$ osztható 9-cel, azaz $k$ osztható 3-al.\\
+
+\noindent 3.) \underline{4-gyel való oszthatóság szabálya olyan, mint a tízes számrendszerben a 9-cel való}\\
+\underline{oszthatósági szabály.}\\
+
+Ez azt jelenti, hogy maguknak a számjegyeknek a 4-el való osztási maradékának egyeznie kell a számjegy által képviselt érték 4-el való osztási maradékával (egy $a_i$ számjegy által képviselt érték alatt a $k^i \cdot a_i$ értjük, ahol $k$ az adott számrendszer). Legyen $a_i\mod 4=l$, azaz $a_i=4k+l$, ahol $k, l \in \mathbb{N}$, ekkor $k^i \cdot a_i\mod 4=l$-nek is igaznak kell lennie, hiszen így lesz igaz, hogy az osztási maradékok megegyeznek, tehát:
+\[k^i\cdot a_i = 4m+l \quad \hbox{(ahol $m\in \mathbb{N}$)}\]
+\[k^i\cdot (4k+l) = 4m+l\]
+Legyen $k^i \mod 4 = h$, így $k^i=4j+h$, ahol $j, h \in \mathbb{N}$. 
+\[(4j+h)\cdot (4k+l) = 4m+l\]
+\[16jk+4kh+4jl+lh = 4m+l\]
+Nézzük mindkét oldalnak a 4-el való osztási maradékát:
+\[lh = l\]
+Ebbõl következik, hogy $h=1$, tehát $k^i \mod 4 = 1$. Már csak az a kérdés, hogy mennyi ekkor $k$-nak a 4-el való osztási maradéka. $k^i \mod 4 = 1$, de ennek $i$-tõl függetlenül igaznak kell lennie, tehát $k \mod 4 = 1$. Minden egyéb más 4-el való osztási maradéknál ha valahanyadik hatványra emeljük a $k$-t akkor lesz olyan $i$. hatvány amikor $k^i \mod 4 \neq 1$.\\
+
+\noindent Tehát miknek kell teljesülnie, hogy a fenti 3 feltétel teljesüljön:\\
+1.) $7|k$\\
+2.) $3|k$\\
+3.) $k\mod 4 = 1$\\
+
+Nincs más dolgunk, mint keresni egy ilyen számot, amire a fentiek teljesülnek. Ilyen például a $k=21$.\\
+
+\textbf{Tehát a 21-es számrendszer a feladatban megfogalmazott tulajdonságokkal bír.}
+
+\end{document}

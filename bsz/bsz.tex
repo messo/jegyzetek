@@ -1,0 +1,2676 @@
+\documentclass[a4paper,12pt,twoside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{textcomp}
+\usepackage[top=2cm,inner=2cm,bottom=2cm,outer=2cm]{geometry}
+%\usepackage[top=2cm,inner=2.5cm,bottom=2cm,outer=1.5cm]{geometry}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{titletoc}
+\usepackage{titlesec}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{ulsy}
+\usepackage[thmmarks]{ntheorem}
+\usepackage{mdwlist}
+\usepackage{lipsum}
+\usepackage{paralist}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows,shapes}
+
+%\usepackage{draftwatermark}
+%\SetWatermarkScale{ 1 }
+%\SetWatermarkText{ KRIVÁN }
+
+\newcommand{\vek}[1]{\mathbf{#1}} % vektort félkövérrel jelöljük!
+\newcommand{\ve}[2]{\mathbf{#1}_{#2}} % vektort félkövérrel jelöljük!
+\newcommand{\lista}[2]{{#1}_{1}, {#1}_{2}, \ldots, {#1}_{#2}}
+\newcommand{\gen}[1]{\langle #1 \rangle}
+\newcommand{\linkomb}[3]{#2_1\vek{#1}_{1} + #2_2\vek{#1}_{2} + \ldots + #2_{#3}\vek{#1}_{#3}}
+
+\newcommand{\allbiz}[1]{\hspace*{8pt} \textit{#1}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\ctg}{ctg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\arcctg}{arcctg}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\theorembodyfont{\normalfont}
+\newtheorem{defi}{Definíció}[chapter]
+
+\newcommand{\openbox}{\leavevmode
+  \hbox to.77em{%
+  \hfil\vrule
+  \vbox to1.2ex{\hrule width1ex\vfil\hrule}%
+  \vrule\hfil}}
+
+\newtheorem{tetel}{Tétel}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theorembodyfont{\normalfont}
+\theoremsymbol{\openbox}
+\newtheorem{biz}{Bizonyítás}[chapter]
+\newtheorem{bizlemma}{Bizonyítás}[chapter]
+
+\theoremstyle{break}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\openbox}
+\newtheorem{bizNL}[biz]{Bizonyítás}
+
+\newenvironment{myitemize}
+{\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+{\end{itemize}}
+
+\title{\textbf{Bevezetés a számításelméletbe 1.}\\\Large Jegyzet mérnök-informatikus hallgatók részére}
+\author{Készítette: Kriván Bálint\\ \normalsize dr. Wiener Gábor és dr. Simonyi Gábor előadásai alapján}
+\date{2009. szeptember - 2010. január 5.}
+
+\parindent 0pt
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Lineáris algebra}
+
+\section{Koordináta geometria}
+
+\subsection{Egyenes egyenlete}
+
+\begin{wrapfigure}{l}{0.45\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+  
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.42,-0.36)(3.98,5.06)
+\psline{->}(-1.2,0.44)(-1.2,4.58)
+\psline{->}(-1.2,0.44)(3.24,0.44)
+\psline{->}(-1.2,0.44)(0.78,2)
+\psplot{-2.42}{3.98}{(--11.29-1.32*x)/3.78}
+\psline[linewidth=1.6pt]{->}(0.02,2.98)(1.76,2.37)
+\psdots(-1.2,0.44)
+\rput[bl](-1.66,0.02){$O$}
+\rput[bl](-1.52,2.44){$z$}
+\rput[bl](0.96,0.04){$x$}
+\rput[bl](-0.46,1.4){$y$}
+\psdots(0.02,2.98)
+\rput[bl](0.08,3.28){$P(x_0; y_0; z_0)$}
+\rput[bl](-1.82,3.86){$e$}
+\rput[bl](0.50,2.40){$\vek{v}$}
+\end{pspicture*}
+\end{center}
+\vspace{-60pt}
+\end{wrapfigure}
+
+Az $e$ minden $E(x; y; z)$ pontjára, és csak is ezekre a pontokra teljesül, hogy ($t\in\R$):\\
+$\left.\begin{array}{rcl}
+x & = & x_0 + ta\\
+y & = & y_0 + tb\\
+z & = & z_0 + tc
+\end{array}\right\}$\\
+Ahol $a$, $b$, illetve $c$ az egyenes $\vek{v}(a; b; c)$ irányvektorának koordinátái. Ezeket $t$-re rendezve, kapjuk, hogy:
+\[\framebox{$t=\dfrac{x-x_0}{a}=\dfrac{y-y_0}{b}=\dfrac{z-z_0}{c}$} \qquad a,b,c\neq 0\]
+
+\subsection{Sík egyenlete}
+
+\begin{wrapfigure}{l}{0.45\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.42,-0.36)(3.98,5.06)
+\pspolygon[linestyle=none](0.08,3.54)(3.24,2.5)(1.92,1.12)(-2.12,2.68)
+\psline{->}(-1.2,0.44)(-1.2,4.58)
+\psline{->}(-1.2,0.44)(3.24,0.44)
+\psline{->}(-1.2,0.44)(0.78,2)
+\psline(0.08,3.54)(3.24,2.5)
+\psline(3.24,2.5)(1.92,1.12)
+\psline(1.92,1.12)(-2.12,2.68)
+\psline(-2.12,2.68)(0.08,3.54)
+\psline{->}(0.8,2.46)(0.98,4.4)
+\psline[linestyle=dotted](0.42,3.03)(1.2,1.86)
+\psline[linestyle=dotted](-0.34,2.55)(2.06,2.36)
+\pscustom{\parametricplot{-0.07919907096945156}{1.4782777056752496}{0.4*cos(t)+0.8|0.4*sin(t)+2.46}\lineto(0.8,2.46)\closepath}
+\pscustom{\parametricplot{1.4782777056752499}{2.1587989303424644}{0.4*cos(t)+0.8|0.4*sin(t)+2.46}\lineto(0.8,2.46)\closepath}
+\psdots(-1.2,0.44)
+\rput[bl](-1.66,0.02){$O$}
+\rput[bl](-1.5,1.9){$z$}
+\rput[bl](0.96,0.04){$x$}
+\rput[bl](-0.46,1.4){$y$}
+\rput[bl](1.06,3.44){$n$}
+\psdots(0.8,2.46)
+\rput[bl](0.1,2.04){$P_0(x_0; y_0;z_0)$}
+\rput[bl](0.87,2.60){\huge .}
+\rput[bl](0.62,2.65){\huge .}
+\psdots(2.52,2.32)
+\rput[bl](2.64,2.28){$P$}
+\end{pspicture*}
+\end{center}
+\vspace{-40pt}
+\end{wrapfigure}
+
+\textbf{Lemma}: $\overrightarrow{OP} \perp \overrightarrow{OQ} \quad \Leftrightarrow \quad \overrightarrow{OP}\cdot\overrightarrow{OQ} = 0$\\
+$P(x;y;z)$ rajta van az $\vek{n}$ normálvektorú síkon $\Leftrightarrow \overrightarrow{P_0P}\perp n$. Tehát a fenti lemma alapján:
+\[(x-x_0)a+(y-y_0)b + (z-z_0)c = 0\]
+\[\framebox{$ax+by+cz = ax_0+by_0+cz_0$} = \hbox{konst.}\]
+\vspace{30pt}
+
+\section{Vektortér v. lineáris tér}
+
+\begin{defi}Vektorok egy $V$ halmaza a vektorokon értelmezett összeadás és valós számmal való szorzás műveletére $\mathbb{R}$ feletti \textbf{vektorteret} alkot, ha teljesülnek a következők:\\
+\framebox{$\begin{array}{lll}
+\hbox{(ö0):} & \forall \vek{u}, \vek{v} \in V & \vek{u}+\vek{v} \in V\\
+\hbox{(ö1):} & \forall \vek{u}, \vek{v} \in V & \vek{u}+\vek{v} = \vek{v}+\vek{u}\\
+\hbox{(ö2):} & \forall \vek{u}, \vek{v}, \vek{w} \in V & (\vek{u}+\vek{v})+\vek{w} = \vek{u}+(\vek{v}+\vek{w})\\
+\hbox{(ö3):} & \exists \vek{0} \in V:\forall \vek{u}\in V & \vek{u}+\vek{0}=\vek{u}\\
+\hbox{(ö4):} &  \forall \vek{u} \in V:\exists (-\vek{u}) & \vek{u}+(-\vek{u})=\vek{0}\\
+-- & & \\
+\hbox{(s0):} & \forall \lambda \in \mathbb{R}\quad \forall \vek{u} \in V & \lambda\vek{u}\in V\\
+\hbox{(s1):} & \forall \lambda \in \mathbb{R}\quad \forall \vek{u}, \vek{v} \in V & \lambda(\vek{u}+\vek{v}) = \lambda\vek{u}+\lambda\vek{v}\\
+\hbox{(s2):} & \forall \lambda,\mu \in \mathbb{R}\quad\forall \vek{u}\in V & (\lambda+\mu)\vek{u} = \lambda\vek{u}+\mu\vek{u}\\
+\hbox{(s3):} & \forall \lambda,\mu \in \mathbb{R}\quad\forall \vek{u}\in V & \lambda(\mu\vek{u})=(\lambda\mu)\vek{u}\\
+\hbox{(s4):} & \forall \vek{u} \in V & 1\vek{u}=\vek{u}\\
+\end{array}$}\\
+\end{defi}
+\emph{Példák}:
+\begin{enumerate}
+\item Valós 1-;2-;3-dimenziós vektorok $\mathbb{R}$ feletti vektorteret alkot a szokásos műveletekkel.
+\item Rendezett valós szám $k$-asok\\
+\[(x_1;\ldots;x_k)+(y_1;\ldots;y_k) := (x_1+y_1;\ldots;x_k+y_k)\]
+\[\forall\lambda\in\mathbb{R}:\lambda(x_1;\ldots;x_k) := (\lambda x_1;\ldots;\lambda x_k)\]
+\item $\leqslant k$-ad fokú valós együtthatójú polinomok (polinom összeadásra és valóssal való szorzásra)
+\[a_k x^k + a_{k-1}x^{k-1}+\ldots +a_1 x + a_0\]
+\end{enumerate}
+
+Tulajdonságok:
+\begin{myitemize}
+\renewcommand{\labelitemi}{$\circ$}
+\item $\vek{u}_1+\vek{u}_2+\vek{u}_3+\vek{u}_4 \rightarrow$ nem kell zárójelezni
+\item $\vek{u}_3+\vek{u}_2+\vek{u}_4+\vek{u}_1 \rightarrow$ sorrend nem számít
+\item $\vek{u}_1+\vek{u}_2=\vek{u}_3 \Leftrightarrow \vek{u}_3-\vek{u}_2=\vek{u}_1 \rightarrow$ van kivonás
+\item $\lambda\vek{u}_1=\vek{u}_2 \overset{\lambda\neq 0}{\Longrightarrow} \vek{u}_1 = \dfrac{\vek{u}_2}{\lambda}$
+\end{myitemize}
+
+Néhány egyszerű következménye az axiómáknak:
+\begin{enumerate*}
+\item $0\cdot \vek{v}=\vek{0}$\\
+\[0\cdot \vek{v}=(0+0)\vek{v}=0\cdot \vek{v}+0\cdot \vek{v} \quad /-0\cdot \vek{v}\]
+\[\vek{0}=0\cdot \vek{v}\]
+\item $\lambda\vek{0} = \vek{0}$
+\[\lambda\vek{0} = \lambda(\vek{0}+\vek{0})=\lambda\vek{0}+\lambda\vek{0} \quad /-\lambda\cdot \vek{0}\]
+\[\vek{0} = \lambda\vek{0}\]
+\item $(-1)\vek{v}=(-\vek{v})$
+\[(1+(-1))\vek{v}=\vek{v}+(-1)\vek{v}\]
+\[(1+(-1))\vek{v}=0\vek{v}=\vek{0}\]
+\[\vek{0} = \vek{v}+(-1)\vek{v} \quad\overset{\hbox{\scriptsize (ö4)}}{\Longrightarrow}\quad (-1)\vek{v} = (-\vek{v}) \]
+\item $\lambda\vek{v} = \vek{0} \quad \Leftrightarrow \quad \lambda = 0 \hbox{ vagy } \vek{v} = \vek{0}$\\
+$\Leftarrow \checkmark$ lásd (1) ill. (2).\\
+$\Rightarrow$ ha $\lambda\neq 0$, akkor:
+\[\dfrac{1}{\lambda}(\lambda\vek{v}) = \dfrac{1}{\lambda}\vek{0}\]
+\[\left(\dfrac{1}{\lambda}\lambda\right)\vek{v} = \vek{0} \quad\Rightarrow\quad \vek{v} = \vek{0}\]
+Tehát, vagy $\lambda=0$ vagy $\vek{v}=\vek{0}$. $\checkmark$
+\end{enumerate*}
+
+\subsection{Altér}
+
+\begin{defi} $(V,+,\cdot)$ vektortér, $U\subseteq V$. $U$ \textbf{altér}, ha maga is vektortér ugyanazon műveletek\-kel.\end{defi}
+Például: $S:\{(x,y,0)|x,y\in\R\}$. Altere-e a $V:\{(x,y,z)|x,y,z\in\R\}$-nek?\\
+Ellenőrizzük az axiómákat... $\checkmark$\\
+Észrevehetjük, hogy ö1, ö2, illetve s1-s4-et nem kell ellenőrizni, hiszen egy részhalmazra mindenképpen teljesülnek.
+
+\begin{tetel}\label{Alter}
+  $U\subseteq V$, $U\neq \emptyset$:
+\[\boxed{U \hbox{ altér } \Leftrightarrow \hbox{ ha } U \hbox{ zárt az összeadásra és szorzásra}}\]
+\end{tetel}
+\begin{bizNL}
+$\Rightarrow \checkmark$ (Definíció szerint)\\
+$\Leftarrow$ ö0, s0 $\checkmark$, ö1, ö2, s1-s4 $\checkmark$\\
+ö3: $0\cdot\vek{u} \in U$ (hiszen zárt) $\Rightarrow \vek{0}\in U \checkmark$\\
+ö4: $(-1)\vek{u} \in U$ (hiszen zárt) $\Rightarrow (-\vek{u})\in U \checkmark$ 
+\end{bizNL}
+
+\textbf{Triviális alterek}:
+\begin{enumerate*}
+\item önmaga (hiszen minden halmaz önmagának részhalmaza
+\item $\{\vek{0}\}$
+\end{enumerate*}
+
+\subsubsection{Alterek a síkban}
+\begin{itemize*}
+\item triviális alterek (sík összes pontjához tartozó helyvektor, illetve csak az origóhoz tartozó helyvektor)
+\item origón átmenő egyenesekhez tartozó pontok helyvektorai (ellenőrzés a fenti tétel hasz\-nálatával: összeadásnál és szorzásnál is benne maradunk az egyenesben)
+\end{itemize*}
+Ha az egyenesen lévőkhöz hozzá veszünk egy rajta kívül lévő ponthoz tartozó helyvektort, akkor így a sík összes pontjához tartozó helyvektort megkaphatjuk (lásd lineáris kombináció)
+
+\subsection{Lineáris kombináció}
+\[\lista{\vek{v}}{n} \in V, \quad \lista{\lambda}{n} \in \R\]
+\[\rightarrow \boxed{\linkomb{v}{\lambda}{n}}\]
+
+\subsection{Generátum (generált altér)}
+\[\gen{\lista{\vek{v}}{n}} = \{\linkomb{v}{\lambda}{n} \;|\; \lambda_i\in\R\}\]
+Például:
+\[\gen{(1,0,0),(0,1,0)}=\{\lambda_1(1,0,0)+\lambda_2(0,1,0)|\lambda_1,\lambda_2\in\R\}=(\lambda_1,\lambda_2,0)\]
+\begin{tetel}
+$\forall$ generátum altér.
+\end{tetel}
+\begin{biz}
+ Hiszen zárt a szorzásra és az összeadásra.
+\end{biz}
+
+Ha $\vek{u}\nparallel\vek{v} \rightarrow \gen{\vek{u},\vek{v}}=\R^2$.
+
+\begin{defi} \textit{Generátorrendszer} ($\lista{\vek{v}}{n} \in V$)
+\[\gen{\lista{\vek{v}}{n}}=V\]
+Vagyis, ha egy $V$ vektortér egy vektorrendszerének generált altere megegyezik $V$-vel, akkor őket generátorrendszernek hívjuk.
+\end{defi}
+
+\begin{defi} $\lista{\vek{v}}{n}\in V$ együtt függetlenek\footnote{Tehát ez nem egy vektorra értendő tulajdonság, hanem vektorok egy halmazára}. (Két féle definíció:)
+\begin{enumerate}
+\item $\nexists \vek{v}_i$, ami a többiek lineáris kombinációjaként előáll.
+\item Ha $\linkomb{v}{\lambda}{n}=\vek{0} \Rightarrow $\\
+$\Rightarrow\quad \lambda_1=\lambda_2=\ldots=\lambda_n=0$ (triviális lin. kombináció)
+\end{enumerate}
+\end{defi}
+
+Bizonyítsuk be, hogy a két definíció ekvivalens.\\
+(1) $\Rightarrow$ (2)
+Indirekt, Tfh: $\linkomb{v}{\lambda}{n}=\vek{0}$ és $\lambda_1 \neq 0$
+\[\lambda_1\vek{v}_1=-\lambda_2\vek{v}_2-\ldots-\lambda_n\vek{v}_n \quad /:\lambda_1\]
+\[\vek{v}_1=\frac{-\lambda_2\vek{v}_2}{\lambda_1}-\ldots-\frac{\lambda_n\vek{v}_n}{\lambda_1} \quad \hbox{\blitza}\]
+Hiszen (1) alapján egyik sem áll elő a többi lin. kombinációjaként.\\
+(2) $\Rightarrow$ (1)
+Indirekt, Tfh: $\vek{v}_1 = \lambda_2\vek{v}_2+\ldots+\lambda_n\vek{v}_n$
+\[\vek{0}=-\vek{v}_1+\lambda_2\vek{v}_2+\ldots+\lambda_n\vek{v}_n \quad \hbox{\blitza}\]
+Hiszen $\vek{v}_1$ együtthatója nem 0, így ez nem triviális lin. kombináció (pedig (2) pont ezt mondja).
+
+\begin{defi} \textit{Bázis}: független generátorrendszer.\\
+Például: $\gen{(1,0,0),(0,1,0),(0,0,1)}$
+\end{defi}
+\begin{defi} \textit{Dimenzió}: A vektortér tetszőleges bázisának elemszáma.\end{defi}
+
+\begin{tetel} Egy $\{\lista{\vek{v}}{n}\}$ vektorrendszer $V$-ben \textit{bázis}t alkot $\Leftrightarrow$ 
+ $\forall \vek{v} \in V: \; \exists \lista{\lambda}{n} \in \R$, hogy
+  \[\vek{v} = \linkomb{v}{\lambda}{n}\]
+  felírás egyértelmű.
+\end{tetel}
+\begin{bizNL}
+$\Rightarrow$\\
+ \[\vek{v} = \linkomb{v}{\mu}{n}\]
+  A kettőt egymásból kivonva:
+  \[\vek{0} =  (\lambda_1-\mu_1)\vek{v}_1+(\lambda_2-\mu_2)\vek{v}_2+\ldots+(\lambda_n-\mu_n)\vek{v}_n\]
+  Mivel $\lista{\vek{v}}{n}$ független (hiszen bázis), ezért ez csak a triviális lineáris kombinácó lehet, tehát $\lambda_i = \mu_i$ $(i = 1,2,\ldots,n)$. $\checkmark$\\
+
+$\Leftarrow$\\
+ Mivel $\vek{v} \in V$ előáll $\lista{\vek{v}}{n}$ lineáris kombinációjaként, ezért $\{\lista{\vek{v}}{n}\}$ generátor\-rendszer, de tegyük fel, hogy nem független. Tehát van olyan $\vek{v}_i$ (legyen ez az egyszerűség kedvéért $\vek{v}_1$), ami előáll a többi lineáris kombinációjaként:
+ \[\vek{v}_1 = \kappa_2\vek{v}_2+\kappa_3\vek{v}_3+\ldots+\kappa_n\vek{v}_n\]
+De ez ellentmondás, hiszen $\vek{v}_1 = 1\vek{v}_1$, ami az előzőtől különböző felírás, de feltettük, hogy minden $V$-beli vektor egyértelműen felírható a $\vek{v}_i\; (i=1,\ldots,n)$ vektorokkal. Tehát\linebreak $\{\lista{\vek{v}}{n}\}$ független generátorrendszer, vagyis bázis. $\checkmark$
+\end{bizNL}
+
+\begin{defi}
+ \[\vek{v} = \linkomb{b}{\lambda}{n} \qquad \mathcal{B}=\{\ve{b}{1}, \ve{b}{2}, \ldots, \ve{b}{n}\},\; \vek{v} \in V \quad \hbox{ ($\mathcal{B}$ bázis $V$-ben)}\]
+A $\vek{k} = (\lista{\lambda}{n})$ vektor a $\vek{v}$-nek a $\mathcal{B}$ bázisban vett \textbf{koordináta-vektora}.\\
+\emph{Megjegyzés}: A fenti tétel alapján adott bázisban felírt koordináta-vektor egyértelmű.
+\end{defi}
+
+\begin{tetel}$\boxed{$Kicserélési tétel$}$
+\[\begin{array}{cl}
+F = \lista{\vek{f}}{n} & \hbox{független $V$-ben} \\
+G = \lista{\vek{g}}{k} & \hbox{generátor rendszer $V$-ben}
+\end{array}\]
+Állítás: $\forall i$-hez $\exists j$, hogy
+\[\lista{\vek{f}}{i-1},\vek{f}_{i+1},\ldots,\vek{f}_n,\vek{g}_j\]
+független legyen (magyarul, bármelyik $\vek{f}$-et lecserélve egy bizonyos $\vek{g}$-vel független rendszer marad $V$-ben).
+\end{tetel}
+\begin{bizNL}
+Indirekt, tfh: $\vek{f}_1$ nem cserélhető le semelyik $\vek{g}_j$-re, azaz a cserélésnél nem marad független:
+\[\left.\begin{array}{c}
+    \vek{g}_1,\vek{f}_2,\ldots,\vek{f}_n \\
+    \vek{g}_2,\vek{f}_2,\ldots,\vek{f}_n \\
+    \vdots \\
+    \vek{g}_k,\vek{f}_2,\ldots,\vek{f}_n
+  \end{array}\right\} \hbox{nem függetlenek}
+\]
+Azaz felhasználva a függetlenség (2) definícióját:
+\[\lambda_1\vek{g}_j+\lambda_2\vek{f}_2+\ldots+\lambda_n\vek{f}_n=\vek{0} \quad \hbox{úgy, hogy nem triviális komb.}\]
+Tehát van olyan $\lambda$ ami $\neq 0$. Azt is tudjuk, hogy $\lambda_1\neq 0$, hiszen ha $\lambda_1=0$, akkor a többi $\lambda$ közül kéne valamelyiknek nem nullának lenni, ahhoz hogy ne legyenek függetlenek, viszont akkor $\vek{f}_2,\vek{f}_3,\ldots,\vek{f}_n$ nem lenne független, ami ellent mond az állításnak (ha $F$ független rendszer $V$-ben akkor ennek részhalmaza is az). Tehát:\\
+\[\lambda_1\vek{g}_j = -\lambda_2\vek{f}_2-\ldots-\lambda_n\vek{f}_n \quad /:\lambda_1 \quad (\lambda_1 \neq 0)\]
+\[\vek{g}_j = -\frac{\lambda_2}{\lambda_1}\vek{f}_2-\ldots-\frac{\lambda_n}{\lambda_1}\vek{f}_n\]
+\[\vek{g}_j \in \gen{ \vek{f}_2, \ldots, \vek{f}_n }\]
+Tehát a számszorosaik is benne vannak, azaz ezek lineáris kombinációja is:
+\[\linkomb{g}{\lambda}{k} \in \gen{ \vek{f}_2, \ldots, \vek{f}_n }\]
+\[\underbrace{V=\gen{\lista{\vek{g}}{k}}}_{\hbox{\small hiszen $G$ generátorrendszer}} \subseteq \quad \gen{\vek{f}_2, \ldots, \vek{f}_n }\]
+Ez viszont azt jelenti, hogy $\gen{ \vek{f}_2, \ldots, \vek{f}_n }$ a $V$ összes vektorát generálja, így $\vek{f}_1$-t is. Ez viszont ellentmondásra vezet, hiszen $F$ független a feltétel szerint.
+\end{bizNL}
+
+\textit{Következmény}: Ha $F$ független rendszer és $G$ generátorrendszer $V$-ben, akkor $|F| \leqslant |G|$. Hiszen minden $\vek{f}$ helyére írhatunk egy $\vek{g}$-t és így is független marad (tehát nincs két egyforma).
+
+\begin{tetel}
+Bármely két azonos vektortérhez tartozó bázisnak ugyanannyi eleme van. (Tehát a dimenzió jól definiált)
+\end{tetel}
+\begin{bizNL}
+Ehhez felhasználjuk a fenti \textbf{kicseréléses tétel} következményét:\\
+$B_1$ és $B_2$ bázisok $V$-ben $\Rightarrow$
+\[
+\left.\begin{array}{c}
+  |B_1| \leqslant |B_2| \\
+  |B_2| \leqslant |B_1|
+\end{array}\right\} |B_1| = |B_2| \checkmark
+\]
+\textit{Megjegyzés}: Nem elfelejteni a bázis definícióját (\textbf{független} \textbf{generátor}rendszer), tehát a fenti következmény használatakor egyszer $B_1$-et tekintjük független rendszernek és $B_2$-őt generá\-torrendszernek, másodszor pedig fordítva.
+\end{bizNL}
+
+\section{Lineáris egyenletrendszerek}
+
+Általánosan egy egyenletrendszer így néz ki:
+\[a_{11}x_1+a_{12}x_2+a_{13}x_3+\ldots+a_{1n}x_n=b_1\]
+\[a_{21}x_1+a_{22}x_2+a_{23}x_3+\ldots+a_{2n}x_n=b_3\]
+\[\vdots \qquad\qquad \vdots \qquad\qquad \vdots\]
+\[a_{k1}x_1+a_{k2}x_2+a_{k3}x_3+\ldots+a_{kn}x_n=b_k\]
+Ezt a következő képpen írhatjuk fel egyszerűbben:
+\[\begin{array}{ccccc|c}
+a_{11} & a_{12} & a_{13} & \ldots & a_{1n} & b_1\\
+a_{21} & a_{22} & a_{23} & \ldots & a_{2n} & b_2\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+a_{k1} & a_{k2} & a_{k3} & \ldots & a_{kn} & b_k\\
+\end{array}\]
+Megnevezések: A vonalig hívjuk \textit{együtthatók mátrixá}nak, az egészet pedig \textit{kibővített mátrix}nak.\\
+
+Elemi ekvivalens átalakítások: (Milyen lépések megengedettek?)
+\begin{enumerate}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+ \item Egy egyenletet lehet $\lambda\neq 0$-val szorozni
+ \item Egy egyenlethez hozzá lehet adni a másik $\mu$-szörösét
+ \item Két egyenlet sorrendjét meg lehet változtatni
+ \item A kibővített mátrix ,,csupa 0'' sora törölhető
+\end{enumerate}
+
+\textit{Algoritmus}:
+
+\begin{enumerate}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+ \item A bal felső ($a_{11}$) elem $\neq 0$?\\
+    IGAZ $\rightarrow$ osztjuk az első sort ezzel az elemmel.\\
+    HAMIS $\rightarrow$ $\exists$ sor amivel cserélhető úgy, hogy ekkor a bal felső elem $\neq 0$?\\
+    \hspace*{10pt} IGAZ $\rightarrow$ cseréljük\\
+    \hspace*{10pt} HAMIS $\rightarrow$ jobbra lépünk és ez lesz a vizsgálandó elem
+
+ \item Az első sor $a_{21}$-szeresét kivonjuk a 2-ből, $a_{31}$-szeresét kivonjuk a 3-ból, \ldots \\
+ \item Ha az algoritmussal elértük a jobb szélét vagy az alját az együtthatók mátrixának akkor végeztünk.
+    \begin{myitemize}
+      \item Ha találunk olyan sort, ahol csupa nulla van, azt elhagyhatjuk.
+      \item Ha találunk olyan sort, ahol csak az utolsó (a vonal mögötti) nem nulla, akkor ezt \textit{tilos sor}nak nevezzük. Ekkor \textbf{nincs} megoldása az egyenletrendszernek!
+    \end{myitemize}
+\end{enumerate}
+
+Nézzünk meg konkrét példákat:\\
+
+\textit{1. példa}: $\underbrace{\begin{array}{ccc|c}
+2 & 4 & 6 & 8\\
+3 & 6 & 11 & 10\\
+5 & 12 & 19 & 20\\
+\end{array}}_{\begin{array}{c}\hbox{\small első sort leoszt-}\\\hbox{\small juk 2-vel}\end{array}} \rightarrow
+\underbrace{\begin{array}{lll|l}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+3 & 6 & 11 & 10\\
+5 & 12 & 19 & 20
+\end{array}}_{\begin{array}{c}\hbox{\small levonjuk az első sort az}\\\hbox{\small alatta lévőkből ahányszor kell}\end{array}} \rightarrow
+\underbrace{\begin{array}{lll|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & \pscirclebox[boxsep=false]{0} & 2 & -2\\
+0 & 2 & 4 & 0
+\end{array}}_{\begin{array}{c}\hbox{\small az éppen ,,aktuális'' bal}\\\hbox{\small felső elem $= 0 \rightarrow$ csere}\end{array}} \rightarrow\\
+\vspace*{15pt}\\
+\rightarrow
+\underbrace{\begin{array}{lll|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & 2 & 4 & 0\\
+0 & 0 & 2 & -2
+\end{array}}_{\hbox{\small osztjuk az aktuális sort}} \rightarrow
+\underbrace{\begin{array}{lll|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & \psframebox[boxsep=false]{1} & 2 & 0\\
+0 & 0 & \pscirclebox[boxsep=false]{2} & -2
+\end{array}}_{\begin{array}{c}\hbox{\small alatta végig 0,}\\\hbox{\small megyünk jobbra, le}\end{array}} \rightarrow
+\underbrace{\begin{array}{lll|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & \psframebox[boxsep=false]{1} & 2 & 0\\
+0 & 0 & \psframebox[boxsep=false]{1} & -1
+\end{array}}_{\hbox{\small utolsó sort is leosztottuk}}$\\
+
+Innen szépen visszakövethetjük, hogy mik a megoldások. Az átlóban bekeretezett egyeseket \textbf{vezéregyesek}nek hívjuk. Az utoljára megkapott mátrixot \textbf{lépcsős alak}nak (LA) nevezzük. Amennyiben nem akarjuk kézzel visszakövetni, hogy akkor most ténylegesen mik a megoldások, mechanikusan tovább csinálhatjuk, ugyanazt amit eddig, csak visszafelé (felfelé).\\
+
+$\underbrace{\begin{array}{lll|r}
+1 & 2 & 3 & 4\\
+0 & \pscirclebox[boxsep=false]{1} & 2 & 0\\
+0 & 0 & \psframebox[boxsep=false]{1} & -1
+\end{array}}_{\begin{array}{c}\hbox{\small az utolsó sort kivonjuk}\\\hbox{\small a fentiekből ahányszor kell}\end{array}} \rightarrow
+\underbrace{\begin{array}{lll|r}
+1 & 2 & 0 & 7\\
+0 & \psframebox[boxsep=false]{1} & 0 & 2\\
+0 & 0 & \psframebox[boxsep=false]{1} & -1
+\end{array}}_{\begin{array}{c}\hbox{\small az utolsó előtti sort kivonjuk}\\\hbox{\small a fentiből ahányszor kell}\end{array}} \rightarrow
+\underbrace{\begin{array}{lll|r}
+\psframebox[boxsep=false]{1} & 0 & 0 & 3\\
+0 & \psframebox[boxsep=false]{1} & 0 & 2\\
+0 & 0 & \psframebox[boxsep=false]{1} & -1
+\end{array}}_{\hbox{\small Redukált lépcsős alak (RLA)}}$\\
+
+Ezzel készen vagyunk, leolvashatjuk, hogy $x=3, y=2$ és $z=-1$.\\
+
+\textit{2. példa}: 
+$\begin{array}{ccc|c}
+2 & 4 & 6 & 8\\
+3 & 6 & 11 & 10\\
+5 & 10 & 19 & 20\\
+\end{array} \rightarrow
+\begin{array}{ccc|c}
+\pscirclebox[boxsep=false]{1} & 2 & 3 & 4\\
+3 & 6 & 11 & 10\\
+5 & 10 & 19 & 20\\
+\end{array} \rightarrow
+\underbrace{\begin{array}{ccc|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & \pscirclebox[boxsep=false,linestyle=dashed]{0} & \pscirclebox[boxsep=false]{2} & -2\\
+0 & 0 & 4 & 0\\
+\end{array}}_{\begin{array}{c}\hbox{mindegyik nulla,}\\\hbox{jobbra lépünk}\end{array}} \rightarrow
+\begin{array}{ccc|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & 0 & \pscirclebox[boxsep=false]{1} & -1\\
+0 & 0 & 4 & 0\\
+\end{array} \rightarrow\\
+\rightarrow \begin{array}{ccc|r}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & 0 & \psframebox[boxsep=false]{1} & -1\\
+0 & 0 & 0 & \pscirclebox[linestyle=dotted,boxsep=false]{\mathbf{4}}\\
+\end{array} \rightarrow$ \textit{Tilos sor}, tehát nincs megoldás!\\
+\vspace*{15pt}\\
+\textit{3. példa}: 
+$\begin{array}{ccc|c}
+2 & 4 & 6 & 8\\
+3 & 6 & 11 & 12\\
+5 & 10 & 19 & 20\\
+\end{array} \rightarrow
+\begin{array}{ccc|c}
+\pscirclebox[boxsep=false]{1} & 2 & 3 & 4\\
+3 & 6 & 11 & 12\\
+5 & 10 & 19 & 20\\
+\end{array} \rightarrow
+\begin{array}{ccc|c}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & \pscirclebox[boxsep=false,linestyle=dashed]{0} & \pscirclebox[boxsep=false]{2} & 0\\
+0 & 0 & 4 & 0\\
+\end{array} \rightarrow
+\begin{array}{ccc|c}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & 0 & \pscirclebox[boxsep=false]{1} & 0\\
+0 & 0 & 4 & 0\\
+\end{array} \rightarrow
+\begin{array}{ccc|l}
+\psframebox[boxsep=false]{1} & 2 & 3 & 4\\
+0 & 0 & \psframebox[boxsep=false]{1} & 0\\
+0 & 0 & 0 & 0 \\
+\end{array}$\\
+\vspace*{15pt}\\
+Redukált lépcsős alakra hozzuk: $
+\begin{array}{ccc|l}
+\psframebox[boxsep=false]{1} & 2 & 0 & 4\\
+0 & 0 & \psframebox[boxsep=false]{1} & 0\\
+\end{array}$\\
+Látható, hogy a második oszlopban nincs vezér egyes, ez azt jelenti, hogy van \textbf{szabad paraméter} (nyílván, ha több ilyen oszlop van, akkor több szabad paraméterrel operálunk): $x=4-2p_1, y=p_1$ és $z=0$. Tehát végtelen sok megoldás van.\\
+
+Minden ismeretlent ki lehet fejezni a jobb oldali számmal és a szabad paraméterek segítségével.
+
+\subsection{Összefoglalás}
+Ha RLA-ra hoztuk, akkor:
+\begin{enumerate*}
+ \item $\exists$ megoldás $\Longleftrightarrow$ $\nexists$ tilos sor.
+ \item Minden sorban pontosan 1 vezéregyes van (az előtte lévők nullák). Ha $\forall$  oszlopban van vezéregyes, akkor a megoldás \textbf{egyértelmű}.
+ \item Ha \textbf{nem} minden oszlopban van vezéregyes, akkor \textbf{nem} egyértelmű a megoldás $\rightarrow$ végtelen sok megoldás van.
+\end{enumerate*}
+
+A közhiedelemmel ellentétben csak a következő állítás igaz a hasonló jellegű állítások közül (ami az ismeretlenek és az egyenletek számát kapcsolja össze):\\
+\textit{Állítás}: Ha több ismeretlen van, mint egyenlet, akkor nincs egyértelmű megoldás.\\
+
+Tehát mikor van egy $n\times n$-es lineáris egyenletrendszernek ($n$ db egyenlet, $n$ db ismeretlen) megoldása?
+\begin{itemize*}
+ \item ha a nem keletkezik csupa 0 sor
+ \item illetve, ha nem lesz tilos sor
+\end{itemize*}
+
+Hogy lehet megállapítani?
+\[\left.
+\begin{array}{l}
+  ax+by=e \qquad /\cdot c \\
+  cx+dy=f \qquad /\cdot a
+\end{array}\right\} \ominus \quad \rightarrow \quad
+cby-ady=ec-af \quad \Rightarrow \quad y = \frac{af-ec}{ad-bc}
+\]
+
+Tehát, ha $ad-bc\neq 0$, akkor $\exists$ egyértelmű megoldás, különben nem!\\
+Erre példa: $(a,b)$ és $(c,d)$ vektorok által kifeszített paralelogramma területe $|ad-bc|$.
+
+\section{Determináns}
+Minek van determinánsa?
+\begin{itemize*}
+    \item $n\times n$-es $M$ mátrixnak értéke: $\det M$.
+\end{itemize*}
+
+\begin{defi} Legyen $A=\{1,2,\ldots,n\}$, ekkor az $f:A\to A$ bijektív függvényt \emph{permutáció}nak hívjuk. Azaz minden $1,2,\ldots,n$ számhoz kölcsönösen egyértelműen egy $1,2,\ldots,n$ számot rendelünk.\end{defi}
+Példa: $1,2,3,4,5$ egy tetszőleges permutációja: $5,3,1,2,4$\\
+$\sigma$ legyen egy hozzárendelési függvény, mely megmutatja, hogy az adott pozíción melyik szám áll:
+\begin{itemize*}
+    \item $\sigma (1)=5$
+    \item $\sigma (2)=3$
+    \item $\sigma (3)=1$
+    \item $\sigma (4)=2$
+    \item $\sigma (5)=4$
+\end{itemize*}
+
+\begin{defi}\emph{Inverziószám}: egy tetszőleges permutációhoz tartozó szám, mely azt fejezi ki, hogy az összes lehetséges számpárt vizsgálva, mennyi pár áll inverzióban (fordított sorrend; csökkenő). \end{defi}
+Példa: $\circlenode[linestyle=dashed]{p1}{5},\circlenode[linestyle=dashed]{p2}{3},\circlenode{p3}{1},\circlenode{p4}{2},\circlenode{p5}{4}$. Tehát az inverziószám ez esetben 6.
+\nccurve[angleA=-90,angleB=-90,linewidth=0.5pt]{->}{p1}{p2}
+\nccurve[angleA=-90,angleB=-90,linewidth=0.5pt]{->}{p1}{p3}
+\nccurve[angleA=-90,angleB=-90,linewidth=0.5pt]{->}{p1}{p4}
+\nccurve[angleA=-90,angleB=-90,linewidth=0.5pt]{->}{p1}{p5}
+\nccurve[angleA=90,angleB=90,linewidth=0.5pt]{->}{p2}{p3}
+\nccurve[angleA=90,angleB=90,linewidth=0.5pt]{->}{p2}{p4}
+\\
+\begin{itemize*}
+    \item legkisebb inverziószám: 0 (ha, az elemek sorrendben (növekvő) vannak)
+    \item legnagyobb inverziószám: $\frac{n(n-1)}{2}$ (ha, teljesen megfordult a sorrendje az eredeti permutációhoz képest)
+    \item páros permutáció: a permutáció inverziószáma páros
+    \item páratlan permutáció: a permutáció inverziószáma páratlan
+\end{itemize*}
+
+\begin{defi}\emph{``Bástyaelhelyezés''}: Ha egy $n\times n$-es ``sakktáblára'' úgy helyezünk le $n$ bástyát, hogy semelyik kettő sem ütik egymást, akkor azt bástyaelhelyezésnek hívjuk (minden sorban és oszlopban csak egy bástya van).\end{defi}
+
+Ha jól meggondoljuk a \textit{bástyaelhelyezés}ekhez \textit{permutáció}kat tudunk rendelni; legyen az adott permutáció $\sigma$, ekkor az $i$. bástyát az $i.$ sor, $\sigma(i)$. oszlopába rakjuk (Ez a hozzárendelés visszafelé is megfogalmazható, tehát kölcsönösen egyértelmű megfeleltetés van a bástyaelhelyezés és a permutáció között). Ennek megfelelően egy permutáció \textit{inverziószám}át megfeleltethetjük annak, hogy az adott bástyaelhelyezésben hány olyan bástyapár van, ami ÉK-DNY elhelyezkedésű, hiszen ekkor van az, hogy a permutációban egy magasabb szám előrébb áll egy kisebb számnál (inverzióban vannak).
+
+\begin{defi}\emph{Determináns}: $\qquad I(\sigma) := $ a $\sigma$ permutáció inverziószáma.
+\[\boxed{\det A := \sum_{\sigma} (-1)^{I(\sigma)} \;\cdot\; a_{{1},\sigma(1)}\cdot a_{{2},\sigma(2)}\cdot\ldots\cdot a_{{n},\sigma(n)}}\]
+\end{defi}
+
+Tulajdonképpen vesszük az összes \textit{bástyaelhelyezést} (jelen esetben egy $n\times n$-es mátrixon helyezgetjük a bástyákat), és összeszorozzuk azokat a számokat, ahova raktunk bástyát, majd attól függően, hogy az adott permutáció páros vagy páratlan (másképp megfogalmazva: páros vagy páratlan ÉK-DNY elhelyezkedésű bástyapár van), annak függvényében pozitív vagy negatív előjellel vesszük, végül összeadjuk ezeket a szorzatokat.\\
+
+\textit{Példa 1}: $\det A = \det \left(\begin{array}{cc}
+a & b\\
+c & d
+\end{array} \right) = 
+\left|\begin{array}{cc}
+a & b\\
+c & d
+\end{array}\right|
+= ?$\\
+\begin{enumerate*}
+ \item Permutációk felírása, illetve ezek inverziószáma: $
+\begin{array}{l}
+  1 \; 2 \rightarrow 0\\
+  2 \; 1 \rightarrow 1
+\end{array}$
+ \item Tehát definíció alapján: $\det A = (-1)^0\cdot a\cdot d + (-1)^1\cdot b\cdot c = ad-bc$
+\end{enumerate*}
+
+\textit{Példa 2}: $\det B = \det \left|
+\begin{array}{ccc}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9\\
+\end{array}\right| = ?$
+\begin{enumerate*}
+ \item Permutációk felírása, illetve ezek inverziószáma:\\
+$\begin{array}{l|l}
+  1 \; 2 \; 3 \rightarrow 0 \quad&\quad 2 \; 3 \; 1 \rightarrow 2\\
+  1 \; 3 \; 2 \rightarrow 1 \quad&\quad 3 \; 1 \; 2 \rightarrow 2\\
+  2 \; 1 \; 3 \rightarrow 1 \quad&\quad 3 \; 2 \; 1 \rightarrow 3\\
+\end{array}$
+ \item Tehát definíció alapján: $\det B = (-1)^0\cdot 1\cdot 5\cdot 9 + (-1)^1\cdot 1\cdot 6\cdot 8 + (-1)^1\cdot 2\cdot 4\cdot 9 + \ldots$
+\end{enumerate*}
+\textit{Megjegyzés}: Későbbiekben nem a definíciót fogjuk használni a determináns kiszámítására, mert hosszadalmas.
+
+\subsection{Tulajdonságok}
+
+\begin{enumerate}
+\renewcommand{\theenumi}{\pscirclebox[boxsep=false]{\arabic{enumi}}}
+
+ \item Ha a főátló alatt (felső háromszög mátrix) v. fölött (alsó háromszög mátrix) minden elem 0, akkor a determináns a főátlóban lévő elemek szorzata.\vspace*{5pt}\\
+ \textit{Bizonyítás}: Egyetlen permutáció (az $1,2,3,\ldots,n$) van, ahol nincs a szorzatban 0. Tehát az összeg csak ebből az egy szorzatból -- a főátlóban lévő elemek szorzatából -- áll.
+
+ \item Ha egy sorban vagy oszlopban minden elem 0, akkor a determináns 0.\vspace*{5pt}\\
+ \textit{Bizonyítás}: Minden sorból és minden oszlopból pontosan 1 elem szerepel mindegyik szorzatban, tehát ha egy oszlop v. sor csupa 0, akkor minden szorzatban lesz 0; ezek összege is 0 lesz.
+
+ \item Ha egy sorban v. oszlopban minden elemet megszorzunk egy $\lambda$-val, akkor a determináns a $\lambda$-szorosára változik.
+
+ \item \[\begin{vmatrix}
+a_{11}+a_{11}' & a_{12}+a_{12}' & \ldots & a_{1n}+a_{1n}'\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix} = \begin{vmatrix}
+a_{11} & a_{12} & \ldots & a_{1n}\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix} + \begin{vmatrix}
+a_{11}' & a_{12}' & \ldots & a_{1n}'\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix}\]
+\textit{Bizonyítás}: Definíció alapján könnyedén bizonyítható.
+
+ \item Ha két sor v. két oszlop azonos, akkor a determináns 0.\vspace*{5pt}\\
+ \textit{Bizonyítás:} Legyen az $i$. és a $j$. sor azonos. Vegyük az $S$ permutációt, amire $\sigma(i)=k$, illetve $\sigma(j)=l$, illetve az $S'$ permutációt, amire $\sigma(i)=l$, illetve $\sigma(j)=k$, az összes többi azonos. Ha jól meggondoljuk, akkor ezekhez tartozó szorzatok abszolútértékben egyenlőek, hiszen a szorás kommutatív. De mi a helyzet az előjelükkel?
+{%
+\begin{center}
+\begin{tabular}{|l||c|c|c|c|c|c|c|c|}\hline
+ & 1 & 2 & \ldots & $i$ & \ldots & $j$ & \ldots & $n$\\\hline\hline
+$S$ & \ldots & \ldots & \ldots & $k$ & \ldots & $l$ & \ldots & \ldots\\\hline
+$S'$ & \ldots & \ldots & \ldots & $l$ & \ldots & $k$ & \ldots & \ldots\\\hline
+\end{tabular}
+\end{center}
+}%
+Ahhoz, hogy $S$-ből $S'$-t kapjunk, először el kell mozgatnunk $k$-t az $i$. pozícióról az $j$-be, mégpedig úgy, hogy mindig a mellette levővel kicseréljük. Egy szomszédos csere 1-el változtatja meg az inverziószámot, hiszen csak az egymáshoz való viszonyuk változik. Tehát, ha $k$-t $j$. pozícióba visszük, akkor $j-i$ csere szükséges. Ekkor az $l$ a $j-1$. pozícióban lesz, hiszen a végén $k$ helyet cserélt vele. Tehát, hogy őt elmozgassuk az $i$. pozícióba $j-i-1$ lépés szükséges. Tehát összesen, hogy $S$-ből $S'$-t kapjunk $2(j-i)-1$ cserét hajtottunk végre, azaz páros inverziószámból páratlant, páratlanból párosat csinál, vagyis $S$-hez és $S'$-höz tartozó szorzat előjele ellentétes. Az összes lehetséges permutációt hasonlóan párosíthatjuk, tehát a determináns 0.
+
+ \item Ha egy oszlophoz v. sorhoz egy másik oszlop v. sor $\lambda$ szorosát hozzáadjuk, akkor a determináns nem változik.\vspace*{5pt}\\
+ \textit{Bizonyítás}: Az előző, illetve a 4-es tulajdonságot felhasználva következik:
+\[\begin{vmatrix}
+a_{11}+\lambda a_{21} & a_{12}+\lambda a_{22} & \ldots & a_{1n}+\lambda a_{2n}\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix} = \begin{vmatrix}
+a_{11} & a_{12} & \ldots & a_{1n}\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix} + \lambda\underbrace{\begin{vmatrix}
+a_{21} & a_{22} & \ldots & a_{2n}\\
+a_{21} & a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn}          
+\end{vmatrix}}_{= 0}\]
+\textit{Megjegyzés}: A fenti példa azt mutatja, ha az első sorhoz a második sor $\lambda$-szorosát adjuk, természetesen tetszőleges két sorra, ugyanígy működik a dolog.
+
+ \item Ha kicserélünk két sort v. oszlopot, akkor a determináns a $-1$-szeresére változik.\vspace*{5pt}\\
+ \textit{Bizonyítás:} Tekintsük az $i$. és a $j$. sort. Adjuk hozzá az $i$-hez a $j$. sort, majd ezt vonjuk ki a $j$-ből. Végül adjuk hozzá ezt az $i$-hez. Ekkor az $i$-ben lesz az eredetileg $j$. sor, a $j$-ben pedig az eredeti $i$ sor $-1$-szerese. Eddig a determináns nem változott, de ahhoz, hogy tényleg a két sort felcseréljük a $j$-et meg kell szorozni $-1$-el. Tehát a determináns valóban a $-1$-szeresére változik:
+\[\begin{vmatrix}
+\ldots & \ldots & \ldots & \ldots\\
+a_{i1} & a_{i2} & \ldots & a_{in}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{j1} & a_{j2} & \ldots & a_{jn}\\
+\ldots & \ldots & \ldots & \ldots\\
+\end{vmatrix} = \begin{vmatrix}
+\ldots & \ldots & \ldots & \ldots\\
+a_{i1}+a_{j1} & a_{i2}+a_{j2} & \ldots & a_{in}+a_{jn}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{j1} & a_{j2} & \ldots & a_{jn}\\
+\ldots & \ldots & \ldots & \ldots\\
+\end{vmatrix} =\]
+\[ = \begin{vmatrix}
+\ldots & \ldots & \ldots & \ldots\\
+a_{i1}+a_{j1} & a_{i2}+a_{j2} & \ldots & a_{in}+a_{jn}\\
+\vdots & \vdots & \ddots & \vdots\\
+-a_{i1} & -a_{i2} & \ldots & -a_{in}\\
+\ldots & \ldots & \ldots & \ldots\\
+\end{vmatrix} = \begin{vmatrix}
+\ldots & \ldots & \ldots & \ldots\\
+a_{j1} & a_{j2} & \ldots & a_{jn}\\
+\vdots & \vdots & \ddots & \vdots\\
+-a_{i1} & -a_{i2} & \ldots & -a_{in}\\
+\ldots & \ldots & \ldots & \ldots\\
+\end{vmatrix} = -\begin{vmatrix}
+\ldots & \ldots & \ldots & \ldots\\
+a_{j1} & a_{j2} & \ldots & a_{jn}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{i1} & a_{i2} & \ldots & a_{in}\\
+\ldots & \ldots & \ldots & \ldots\\
+\end{vmatrix}\]
+
+\end{enumerate}
+
+\subsection{További azonosságok}
+
+Az $A$ egy $n\times n$-es mátrix, $\lambda\in\R$:
+\[\det(\lambda\cdot A) = \lambda^n\cdot\det A\]
+
+\begin{tetel}
+ $\boxed{$Determinánsok szorzás-tétele$}$\\
+ \[\det(A\cdot B) = \det A\cdot \det B\]
+ \emph{Megjegyzés}: Nyílván, ha $A$ és $B$ négyzetes mátrix, illetve ha értelmezhető a szorzatuk.
+\end{tetel}
+\addtocounter{biz}{1} % nincs bizonyítás
+
+\section{Mátrixok}
+
+Tehát tudjuk, hogy a Gauss-elimináció lépései, hogyan hatnak a determinánsra. Ha sikerül LA-ra hozni a mátrixot, akkor annak a determinánsa a főátlók szorzata (1 v. 0), de nem felejtjük el, hogy időközben a determináns értéke megváltozott.\\
+
+De miért is jó, hogy tudjuk, hogyan kell kiszámolni egy determinánst?
+
+\subsection{Mire jó a determináns?}
+
+Segítségével meg tudjuk határozni, hogy egy $n\times n$-es egyenletrendszernek, mikor van megoldása.
+\begin{center}
+\psset{xunit=.5pt,yunit=.5pt,runit=.5pt}
+\begin{pspicture}(160.11599731,95.64286041)
+
+\pscustom[linewidth=1]{\newpath
+\moveto(0.50065159,87.32077312)
+\lineto(79.2912476,87.32077312)
+\lineto(79.2912476,8.32207774)
+\lineto(0.50065159,8.32207774)
+\closepath}
+
+\rput[B](40,40){$A$}
+
+\pscustom[linewidth=1]{\newpath
+\moveto(107.11622071,87.32120799)
+\lineto(129.61578011,87.32120799)
+\lineto(129.61578011,8.3216505)
+\lineto(107.11622071,8.3216505)
+\closepath}
+
+\rput[B](118,40){$b$}
+
+\pscustom{\newpath
+\moveto(93.0088643,95.14286041)
+\lineto(93.0088643,0.49999941)
+\closepath}
+
+\rput[lB](140,40){$\quad \rightarrow \quad A|b$}
+\end{pspicture}
+\end{center}
+\begin{tetel}
+$\boxed{\exists!\; \rm{mo} \Leftrightarrow \det A \neq 0}$ 
+\end{tetel}
+\begin{biz}Akkor és csak akkor létezik egyértelmű megoldás, ha a lépcsős alakban minden oszlopban van vezéregyes:\\
+\pscirclebox[framesep=0.5pt]{$\Rightarrow$} Amikor előáll a lépcsős alak (Gauss-elmináció lépései), akkor a determináns értéke változik, de a \emph{nulla mivolta \textbf{nem}}!\\
+Tehát, ha a lépcsős alakban minden oszlopban van 1-es tehát a lépcsős alakra hozott mátrix determinánsa $1 \neq 0$, azaz $\det A \neq 0 \quad \checkmark$.\\
+
+\pscirclebox[framesep=0.5pt]{$\Leftarrow$} A lépcsős alakra hozás után megtudjuk, hogy $\det A \neq 0$. Tehát a főátlóban nem volt 0, azaz minden oszlopban van vezéregyes. $\checkmark$
+\end{biz}
+
+\begin{defi}
+  \emph{Transzponált}: Az $A(k\times n)$-es mátrix transzponáltja $A^T$, ami egy $n\times k$-s mátrix, amit úgy kapunk, hogy minden oszlopból a megfelelő sorrendben sort csinálunk:\\
+\begin{center}
+\psset{xunit=1.5pt,yunit=1.5pt,runit=.5pt}
+\begin{pspicture}(86,41.20259094)
+
+\pscustom[linewidth=1]{\newpath
+\moveto(0.5,40.70259093)
+\lineto(40.5,40.70259093)
+\lineto(40.5,15.70259093)
+\lineto(0.5,15.70259093)
+\lineto(0.5,40.70259093)
+\closepath}
+
+\pscustom[linewidth=1]{\newpath
+\moveto(60.5,40.70259093)
+\lineto(85.5,40.70259093)
+\lineto(85.5,0.70259093)
+\lineto(60.5,0.70259093)
+\lineto(60.5,40.70259093)
+\closepath}
+
+\pscustom[linewidth=1]{\newpath
+\moveto(5.5,40.70259094)
+\lineto(5.5,15.70259054)}
+
+\pscustom[linewidth=1]{\newpath
+\moveto(60.5,35.70259054)
+\lineto(85.5,35.70259054)}
+
+\pscustom[linewidth=1,linestyle=dashed,dash=4 4]{\newpath
+\moveto(2.5,15.70259054)
+\curveto(15.5,0.70259054)(30.5,-4.29740946)(40.5,5.70259054)
+\curveto(50.5,15.70259054)(45.5,20.70259054)(60.5,37.70259054)}
+
+\pscustom[linestyle=none,fillstyle=solid,fillcolor=black]{\newpath
+\moveto(55.22416779,35.38135813)
+\lineto(61.36902989,38.70201291)
+\lineto(58.83933516,32.19150409)
+\curveto(58.46505423,33.91845264)(57.00095142,35.20226024)(55.22416779,35.38135813)
+\closepath}
+
+\pscustom[linestyle=none,fillstyle=vlines]{\newpath
+\moveto(0.5,40.70259093)
+\lineto(5.5,40.70259093)
+\lineto(5.5,15.70259093)
+\lineto(0.5,15.70259093)
+\lineto(0.5,40.70259093)
+\closepath}
+
+\pscustom[linestyle=none,fillstyle=vlines]{\newpath
+\moveto(60.5,40.70259093)
+\lineto(85.5,40.70259093)
+\lineto(85.5,35.70259093)
+\lineto(60.5,35.70259093)
+\lineto(60.5,40.70259093)
+\closepath}
+\end{pspicture}
+\end{center}
+Ha $n\times n$-es mátrixunk van, akkor ez egy egyszerű főátlóra való tükrözéssel megvalósítható.
+\end{defi}
+
+\begin{tetel}
+ \[\boxed{\det A = \det A^T} \qquad A(n\times n)\]
+\end{tetel}
+\begin{biz}
+ \[\begin{matrix}
+  A & & A^T\\
+  \begin{array}{|cccc|}
+   \hline
+    &  &  &  \\
+    &  &  &  \\
+    &  &  &  \\
+   \hline
+  \end{array} & & \begin{array}{|cccc|}
+   \hline
+    &  &  &  \\
+    &  &  &  \\
+    &  &  &  \\
+   \hline
+  \end{array}\\
+  \downarrow & & \downarrow\\
+  \hbox{itt rendesen a Gauss-} & & \hbox{ugyanazt csináljuk csak}\\
+  \hbox{elimináció lépéseit csináljuk} & & \hbox{nem sorokon, hanem oszlopokon}\\
+  \downarrow & & \downarrow\\
+  \hbox{felső háromszög mátrix} & & \hbox{alsó háromszög mátrix}\\
+  \multicolumn{3}{c}{\nwarrow\hbox{főtáló elemei egyelőek}\nearrow}\\
+  \multicolumn{3}{c}{\Downarrow}\\
+ \end{matrix}\]
+\[\det A = \det A^T\]
+\end{biz}
+
+\begin{defi}
+ \emph{Előjeles aldetermináns}: $A_{ij}(n-1\times n-1)$, ha $A(n\times n)$. Ez az $a_{i,j}$-hez tartozó előjeles aldetermináns, melyet úgy kapunk, hogy az $A$-ból elhagyjuk az $i$. sort és a $j$. oszlopot, vesszük ennek a mátrixnak a determinánsát, majd megszorozzuk $(-1)^{i+j}$-nel.
+\end{defi}
+
+\begin{tetel}$\boxed{$Kifejtési-tétel$}$\\
+ Ha vesszük a mátrix egy sorát vagy oszlopát, akkor az itt álló elemeket megszorozva a hozzájuk tartozó előjeles aldeterminánssal, majd ezeket összegezve, megkapjuk a mátrix determinánsát:
+\[\boxed{\det A = \sum_{j=1}^{n} a_{i,j}\cdot \underbrace{(-1)^{i+j} A_{ij}}_{\hbox{előjeles aldet.}}} \quad \hbox{(ez az $i$. sor szerinti kifejtés)}\]
+\end{tetel}
+\begin{biz}
+ Bizonyítani csak egy sor kifejtését fogjuk, hiszen ha transzponáljuk, akkor az oszlopok helyett továbbra is sorokkal dolgozhatunk tovább, viszont a fenti tétel alapján $\det A = \det A^T$.\\
+
+ Ha megvizsgáljuk a fenti szummát, akkor észrevehetjük, hogy ha az előjeleket nem nézzük, csak magukat a szorzatokat, akkor ezek megegyeznek a determináns definíciójában lévő szorzatokkal, hiszen mind a két felírásban tulajdonképpen vesszük az összes lehetséges bástyaelhelyezést - permutációt. Kérdés, hogy az előjelekkel mi a helyzet? Vizsgáljunk meg egy-egy szorzatot mindkét összegből (amik bástyaelhelyezésben azonosak); tfh, hogy a kifejtés során az $i$. sor $j$. oszlopában tartunk, ekkor a szorzat a következő:
+ \[a_{i,j}\cdot (-1)^{i+j} A_{ij}\]
+ A determináns definíciója alapján pedig:
+ \[(-1)^{I(\sigma)}\cdot a_{1,\sigma{1}}\cdot\ldots\cdot a_{i,j}\cdot\ldots\cdot a_{n,\sigma{n}}\]
+ Azt előzőekben tárgyaltuk, hogy abszolútértékben a két szorzat megegyezik, kérdés, hogy $(-1)^{I(\sigma)} \overset{?}{=} (-1)^{i+j}$.
+\newcommand{\mca}[3]{\multicolumn{#1}{#2}{#3}}
+\begin{center}
+\begin{tabular}{lllllll}\cline{1-3}\cline{5-7}
+\mca{1}{|l}{} &  & \mca{1}{l|}{} & \mca{1}{l|}{} &  &  & \mca{1}{l|}{}\\
+\mca{1}{|l}{} & \mca{1}{c}{$j-1-k$} & \mca{1}{l|}{} & \mca{1}{l|}{} &  & \mca{1}{c}{$i-j+k$} & \mca{1}{l|}{}\\
+\mca{1}{|l}{} &  & \mca{1}{l|}{} & \mca{1}{l|}{} &  &  & \mca{1}{l|}{}\\\cline{1-3}\cline{5-7}
+ &  &  & \mca{1}{c}{$\pscirclebox[boxsep=false,framesep=1pt]{a_{i,j}}$} &  &  & \\\cline{1-3}\cline{5-7}
+\mca{1}{|l}{} &  & \mca{1}{l|}{} & \mca{1}{l|}{} &  &  & \mca{1}{l|}{}\\
+\mca{1}{|l}{} & \mca{1}{c}{$k$} & \mca{1}{l|}{} & \mca{1}{l|}{} &  & \mca{1}{c}{} & \mca{1}{l|}{}\\
+\mca{1}{|l}{} &  & \mca{1}{l|}{} & \mca{1}{l|}{} &  &  & \mca{1}{l|}{}\\\cline{1-3}\cline{5-7}
+\end{tabular}
+\end{center}
+
+Tegyük fel, hogy $a_{i,j}$-től DNY-ra $k$ bástya van. Mivel $a_{i,j}$ a $j$. oszlopban van, ezért előtte $j-1$ bástya van, tehát $a_{i,j}$-től ÉNY-ra $j-1-k$ darab. Továbbá mivel $a_{i,j}$ az $i$. sorban van, ezért felette $i-1$ bástya van, tehát tőle ÉK-re $i-1-(j-1-k) = i-j+k$ darab bástya van. Ha jól megnézzük, akkor egy ilyen permutációban $a_{i,j}$-re helyezett bástya $k+i-j+k$ darab bástyával van ÉK-DNY elhelyezkedésben. Ez $k$ választásától függetlenül akkor páratlan, ha $i-j$ páratlan, ami pontosan akkor páratlan, ha $i+j$ páratlan. Ezzel beláttuk, hogy az adott permutáció inverziószámának páratlansága megegyezik $i+j$ páratlanságával, tehát:
+\[(-1)^{I(\sigma)} = (-1)^{i+j}\]
+
+\end{biz}
+
+\begin{defi}
+ \emph{$n\times n$-es egységmátrix}: minden elem nulla, kivéve a főátló, ahol csupa 1-es van:
+\[\begin{pmatrix}
+   \mathbf{1} & 0 & \ldots & 0 & 0 \\
+   0 & \mathbf{1} & 0 & \ldots & 0 \\
+   \vdots & \vdots & \ddots & \vdots & \vdots \\
+   0 & \ldots & 0 & \mathbf{1} & 0 \\
+   0 & 0 & \ldots & 0 & \mathbf{1} \\
+  \end{pmatrix}\]
+Jele: $I_n$, $E_n$, $E$.
+\end{defi}
+
+\subsection{Mátrix-műveletek}
+
+\begin{description}
+ \item[Összeadás, kivonás] \hfill\\
+  Két azonos alakú mátrixot összeadhatunk, kivonhatjuk egymásból: megfelelő elemeket összeadjuk/kivonjuk.\\
+  $A+B = B+A \qquad (A+B)+C = A+(B+C)$
+ \item[$\lambda$-val való szorzás] \hfill\\
+  Minden elemet megszorzunk $\lambda$-val.
+ \item[Szorzás] \hfill\\
+  Két mátrixot csak akkor szorozhatunk össze egymással, ha az első! mátrix oszlopainak száma megegyezik a második! mátrix sorainak számával. Nem mindegy a sorrend: a szorzás mátrixok között \textbf{nem kommutatív}.
+  \[A(k\times n)\cdot B(n\times l) = C(k\times l)\]
+  \[[A\cdot B]_{ij} = C_{ij} := \hbox{($A$ $i$. sorvektora)}\cdot\hbox{($B$ $j$. oszlopvektora)} = \]
+  \[= (a_{i1}, a_{i2}, \ldots, a_{in})\cdot(b_{1j}, b_{2j}, \ldots, b_{nj}) = \sum^{n}_{m=1} a_{im}\cdot b_{mj}\]
+
+\emph{Példa}:
+\[\begin{pmatrix}
+2 & 3 \\
+1 & 4
+\end{pmatrix}\cdot
+\begin{pmatrix}
+1 & 2 \\
+5 & 6
+\end{pmatrix}=
+\begin{matrix}
+& \begin{pmatrix}
+1 & 2 \\
+5 & 6
+\end{pmatrix} & & \\
+
+\begin{pmatrix}
+2 & 3 \\
+1 & 4
+\end{pmatrix} &
+\begin{pmatrix}
+17 & 22 \\
+21 & 26
+\end{pmatrix}
+\end{matrix}\]
+
+\textbf{Szorzás tulajdonságai}:
+\begin{itemize*}
+ \item $0\cdot A = 0$
+ \item $I_n\cdot A = A\cdot I_n = A$
+ \item $\left.\begin{array}{lcr}
+         A\cdot(B\cdot C) &=& (A\cdot B)\cdot C \\
+         A\cdot(B + C) &=& AB + AC \\
+         (A+B)\cdot C &=& AC + BC \\
+        \end{array} \right\} \hbox{ha ezek a műveletek elvégezhetőek}$
+\end{itemize*}
+\end{description}
+
+Szorozzunk meg balról egy oszlopvektort, nézzük meg mit kapunk:
+\[\begin{pmatrix}
+2 & 4 & 7 \\
+1 & 3 & 5 
+\end{pmatrix} \cdot \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} =
+\begin{pmatrix}
+2x_1+4x_2+7x_3 \\
+1x_1+3x_2+5x_3 \\
+\end{pmatrix}\]
+
+Ha jól megnézzük egy ``egyenletrendszer kezdeményt'' látunk. Tehát pl. a következő egyenletrendszert:
+\[\left\{\begin{array}{lcr}2x_1+4x_2+7x_3 & = & 5 \\
+1x_1+3x_2+5x_3 & = & 8\end{array} \right. \quad \hbox{vagy röviden:} \quad A|b = \begin{array}{ccc|c}
+2 & 4 & 7 & 5 \\
+1 & 3 & 5 & 8 \\
+\end{array}\]
+Felírhatjuk így is:
+\[\begin{pmatrix}
+2 & 4 & 7 \\
+1 & 3 & 5 
+\end{pmatrix} \cdot \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+5 \\
+8 \end{pmatrix}\]
+Vagyis tulajdonképpen:
+\[A\cdot \vek{x} = \vek{b}\]
+
+\emph{Kicsit kalandozzunk el}:\\
+Legyen $A(n\times n)$. Tegyük fel, hogy létezik ``inverze'' ($A^{-1}$). Elvárjuk, hogy $A^{-1}\cdot A = A\cdot A^{-1} = I$.
+Nézzük csak meg mégegyszer a fenti egyenletet:
+\[A\cdot \vek{x} = \vek{b} \qquad /\cdot A^{-1} \hbox{ balról}\]
+\[A^{-1}\cdot (A\cdot \vek{x}) = A^{-1}\cdot\vek{b}\]
+\[\underbrace{(A^{-1}\cdot A)}_{I}\cdot \vek{x} = A^{-1}\cdot\vek{b}\]
+\[\vek{x} = A^{-1}\cdot\vek{b}\]
+Tehát, ha meg tudnánk határozni egy mátrix inverzét, akkor az egyenletrendszerek megoldását egy szimpla mátrix szorzással ki tudnánk számolni.
+
+\subsection{Inverz mátrix}
+
+Nem minden mátrixnak van, pl:
+\begin{itemize*}
+ \item nullmátrix
+ \item egy olyan $A$ mátrixnak, melyhez $\exists B\neq 0$, hogy $AB = 0$.
+\end{itemize*}
+
+\begin{defi}
+ \emph{Balinverz}: $B$ mátrix az $A$ mátrix balinverze, ha $B\cdot A = E$.
+\end{defi}
+
+\begin{defi}
+ \emph{Jobbinverz}: $J$ mátrix az $A$ mátrix jobbinverze, ha $A\cdot J = E$.
+\end{defi}
+
+\begin{tetel}
+ Ha $A$-nak $B$ a balinverze és $J$ a jobbinverze, akkor $B=J$.
+\end{tetel}
+\begin{biz}
+ \[\left.\begin{array}{l}
+    B(AJ) = BI = B\\
+    (BA)J = IJ = J
+   \end{array}\right. \quad \hbox{mivel } B(AJ)=(BA)J \quad \Rightarrow \quad B=J
+ \]
+\end{biz}
+
+Ha $\mathbf{B=J}$, akkor mindkettő egyértelmű, tehát \textbf{létezik inverze}. Már csak az a kérdés, hogy milyen mátrixnak van inverze?
+
+\begin{tetel}
+ Azoknak a mátrixoknak van jobbinverze, melyek determinánsa $\neq 0$. Tehát:
+ \[\boxed{\det A \neq 0 \quad \Leftrightarrow \quad \hbox{$A$-nak $\exists$ jobbinverze}}\]
+\end{tetel}
+\begin{bizNL}
+$\Rightarrow$
+ \[\begin{matrix}
+& \begin{matrix} \vek{x} & \vek{y} & \vek{z} \end{matrix} \\
+& \begin{pmatrix}
+x_1 & y_1 & z_1 \\
+x_2 & y_2 & z_2 \\
+x_3 & y_3 & z_3
+\end{pmatrix} & & \\
+
+\begin{pmatrix}
+1 & 2 & 3 \\
+2 & 4 & 7 \\
+3 & 10 & 20
+\end{pmatrix} &
+\begin{pmatrix}
+\rnode{a11}{\pscirclebox{\;}} & \rnode{a12}{\pscirclebox{\;}} & \pscirclebox[linestyle=dashed]{\;} \\
+\rnode{a21}{\pscirclebox{\;}} & \rnode{a22}{\pscirclebox{\;}} & \pscirclebox[linestyle=dashed]{\;} \\
+\rnode{a31}{\pscirclebox{\;}} & \pscirclebox[linestyle=dashed]{\;} & \pscirclebox[linestyle=dashed]{\;} 
+\end{pmatrix} & = & 
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\end{matrix}
+ \]
+\[\begin{array}{ll}
+    \rnode{a11_exp}{x_1+2x_2+3x_3} \nccurve[angleA=180]{->}{a11}{a11_exp} \qquad\qquad&\qquad\qquad \rnode{a12_exp}{y_1+2y_2+3y_3} \nccurve[angleA=0,angleB=180]{->}{a12}{a12_exp}\\
+    \rnode{a21_exp}{2x_1+4x_2+7x_3} \nccurve[angleA=180]{->}{a21}{a21_exp} \qquad\qquad&\qquad\qquad \rnode{a22_exp}{2y_1+4y_2+7y_3} \nccurve[angleA=0,angleB=180]{->}{a22}{a22_exp} \\
+    \rnode{a31_exp}{3x_1+10x_2+20x_3} \nccurve[angleA=180]{->}{a31}{a31_exp}
+  \end{array}\]
+Tulajdonképpen az $A\cdot \vek{x} = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$, $A\cdot \vek{y} = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$ és $A\cdot \vek{z} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$ egyenletrendszert kell megoldani. És az előzőekben tanultak alapján, ha $\det A \neq 0 \; \Rightarrow \exists $ egyértelmű megoldás $\Rightarrow \exists $ jobbinverz.
+
+Magát a tényleges megoldást, \textit{Gauss-elimináció}val viszonylag könnyen kiszámíthatjuk. Vezessük végig a fenti konkrét példát. Ahhoz, hogy megkapjuk az $\vek{x}$-et, a következőt kell redukált lépcsős alakra hozni:
+\[\begin{array}{ccc|c}
+1 & 2 & 3 & 1\\
+2 & 4 & 7 & 0\\
+3 & 10 & 20 & 0\\
+\end{array}\]
+Hasonlóan kell eljárni az $\vek{y}$-al és $\vek{z}$-vel is, azzal a különbséggel, hogy a vonaltól jobbra más áll. Vegyük észre, hogy a lépések során a bal oldal ugyanúgy változik, mind a 3 esetben, ezért az eliminációt ``egyszerre'' csinálhatjuk:
+\[\begin{array}{ccc|ccc}
+1 & 2 & 3 & 1 & 0 & 0\\
+2 & 4 & 7 & 0 & 1 & 0\\
+3 & 10 & 20 & 0 & 0 & 1\\
+\end{array}\]
+Ha a fentiben elvégezzük a Gauss-elimináció lépéseit akkor a jobb oldalt fogjuk ``megkapni'' a mátrix jobbinverzét. Tehát:
+\[\begin{array}{ccc|ccc}
+1 & 2 & 3 & 1 & 0 & 0\\
+2 & 4 & 7 & 0 & 1 & 0\\
+3 & 10 & 20 & 0 & 0 & 1\\
+\end{array} \;\rightarrow\; \begin{array}{ccc|ccc}
+\psframebox[boxsep=false]{1} & 2 & 3 & 1 & 0 & 0\\
+0 & 0 & 1 & -2 & 1 & 0\\
+0 & \pscirclebox[boxsep=false,linestyle=dashed]{4} & 11 & -3 & 0 & 1\\
+\end{array} \;\rightarrow\; \begin{array}{ccc|ccc}
+\psframebox[boxsep=false]{1} & 2 & 3 & 1 & 0 & 0\\
+0 & \psframebox[boxsep=false]{1} & \frac{11}{4} & \frac{-3}{4} & 0 & \frac{1}{4}\\
+0 & 0 & 1 & -2 & 1 & 0\\
+\end{array} \;\rightarrow\]
+\[\begin{array}{ccc|ccc}
+1 & 2 & 3 & 1 & 0 & 0\\
+0 & 1 & \frac{11}{4} & \frac{-3}{4} & 0 & \frac{1}{4}\\
+0 & 0 & \pscirclebox[boxsep=false]{1} & -2 & 1 & 0\\
+\end{array} \;\rightarrow\; \begin{array}{ccc|ccc}
+1 & 2 & 0 & 7 & -3 & 0\\
+0 & \pscirclebox[boxsep=false]{1} & 0 & \frac{19}{4} & \frac{-11}{4} & \frac{1}{4}\\
+0 & 0 & \psframebox[boxsep=false]{1} & -2 & 1 & 0\\
+\end{array} \;\rightarrow\; \begin{array}{ccc|ccc}
+\psframebox[boxsep=false]{1} & 0 & 0 & \frac{-10}{4} & \frac{10}{4} & \frac{-2}{4}\\
+0 & \psframebox[boxsep=false]{1} & 0 & \frac{19}{4} & \frac{-11}{4} & \frac{1}{4}\\
+0 & 0 & \psframebox[boxsep=false]{1} & -2 & 1 & 0\\
+\end{array} \]
+Tehát az $A$ mátrix jobbinverze:
+\[\begin{pmatrix}
+\dfrac{-5}{2} & \dfrac{5}{2} & \dfrac{-1}{2} \\\\[-2mm]
+\dfrac{19}{4} & \dfrac{-11}{4} & \dfrac{1}{4} \\\\[-2mm]
+-2 & 1 & 0\\
+\end{pmatrix}\]
+
+$\Leftarrow$ Indirekt; Tfh: $\det A = 0$.\\
+Ha a determináns 0, akkor a Gauss-elimináció közben lesz bal oldalon egy 0 sor. Ahhoz, hogy ne legyen ez a sor tilos sor, a vonaltól jobbra is csupa nullának kell lennie:
+\[\begin{array}{ccc|ccc}
+\ldots & \ldots & \ldots & \ldots & \ldots & \ldots\\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+0 & 0 & 0 & 0 & 0 & 0\\
+\end{array}\]
+Ez viszont azt jelenti, hogy a jobbinverz determinánsa 0. Az viszont nem lehet hiszen mint tanultuk a Gauss-elimináció közben a determináns nulla mivolta nem változhat. Mivel kezdetben egységmátrix volt jobboldalt, aminek a determinánsa 1 ($\neq 0$), így ellenmondásba ütköztünk.\\
+
+\textit{Megjegyzés}: $\Leftarrow$ másképp:
+\[\det(A\cdot J) = \det A\cdot \det J \qquad \hbox{(lásd determinánsok szorzástétele)}\]
+\[A\cdot J = E \quad \Rightarrow \quad \det E = 1\]
+\[\hbox{ha } \det A = 0 \hbox{, akkor } 1 = 0 \; \hbox{\blitza}\]
+\end{bizNL}
+
+\begin{lemma}
+ $A$ és $B$ $n\times n$-es mátrixok:
+\[(A\cdot B)^T = B^T\cdot A^T\]
+\end{lemma}
+\begin{bizlemma}
+\[(A\cdot B)^T = B^T\cdot A^T\]
+\[\left[AB\right]_{j,i} = \left[B^T\cdot A^T\right]_{i,j}\] 
+Tehát baloldalt az $A$ mátrix $j$. sorának és a $B$ mátrix $i$. oszlopának, jobb oldalt pedig a $B^T$ mátrix $i.$ sorának és az $A^T$ mátrix $j$. oszlopának a skaláris szorzata. Mivel a transzponálás ``megcseréli'' a sorokat és az oszlopokat (a főátlóra tükrözünk) ezért a két oldal valóban egyenlő (a vektorok skaláris szorzata kommutatív).
+\end{bizlemma}
+
+\begin{tetel}
+ Minden $n\times n$-es $A$ mátrixnak, aminek van jobbinverze, annak van balinverze is.
+\end{tetel}
+\begin{biz}
+ \[\det A \neq 0 \quad \Rightarrow \quad \det A^T \neq 0 \quad \Rightarrow \quad A^T\hbox{-nek van jobbinverze ($J_t$)}\]
+ \[A^T\cdot J_{t} = E\]
+ \[(A^T\cdot J_{t})^T = E^T = E\]
+ \[J_{t}^T\cdot {A^T}^T = E\]
+ \[\pscirclebox[boxsep=false]{J_{t}^T}\cdot A = E\]
+ Tehát $J_{t}^T$ az $A$ mátrix balinverze (tehát egy mátrix balinverze a mátrix transzponáltjának jobbinverzének transzponáltja).
+\end{biz}
+
+Következmény:
+\begin{tetel}
+ $\boxed{A$-nak létezik inverze $\Leftrightarrow \det A\neq 0$.$}$
+\end{tetel}
+\addtocounter{biz}{1} % nincs bizonyítás
+
+\begin{tetel}
+ \[\boxed{ (AB)^{-1} = B^{-1}\cdot A^{-1} }\]
+\end{tetel}
+\begin{biz}
+ \[(AB)\cdot (AB)^{-1} = E \qquad /\cdot A^{-1} \hbox{ balról}\]
+ \[(A^{-1}\cdot A)\cdot B\cdot (AB)^{-1} = A^{-1} \qquad /\cdot B^{-1} \hbox{ balról}\]
+ \[(B^{-1}\cdot B)\cdot (AB)^{-1} = B^{-1}\cdot A^{-1}\]
+ \[(AB)^{-1} = B^{-1}\cdot A^{-1}\]
+\end{biz}
+
+\subsection{Rang}
+
+\begin{defi} \emph{Sorrang} $s(A)$: A lineárisan független sorok számának maximuma. \end{defi}
+\begin{defi} \emph{Oszloprang} $o(A)$: A lineárisan független oszlopok számának maximuma. \end{defi}
+\begin{defi} \emph{Determinánsrang} $d(A)$: Legnagyobb olyan $k$ hogy $A$ egy $k\times k$-as aldeterminánsa (kiválasztunk tetszőleges $k$ sort és $k$ oszlopot és a sorok és oszlopok metszéspontjában tekintjük az elemeket) nem nulla. \end{defi}
+
+\begin{tetel}
+ \[\boxed{ s(A)=d(A) \quad \Rightarrow \quad s(A)=d(A)=o(A) \quad \forall A }\]
+\end{tetel}
+\begin{biz}
+ $d(A) = d(A^T)$, hiszen minden aldeterminánsnak megvan a párja (egyenlőek), tehát ha az egyik $\neq 0$, akkor a másik se. Ebből:
+\[\underbrace{o(A) = s(A^T)}_{\hbox{o. $\rightarrow$ sor}} = d(A^T) = d(A)\]
+\end{biz}
+
+\begin{tetel}
+ \[\boxed{\forall A: \quad d(A) = s(A)}\]
+\end{tetel}
+\begin{biz}
+ Legyenek a sorvektorok: $\lista{\vek{v}}{k}$ ($\R^n$-beli vektorok). A sorvektorok által generált altér dimenziója a sorrang (a definíció egy értelmezése): 
+\[\dim\gen{ \lista{\vek{v}}{k} } = s(A) := s\]
+Rendezzük úgy a vektorokat, hogy az első $s$ vektor független legyen, ekkor:
+\[\gen{  \underbrace{ \lista{\vek{v}}{s} }_{\hbox{tehát ez bázis}} } = \gen{ \lista{\vek{v}}{k} }\]
+Hiszen, tegyük fel, hogy ez nem igaz, akkor $\vek{v}_{s+1}, \ldots, \vek{v}_k$ között van olyan vektor, ami nem áll elő az első $s$ vektor lineáris kombinációjaként, tehát ezt hozzá véve szintén független rendszert kapunk, ami ellentmondás ($s$ dimenziójú térben nem lehet $s+1$ elemű független rendszer).\\
+
+Ha belátjuk, hogy
+\[\dim\gen{ \lista{\vek{v}}{k} } = d(A)\]
+akkor kész vagyunk.\\
+
+A Gauss-elimináció nem változtatja meg a sorvektorok által generált altér dimenzióját, hiszen a megváltozott sorok ugyanazt az alteret fogják generálni $\Rightarrow$ nem változik a dimenzió.\\
+
+Vajon a determináns rang változik-e? Az világos, hogy a Gauss-elimináció műveletei közül a sorcsere és egy sor $\lambda\neq 0$-val való szorzás nem változtat a determináns nullaságán, tehát a determináns rang nem változik. De mi a helyzet egy sorhoz egy másik sor $\lambda$-szorosának hozzáadásával? Tegyük fel, hogy ekkor tudunk növelni a determinánsrangon (ha nőhet, akkor csökkenhet is - tehát változhat, így elég csak azt belátnunk, hogy nem nőhet), tehát találunk egy $k\times k$-asnál nagyobb nem 0 aldeterminánst. Az egyszerűség kedvéért tegyük fel, hogy az 1. sor érintett a kiválasztott aldeterminánsban, a második nem, de ennek a $\lambda$ szorosát adjuk az elsőhöz:
+\[\begin{vmatrix}
+   \quad & \pscirclebox[boxsep=false,framesep=0.4pt]{1} + \lambda\, \pscirclebox[boxsep=false,framesep=0.4pt]{2} & \quad\\\hline
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots& \ddots
+  \end{vmatrix} = \underbrace{\begin{vmatrix}
+   \quad & \pscirclebox[boxsep=false,framesep=0.4pt]{1} & \quad\\\hline
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots& \ddots
+  \end{vmatrix}}_{=0} + \lambda\cdot \underbrace{\begin{vmatrix}
+   \quad & \pscirclebox[boxsep=false,framesep=0.4pt]{2} & \quad\\\hline
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots & \ddots \\
+   \ddots & \ddots& \ddots
+   \end{vmatrix}}_{=0} = 0
+\]
+A jobb oldali két aldetermináns biztosan nulla, hiszen az eredeti mátrixban nem találtunk $k\times k$-asnál nagyobb nem nulla aldeterminánst (a Gauss-elminináció előtt a mátrix rangja $k$), így viszont a 2. sor $\lambda$-szorosának hozzáadása után se találunk $k\times k$-asnál nagyobb nem 0 aldeterminánst, tehát nem lehet növelni a determinánsrangon! \\
+
+Vagyis, ha Gauss-elimináljuk a mátrixot és kapunk egy $A'$ mátrixot, melyben legyen az első $l$ sor, amiben van vezéregyes, a maradék pedig csupa nulla sor. Ekkor ebben az $A'$ mátrixban van egy $l\times l$-es nem nulla aldetermináns (egységmátrix), ennél nagyobb viszont nincs, tehát $d(A') = l$. Viszont ez az $l$ darab sorvektor független rendszer is, hiszen nem állnak elő egymás lineáris kombinációjaként, tehát: $d(A') = l = s(A')$. Viszont, ahogy az előbbiekben láttuk a Gauss-elimináció nem változtatja meg sem a determinánsrangot sem a sorrangot, tehát: $d(A) = s(A)$.
+
+Tehát az eddigi tételekből következik, hogy $\forall A$ mátrixra $d(A) = s(A) = o(A) = \mathbf{r(A)}$. Ezt hívjuk \textbf{rang}nak.
+\end{biz}
+
+\subsubsection{Mire használhatjuk?}
+
+Ha egy adott vektorrendszer által generált altér dimenzióját megkaphatjuk úgy, hogy a vektorokat mátrixba rendezzük, majd meghatározzuk ennek a rangját (amit Gauss-eliminációva könnyen kiszámolhatunk). Példa:
+\[\dim\langle (1,2,3), (4,5,6), (7,8,9), (10,11,12) \rangle = \rnode{Rang}{2} \]
+\[\begin{pmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9\\
+10 & 11 & 12\\
+\end{pmatrix} \rightarrow \begin{pmatrix}
+1 & 2 & 3\\
+0 & -3 & -6\\
+0 & -6 & -12\\
+0 & -9 & -18\\
+\end{pmatrix} \rightarrow \begin{pmatrix}
+\pscirclebox[boxsep=false,framesep=0.4pt]{1} & 2 & 3\\
+0 & \pscirclebox[boxsep=false,framesep=0.4pt]{1} & 2\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{pmatrix} \quad \hbox{sorrangja 2, azaz }\rnode{MRang}{\overbrace{\hbox{a mátrix rangja 2}}} \nccurve[angleA=90, angleB=0,nodesep=4pt]{->}{MRang}{Rang}\]
+
+Illetve egy hasznos tétel:
+\[\begin{matrix}
+   & & \begin{pmatrix}
+      \lambda_1 \\
+      \lambda_2 \\
+     \end{pmatrix} & \\
+
+   \begin{pmatrix}
+    1 & 3 \\
+    2 & 5
+   \end{pmatrix}\cdot \begin{pmatrix}
+      \lambda_1 \\
+      \lambda_2 \\
+     \end{pmatrix} = 
+   &
+   \begin{pmatrix}
+    1 & 3 \\
+    2 & 5 \\
+   \end{pmatrix}
+   &
+   \begin{pmatrix}
+      \lambda_1 + 3\lambda_2\\
+      2\lambda_1 + 5\lambda_2
+     \end{pmatrix}
+   & = \lambda_1\begin{pmatrix}1\\ 2\end{pmatrix} + \lambda_2\begin{pmatrix}3\\ 5\end{pmatrix}
+  \end{matrix}
+\]
+Tehát tulajdonképpen, ha $A\cdot \vek{x} = \vek{b}$ mátrixegyenletünk van, akkor $\vek{b}$ az $A$ oszlopainak egy lineáris kombinációját adja.
+
+\begin{tetel}
+ \[\boxed{A\cdot \vek{x} = \vek{b} \hbox{ megoldható } \quad \Leftrightarrow \quad r(A|b) = r(A)}\]
+\end{tetel}
+\begin{bizNL}
+ \begin{description*}
+ \item[$\Rightarrow$] $\exists \vek{x}$, tehát $\exists A$ oszlopainak olyan lineáris kombinációja, ami $\vek{b}$-t adja, tehát ha $r(A) = r$, akkor $r(A|b) = r$ hiszen hozzávéve az oszlopvektorokhoz a $\vek{b}$-t nem nő a dimenzió.
+ \item[$\Leftarrow$] $r(A|b) = r(A) = r$. Vegyük az $A$ oszlopvektorait; ezekhez hozzávéve $b$-t nem nő a vektorok által generált tér dimenziója, tehát $b$ előáll az oszlopvektorok lineáris kombinációjaként (mivel $r$ az $A$ mátrix oszloprangja, ezért csak azt az $r$ vektort választjuk ki, akik bázist alkotnak):
+ \[\vek{b} = \linkomb{v}{\lambda}{r}\]
+ Tehát ha $\vek{x}$-et úgy választjuk, hogy $i$. sorba írunk $\lambda_i$-t, ha az $A$ mátrixban az $i$. oszlopban van bázist alkotó vektor, többi helyre 0-át, akkor $\vek{x}$ kielégíti a kérdéses mátrix-egyenletet.
+ \end{description*}
+ \[\begin{matrix}
+   & \begin{pmatrix}
+      \rnode{L1}{\lambda_1} \\
+      \rnode{L10}{\ldots} \\
+      \rnode{L2}{\lambda_2} \\
+      \rnode{L3}{\lambda_3} \\
+      \rnode{L30}{\ldots} \\
+      \rnode{LR}{\lambda_r}
+     \end{pmatrix}\\
+   \begin{matrix}
+    \rnode{V1}{v_1} & \rnode{V10}{\ldots} & \rnode{V2}{v_2} & \rnode{V3}{v_3} & \rnode{V30}{\ldots} & \rnode{VR}{v_r}
+   \end{matrix} & \\
+   \begin{pmatrix}
+    \; \vdots \; & \ldots & \; \vdots \; & \; \vdots \; & \ldots & \; \vdots \; \\
+    \vdots & \ldots & \vdots & \vdots & \ldots & \vdots \\
+    \vdots & \ldots & \vdots & \vdots & \ldots & \vdots \\
+    \vdots & \ldots & \vdots & \vdots & \ldots & \vdots \\
+    \vdots & \ldots & \vdots & \vdots & \ldots & \vdots \\
+   \end{pmatrix} & \begin{array}{|c|}\hline\\\\\\\vek{b}\\\\\\\\\hline\end{array}
+ \end{matrix}
+\]
+\nccurve[angleA=90, angleB=180,nodesepA=4pt,nodesepB=9pt,linewidth=0.5pt]{->}{V1}{L1}
+\nccurve[angleA=90, angleB=180,nodesepA=8pt,nodesepB=9pt,linewidth=0.5pt,linestyle=dashed]{->}{V10}{L10} \ncput*[npos=0.9]{0}
+\nccurve[angleA=90, angleB=180,nodesepA=4pt,nodesepB=9pt,linewidth=0.5pt]{->}{V2}{L2}
+\nccurve[angleA=90, angleB=180,nodesepA=4pt,nodesepB=9pt,linewidth=0.5pt]{->}{V3}{L3}
+\nccurve[angleA=90, angleB=180,nodesepA=8pt,nodesepB=9pt,linewidth=0.5pt,linestyle=dashed]{->}{V30}{L30} \ncput*[npos=0.78]{0}
+\nccurve[angleA=90, angleB=180,nodesepA=4pt,nodesepB=9pt,linewidth=0.5pt]{->}{VR}{LR}
+\end{bizNL}
+
+\vspace{-25pt}
+
+\section{Lineáris leképezések}
+
+\begin{defi}
+ $\mathcal{A}: V_1 \to V_2$ \textbf{lineáris leképezés}, ha:
+ \begin{enumerate}
+  \item $\forall \vek{u}, \vek{v} \in V_1$-re: $\mathcal{A}(\vek{u}+\vek{v}) = \mathcal{A}(\vek{u}) + \mathcal{A}(\vek{v})$
+  \item $\forall \lambda\in\R$, $\vek{u}\in V_1$-re: $\mathcal{A}(\lambda \vek{u})=\lambda\mathcal{A}(\vek{u})$
+ \end{enumerate}
+\end{defi}
+
+\subsection{Példák}
+
+(1) $V_1 = V_2 = \R^2$. Legyen $\mathcal{A}$, olyan, hogy az adott vektort az $x$ tengelyre vetítjük, tehát $\mathcal{A}((\vek{x},\vek{y})) = (\vek{x},0)$. Lineáris leképezés-e?
+\[\left.\begin{array}{r}
+\mathcal{A}((\vek{x},\vek{y})+(\vek{u},\vek{v})) = \mathcal{A}((\vek{x}+\vek{u}, \vek{y}+\vek{v})) = (\vek{x}+\vek{u}, 0) \\
+\mathcal{A}((\vek{x},\vek{y}))+\mathcal{A}((\vek{u},\vek{v}))=(\vek{x},0)+(\vek{u},0)=(\vek{x}+\vek{u},0)   
+  \end{array}\right\} \checkmark\]
+\[\left.\begin{array}{r}
+\mathcal{A}(\lambda(\vek{x},\vek{y})) = \mathcal{A}((\lambda \vek{x}, \lambda \vek{y})) = (\lambda \vek{x}, 0) \\
+\lambda \mathcal{A}((\vek{x},\vek{y}))=\lambda (\vek{x},0)=(\lambda \vek{x},0)   
+  \end{array}\right\} \checkmark\]
+
+(2) $V_1 = V_2 = \R^2$. Az adott vektornak a képe legyen az $\vek{y}$ tengelyre vett tükörképe, tehát $(\vek{x},\vek{y}) \rightarrow (-\vek{x},\vek{y})$. Lineáris leképezés-e?
+\[\left.\begin{array}{r}
+\mathcal{A}((\vek{x},\vek{y})+(\vek{u},\vek{v})) = \mathcal{A}((\vek{x}+\vek{u}, \vek{y}+\vek{v})) = (-(\vek{x}+\vek{u}), \vek{y}+\vek{v}) \\
+\mathcal{A}((\vek{x},\vek{y}))+\mathcal{A}((\vek{u},\vek{v}))=(-\vek{x},\vek{y})+(-\vek{u},\vek{v}) = (-(\vek{x}+\vek{u}),\vek{y}+\vek{v})   
+  \end{array}\right\} \checkmark\]
+\[\left.\begin{array}{r}
+\mathcal{A}(\lambda(\vek{x},\vek{y})) = \mathcal{A}((\lambda \vek{x}, \lambda \vek{y})) = (-\lambda \vek{x}, \lambda \vek{y}) \\
+\lambda \mathcal{A}((\vek{x},\vek{y}))=\lambda (-\vek{x},\vek{y})=(-\lambda \vek{x},\lambda \vek{y})   
+  \end{array}\right\} \checkmark\]
+
+\subsection{Tulajdonságok}
+
+\begin{enumerate*}
+ \item \[\mathcal{A}(\vek{0}) = \vek{0}\]
+  \[\mathcal{A}(\underbrace{\vek{0}+\vek{0}}_{\vek{0}}) = \mathcal{A}(\vek{0})+\mathcal{A}(\vek{0}) \qquad /-\mathcal{A}(\vek{0})\]
+  \[0 = \mathcal{A}(\vek{0}) \quad \checkmark\]
+ \item \[\mathcal{A}(\vek{u}_1+\vek{u}_2+\ldots+\vek{u}_k) = \mathcal{A}(\vek{u}_1)+\mathcal{A}(\vek{u}_2)+\ldots+\mathcal{A}(\vek{u}_k)\]
+  Először $\vek{u}_1 + (\vek{u}_2+\ldots+\vek{u}_k)$-ra alkalmazzuk a definíciót, majd $\vek{u}_2 + (\vek{u}_3+\ldots+\vek{u}_k)$-ra és így tovább.
+ \item \[\mathcal{A}(\linkomb{u}{\lambda}{k}) = \lambda_1\mathcal{A}(\vek{u}_1)+\lambda_2\mathcal{A}(\vek{u}_2)+\ldots+\lambda_k\mathcal{A}(\vek{u}_k)\]
+ Először alkalmazzuk a fenti tulajdonságot, majd a definíciót.
+\end{enumerate*}
+
+Vegyük a következőt: $\mathcal{A}(\vek{u})=\vek{u}+\vek{x}$. Erről könnyen beláthatjuk, hogy nem lineáris leképezés, hiszen nem telejesül a fenti (1)-es tulajdonság, miszerint: $\mathcal{A}(\vek{0}) = \vek{0}$, hiszen mi esetünkben ez $\vek{0}+\vek{x}$.\\
+
+Felhasználva a lineáris leképezés definícióját, ha egy $V_1$ vektortér vektorait szeretnénk $V_2$-be transzformálni $\mathcal{A}:V_1\to V_2$ segítségével, akkor elég, ha tudjuk, hogy a $V_1$ egy bázisának vektoraival mi történik. Hiszen:
+\[\underbrace{\lista{\vek{b}}{n}}_{\hbox{bázis $V_1$-ben}} \in V_1 \quad : \quad \exists \lista{\lambda}{n} \quad : \quad \underbrace{\vek{v} = \linkomb{b}{\lambda}{n}}_{\hbox{egyértelmű felírás}}\]
+És tudjuk, hogy: 
+\[\mathcal{A}(\vek{v}) = \lambda_1\mathcal{A}(\ve{b}{1}) + \lambda_2\mathcal{A}(\ve{b}{2}) + \ldots + \lambda_n\mathcal{A}(\ve{b}{n})\]\\
+
+\begin{defi}
+ $\mathcal{A}: V_1 \to V_2$ lineáris leképezés. $\mathcal{B}=\{\ve{b}{1}, \ve{b}{2}, \ldots, \ve{b}{n}\}$ bázis $V_1$-ben, $\mathcal{C}=\{\ve{c}{1}, \ve{c}{2}, \ldots, \ve{c}{k}\}$ bázis $V_2$-ben.
+ \[[\mathcal{A}]_{\mathcal{B},\mathcal{C}} = \left[[\mathcal{A}(\ve{b}{1})]_\mathcal{C}[\mathcal{A}(\ve{b}{2})]_\mathcal{C}\ldots[\mathcal{A}(\ve{b}{n})]_\mathcal{C}\right]\]
+Tehát veszünk 1-1 bázist a két vektortérben, ekkor az $\mathcal{A}$ \textit{leképzés mátrixa} a fenti mátrix: vesszük a kiinduló vektortér egy bázisát ($\mathcal{B}$), a vektoroknak ($\ve{b}{1},\ve{b}{2},\ldots,\ve{b}{n}$) vesszük a képét, majd ezeknek a koordináta-vektorát a $\mathcal{C}$ bázisban. Ezek a koordináta-vektorok alkotják az $\mathcal{A}$ leképzés mátrixának oszlopait.
+\end{defi}
+
+Nézzünk erre egy példát: $\mathcal{A}: \R^2 \to \R^2$. A leképezés legyen olyan, hogy a síkbeli vektorokat az $x$ tengely egyenesére vetítjük. Mivel ugyanabba a vektortérbe (síkvektorok) képezünk le, ezért közös bázist vegyünk fel: $\mathcal{B} = \{(1,0), (0,1)\}$.
+\[\mathcal{A} \hbox{ mátrixa a standard bázison} = \begin{pmatrix}
+  1 & 0 \\
+  0 & 0
+\end{pmatrix}
+\]
+Hiszen $(1,0)$-nak a képe $(1,0)$, ennek önmagában vett koordináta-vektora $\begin{pmatrix}1\\0\end{pmatrix}$, $(0,1)$-nek $(0,0)$, ennek pedig $\begin{pmatrix}0\\0\end{pmatrix}$ a koordináta-vektora.
+
+Szeretnénk ezt a ``leképezés mátrixot'' másra is használni, például egy vektornak a képének a meghatározásához:
+\begin{tetel} $\mathcal{A}: V_1 \to V_2$
+ \[[\mathcal{A}(\vek{v})]_\mathcal{C} = [\mathcal{A}]_{\mathcal{B},\mathcal{C}}\cdot[\vek{v}]_\mathcal{B} \qquad \mathcal{B}, \vek{v} \in V_1, \mathcal{C} \in V_2\]
+\end{tetel}
+\begin{biz} $[\vek{v}]_\mathcal{B}=(\lista{\lambda}{n})$
+\[\begin{matrix}
+   & & \begin{pmatrix}\lambda_1\\\lambda_2\\\ldots\\\lambda_n\end{pmatrix}\\
+   [\mathcal{A}]_{\mathcal{B},\mathcal{C}}\cdot[\vek{v}]_\mathcal{B} =  &
+   \left(\,
+      \begin{array}{|c|}\hline
+	\\ \\ [\mathcal{A}( \ve{b}{1})]_\mathcal{C} \\ \\ \\\hline
+      \end{array}
+      \,
+      \begin{array}{|c|}\hline
+	\\ \\ [\mathcal{A}( \ve{b}{2})]_\mathcal{C} \\ \\ \\\hline
+      \end{array} \ldots
+      \begin{array}{|c|}\hline
+	\\ \\ [\mathcal{A}( \ve{b}{n})]_\mathcal{C} \\ \\ \\\hline
+      \end{array}
+      \,
+   \right) & \left(\displaystyle \sum^{n}_{i=1} \lambda_i\cdot[\mathcal{A}( \ve{b}{i})]_\mathcal{C} \right)
+  \end{matrix}
+\]
+\[\left(\displaystyle \sum^{n}_{i=1} \lambda_i\cdot[\mathcal{A}( \ve{b}{i})]_\mathcal{C}\right) = \left(\displaystyle \sum^{n}_{i=1} [\lambda_i\mathcal{A}( \ve{b}{i})]_\mathcal{C}\right) = \left(\displaystyle \sum^{n}_{i=1} [\mathcal{A}(\lambda_i\cdot\ve{b}{i})]_\mathcal{C}\right) = \left[ \displaystyle \sum^{n}_{i=1} \mathcal{A}(\lambda_i\cdot\ve{b}{i}) \right]_\mathcal{C} = \]
+\[ = \left[ \mathcal{A}\left( \displaystyle \sum^{n}_{i=1} \lambda_i\cdot\ve{b}{i}\right) \right]_\mathcal{C} = \left[ \mathcal{A}(\vek{v}) \right]_\mathcal{C} \] 
+\end{biz}
+
+\subsection{Lineáris leképezések szorzata}
+
+$\mathcal{A}: V_1 \to V_2$, $\mathcal{B}: V_2 \to V_3$. Ha $\vek{v}\in V_1$, akkor $\mathcal{A}(\vek{v}) \in V_2$, illetve $\mathcal{B}(\mathcal{A}(\vek{v}))\in V_3$.
+
+\begin{defi} Lineáris leképezések szorzata: $(\mathcal{BA}): V_1 \to V_3$.
+\[(\mathcal{BA})(\vek{v}) := \mathcal{B}(\mathcal{A}(\vek{v}))\]
+\end{defi}
+
+\begin{tetel}
+Legyen $\mathcal{A}$ és $\mathcal{B}$ lineráris leképezés. Ekkor $(\mathcal{BA})$ is lineáris leképezés. 
+\end{tetel}
+\begin{biz} Ellenőrizzük, hogy lineráis leképezés:
+ \[\pscirclebox[boxsep=false,framesep=0.5pt]{1} \quad (\mathcal{BA})(\vek{u}+\vek{v}) = \mathcal{B}(\mathcal{A}(\vek{u})+\mathcal{A}(\vek{v})) = \mathcal{B}(\mathcal{A}(\vek{u})) + \mathcal{B}(\mathcal{A}(\vek{v})) = (\mathcal{BA})(\vek{u}) + (\mathcal{BA})(\vek{v}) \quad \checkmark\]
+ \[\pscirclebox[boxsep=false,framesep=0.5pt]{2} \quad (\mathcal{BA})(\lambda\vek{u}) = \mathcal{B}(\mathcal{A}(\lambda\vek{u})) = \mathcal{B}(\lambda\mathcal{A}(\vek{u})) = \lambda\cdot\mathcal{B}(\mathcal{A}(\vek{u})) = \lambda\cdot (\mathcal{BA})(\vek{u}) \quad \checkmark\]
+\end{biz}
+
+\begin{tetel} $\mathcal{A}: V_1 \to V_2$, $\mathcal{B}: V_2 \to V_3$. $\mathcal{C}=\{\lista{\vek{c}}{n}\}$ legyen $V_1$-ben, $\mathcal{D}=\{\lista{\vek{d}}{k}\}$ legyen $V_2$-ben és $\mathcal{E}=\{\lista{\vek{e}}{l}\}$ legyen $V_3$-ban bázis.
+ \[[\mathcal{BA}]_{\mathcal{C},\mathcal{E}} = [\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot[\mathcal{A}]_{\mathcal{C},\mathcal{D}} \]
+\end{tetel}
+
+\begin{bizNL}
+$[\mathcal{B}]_{\mathcal{D},\mathcal{E}}$ egy $l\times k$-as mátrix hiszen $l$ sora van, mivel $\mathcal{E}$ dimenziója $l$, és $k$ oszlopa, hiszen $\mathcal{D}$ dimenziója $k$.
+$[\mathcal{A}]_{\mathcal{C},\mathcal{D}}$ egy $k\times n$-as mátrix hiszen $k$ sora van, mivel $\mathcal{D}$ dimenziója $k$, és $n$ oszlopa, hiszen $\mathcal{C}$ dimenziója $n$. Hasonlóan kapjuk, hogy $[\mathcal{BA}]_{\mathcal{C},\mathcal{E}}$ egy $l\times n$-es mátrix, és $[\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot [\mathcal{A}]_{\mathcal{C},\mathcal{D}}$ szorzat létezik és $l\times n$-es mátrix, tehát az egyenlet két oldala két azonos méretű mátrix. Kérdés, hogy az elemek egyeznek-e?\\
+
+Tehát a szorzat: $[\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot[\mathcal{A}]_{\mathcal{C},\mathcal{D}} = [\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot\Big[[\mathcal{A}(\ve{c}{1})]_\mathcal{D}[\mathcal{A}(\ve{c}{2})]_\mathcal{D}\ldots[\mathcal{A}(\ve{c}{n})]_\mathcal{D}\Big]$\\
+
+Vizsgáljuk meg a szorzat első oszlopát: $[\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot[\mathcal{A}(\ve{c}{1})]_\mathcal{D}$. Ha jól megnézzük, akkor a már tanultak alapján ez az $\mathcal{A}(\ve{c}{1})$ vektor transzformálása $\mathcal{B}$-vel a $\mathcal{D}$ bázisból az $\mathcal{E}$ bázisba. Tehát:
+\[[\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot[\mathcal{A}(\ve{c}{1})]_\mathcal{D} = [\mathcal{B}(\mathcal{A}(\ve{c}{1}))]_{\mathcal{E}} = [\mathcal{BA}(\ve{c}{1}))]_{\mathcal{E}}\]
+Ami viszont megegyezik $[\mathcal{BA}]_{\mathcal{C},\mathcal{E}}$ első oszlopával, hiszen annak első oszlopba a $\ve{c}{1}$ vektor $\mathcal{BA}$-val transzformált vektor $\mathcal{E}$-beli koordináta-vektora.\\
+
+% Nézzük meg a szorzat első oszlopát: $[\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot [\mathcal{A}(\ve{c}{1})]_{\mathcal{D}}$\\
+% $\mathcal{A}(\ve{c}{1}) = \linkomb{d}{\lambda}{k} \quad \Rightarrow \quad [\mathcal{A}(\ve{c}{1})]_{\mathcal{D}} = \begin{pmatrix}\lambda_1\\\lambda_2\\\vdots\\\lambda_k\end{pmatrix}$\\
+% Tehát
+% \[
+% [\mathcal{B}]_{\mathcal{D},\mathcal{E}}\cdot [\mathcal{A}(\ve{c}{1})]_{\mathcal{D}} = 
+% \Big[[\mathcal{B}(\ve{d}{1})]_\mathcal{E}[\mathcal{B}(\ve{d}{2})]_\mathcal{E}\ldots[\mathcal{B}(\ve{d}{k})]_\mathcal{E}\Big]\cdot \begin{pmatrix}\lambda_1\\\lambda_2\\\vdots\\\lambda_k\end{pmatrix} = \]
+% \[ = \lambda_1\cdot[\mathcal{B}(\ve{d}{1})]_\mathcal{E} + \lambda_2\cdot[\mathcal{B}(\ve{d}{2})]_\mathcal{E} + \ldots + \lambda_k\cdot[\mathcal{B}(\ve{d}{k})]_\mathcal{E} = \sum^{k}_{i=1} [\lambda_i\cdot\mathcal{B}(\ve{d}{i})]_\mathcal{E} =  \left[\sum^{k}_{i=1} \lambda_i\cdot\mathcal{B}(\ve{d}{i})\right]_\mathcal{E} =
+% \]
+% \[ = \left[\sum^{k}_{i=1} \mathcal{B}(\lambda_i\cdot\ve{d}{i})\right]_\mathcal{E} = \left[\mathcal{B}\left( \sum^{k}_{i=1} \lambda_i\cdot\ve{d}{i}\right)\right]_\mathcal{E} = \left[\mathcal{B}\left( \mathcal{A}(\ve{c}{1}) \right)\right]_\mathcal{E}  = \left[(\mathcal{BA})(\ve{c}{1})\right]_\mathcal{E}\]
+
+Tehát az egyenlet jobb oldalán lévő mátrix első oszlopba megegyezik az egyenlet bal oldalán álló mátrix első oszlopával, ugyanígy az összes többi $n-1$ oszlopot is megvizsgálhatjuk.
+\end{bizNL}
+
+% \[
+% \begin{matrix}
+%  & & & n \\
+%  & & k & \begin{array}{|cc|}
+%  \hline \begin{array}{|c|}
+%  \hline \\ \\ \pscirclebox[boxsep=false,framesep=0.5pt]{1} \\
+%  \\ \\
+%  \hline
+% \end{array} & \begin{array}{cccc}
+%   & & & \\
+%   & & & \\
+%   & \mathcal{A} & & \\
+%   & & & \\
+%   & & & \\
+% \end{array}\\
+%  \hline
+% \end{array}\\
+%  & k & & \\
+%  l & \begin{array}{|ccccc|}
+%  \hline & & & & \\
+%   & & & & \\
+%   & ~ & \mathcal{B} & ~ & \\
+%   & & & & \\
+%   & & & & \\
+%  \hline
+% \end{array}
+% \end{matrix}
+% \]
+
+
+Nézzünk meg egy példát: $\mathcal{A},\mathcal{B}: \R^2 \to \R^2$. Bázisnak mindig a $\mathcal{C}$ standard bázist válasszuk. $\mathcal{A}$ leképezés az $x$, $\mathcal{B}$ leképezés pedig az $y$ tengelyre való tükrözés legyen.
+\[[\mathcal{A}]_{\mathcal{C},\mathcal{C}} = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad [\mathcal{B}]_{\mathcal{C},\mathcal{C}} = \begin{pmatrix}-1 & 0 \\ 0 & 1\end{pmatrix}\]
+Fenti tétel alapján: 
+\[[\mathcal{BA}]_{\mathcal{C},\mathcal{C}} = [\mathcal{B}]_{\mathcal{C},\mathcal{C}}\cdot [\mathcal{A}]_{\mathcal{C},\mathcal{C}} = \begin{pmatrix}-1 & 0 \\ 0 & 1\end{pmatrix}\cdot \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix} = \begin{pmatrix}-1 & 0\\ 0 & -1\end{pmatrix}\]
+És valóban ezt várnánk, hiszen két derészkögű tengelyre való tükrözés egy centrális tükrözés. Tehát $(\mathcal{BA})(x,y) = (-x, -y)$.
+
+\subsection{Képtér és magtér}
+
+Legyen $\mathcal{A}: V_1 \to V_2$ lineáris leképezés.
+
+\begin{defi} $\mathcal{A}$ \textbf{képtere}
+ \[\Ima(\mathcal{A}) = \{\mathcal{A}(\vek{v}) \,|\, \vek{v}\in V_1\}\subseteq V_2\]
+\end{defi}
+
+\begin{defi} $\mathcal{A}$ \textbf{magtere}
+ \[\Ker(\mathcal{A}) = \{\vek{v}\in V_1 \,|\, \mathcal{A}(\vek{v}) = \vek{0}\}\subseteq V_1\]
+\end{defi}
+
+\begin{tetel} $\boxed{\Ima \mathcal{A}$ altér $V_2$-ben $}$ \end{tetel}
+\begin{biz}
+ Ahhoz, hogy használhassuk \aref{Alter} tételt (altér-e?) két dologról fontos megemlékezni: $\Ima \mathcal{A}\subseteq V_2$ és, hogy $\Ima \mathcal{A}\neq \emptyset$ (hiszen nullvektor képe nullvektor). Tehát csak azt kell belátnunk, hogy zárt az összeadásra és szorzásra:
+ \[\vek{x}, \vek{y} \in \Ima \mathcal{A} \hbox{ kéne, hogy } \vek{x}+\vek{y} \in \Ima \mathcal{A} \hbox{ és } \lambda \vek{x} \in \Ima \mathcal{A}\]
+ \[x, y \in \Ima \mathcal{A} \; \Leftrightarrow \; \exists \vek{u}\in V_1 : \mathcal{A}(\vek{u})=\vek{x} \hbox{ és } \exists \vek{v}\in V_1 : \mathcal{A}(\vek{v})=\vek{y}\]
+ \[\vek{x}+\vek{y} = \mathcal{A}(\vek{u}) +\mathcal{A}(\vek{v}) = \mathcal{A}(\underbrace{\vek{u} +\vek{v}}_{\in V_1}) \in \Ima \mathcal{A} \quad \checkmark\]
+ \[\lambda \vek{x} = \lambda \mathcal{A}(\vek{u}) = \mathcal{A}(\underbrace{\lambda\vek{u}}_{\in V_1}) \in \Ima \mathcal{A} \quad \checkmark\]
+\end{biz}
+
+\begin{tetel} $\boxed{\Ker \mathcal{A}$ altér $V_1$-ben$}$ \end{tetel}
+\begin{biz}
+ Hasonlóan az előzőhöz, ahhoz, hogy használhassuk \aref{Alter} tételt (altér-e?) két dologról fontos megemlékezni: $\Ker \mathcal{A}\subseteq V_1$ és, hogy $\Ker \mathcal{A}\neq \emptyset$ (hiszen nullvektor tuti benne van). Tehát csak azt kell belátnunk, hogy zárt az összeadásra és szorzásra:
+ \[\vek{u}, \vek{v} \in \Ker \mathcal{A} \hbox{ kéne, hogy } \vek{u}+\vek{v} \in \Ker \mathcal{A} \hbox{ és } \lambda \vek{u} \in \Ker \mathcal{A}\]
+ \[\vek{u}, \vek{v} \in \Ker \mathcal{A} \; \Leftrightarrow \; \mathcal{A}(\vek{u}) = \vek{0} \hbox{ és } \mathcal{A}(\vek{v}) = \vek{0}\]
+ \[\mathcal{A}(\vek{u}+\vek{v}) = \mathcal{A}(\vek{u}) + \mathcal{A}(\vek{v}) = \vek{0} \quad \checkmark\]
+ \[\mathcal{A}(\lambda\vek{u}) = \lambda \mathcal{A}(\vek{u}) = \vek{0} \quad \checkmark\]
+\end{biz}
+
+\begin{tetel} $\boxed{$Dimenzió-tétel$} \qquad \mathcal{A}: V_1 \to V_2$ \\
+  \[ \dim( \Ker \mathcal{A} ) + \dim( \Ima \mathcal{A} ) = \dim V_1 \]
+\end{tetel}
+\begin{biz}
+ Legyen $\lista{\vek{b}}{k}$ bázis $\Ker \mathcal{A}$-ban, egészítsük ki úgy, hogy a vektorok bázist alkossanak $V_1$-ben (Legyen $\dim V_1 = n$):
+ \[\lista{\vek{b}}{k}, \lista{\vek{c}}{n-k}\]
+ Igaz az állítás, ha sikerül belátnunk, hogy $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ bázist alkotnak $\Ima \mathcal{A}$-ban: \\
+
+ Először belátjuk, hogy $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ generálják $\Ima \mathcal{A}$-t. $\vek{x}\in\Ima \mathcal{A} \; \Rightarrow \; \exists \vek{v} : \mathcal{A}(\vek{v}) = \vek{x}$.
+ \[\vek{v} = \linkomb{b}{\lambda}{k}+\linkomb{c}{\mu}{n-k}\]
+ \[\vek{x} = \mathcal{A}(\vek{v}) = \underbrace{\mathcal{A}(\lambda_1\vek{b}_1)+\mathcal{A}(\lambda_2\vek{b}_2)+\ldots+\mathcal{A}(\lambda_k\vek{b}_k)}_{= \vek{0}}+\mathcal{A}(\mu_1\vek{c}_1)+\ldots+\mathcal{A}(\mu_{n-k}\vek{c}_{n-k})\]
+ \[\vek{x} = \mu_1\mathcal{A}(\vek{c}_1)+ \mu_2\mathcal{A}(\vek{c}_2) + \mu_{n-k}\mathcal{A}(\vek{c}_{n-k})\]
+
+ Felírtunk egy tetszőleges $\vek{x}\in\Ima \mathcal{A}$-t $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ lineáris kombinációjaként, tehát:
+ \[\gen{ \mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k}) } = \Ima \mathcal{A} \quad \checkmark\]
+
+ Már csak az a kérdés, hogy $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ lineárisan függetlenek-e? Ezt indirekt bizonyítjuk, tfh:
+ \[\lambda_1\mathcal{A}(\ve{c}{1}) + \lambda_2\mathcal{A}(\ve{c}{2}) + \ldots + \lambda_{n-k}\mathcal{A}(\ve{c}{n-k}) = \vek{0} \qquad \hbox{úgy, hogy nem $\forall \lambda_i = 0$}\]
+  \[\mathcal{A}(\underbrace{\linkomb{c}{\lambda}{n-k}}_{\in \Ker \mathcal{A}}) = \vek{0}\]
+ Tehát felírható $\lista{\vek{b}}{k}$ bázisban. Tehát:
+ \[\linkomb{\vek{c}}{\lambda}{n-k} = \linkomb{b}{\mu}{k}\]
+ \[\linkomb{\vek{c}}{\lambda}{n-k} -\mu_1 \vek{b}_1 - \mu_2 \vek{b}_2 - \ldots - \mu_k \vek{b}_k = \vek{0}\]
+ A feltétel alapján $\lista{\vek{b}}{k}, \lista{\vek{c}}{n-k}$ bázis, tehát a fenti a bázis elemeiből egy nem triviális lineáris kombináció, amire $\vek{0}$-át kapunk $\Rightarrow$ bázis elemei nem függetlenek $\rightarrow$ ellentmondás, tehát $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ lineárisan függetlenek. Ezzel beláttuk az eredeti állítást is, hiszen $\mathcal{A}(\ve{c}{1}), \mathcal{A}(\ve{c}{2}), \ldots, \mathcal{A}(\ve{c}{n-k})$ bázist alkotnak $\Ima \mathcal{A}$-ban.
+\end{biz}
+
+\subsection{Sajátvektor, sajátérték}
+
+Legyen $\mathcal{A}: V\to V$, $\vek{v} \in V$, $\lambda\in\R$.
+
+\begin{defi}
+$\vek{v}$ \textbf{sajátvektor}, ha $\vek{v} \neq \vek{0}$ és $\exists \lambda$, hogy $\mathcal{A}(\vek{v}) = \lambda\cdot \vek{v}$
+\end{defi}
+
+\begin{defi} 
+$\lambda$ \textbf{sajátérték}, ha $\exists \vek{v}\neq \vek{0}$, hogy $\mathcal{A}(\vek{v})=\lambda\cdot \vek{v}$.
+\end{defi}
+
+\emph{Megjegyzés}: Nem csak leképezéseknek, hanem \emph{négyzetes mátrixoknak is van sajátvektora, saját\-értéke}: Ha $A$ egy $n\times n$-es mátrix, akkor annak $\vek{x}\neq\vek{0}$ sajátvektora ($n$ sorból álló oszlopvektor), $\lambda$ sajátértékkel, ha $A\cdot \vek{x} = \lambda\vek{x}$. A további tételek ugyanúgy igazak mindkettőre, ezért az egyszerűség kedvéért, csak a leképezések mátrixával foglalkozunk.
+
+\begin{tetel}
+ Az azonos sajátértékhez tartozó sajátvektorok és a $\vek{0}$ alteret alkotnak (ezt \textbf{sajátal\-tér}nek hívjuk)
+\end{tetel}
+\begin{biz}
+ Nem üres $\checkmark$. Zárt-e az összeadásra, szorzásra?
+ \[\vek{u}, \vek{v} \hbox{ sajátvektor $\lambda$ sajátértékre } \Rightarrow \mathcal{A}(\vek{u})=\lambda\vek{u}, \mathcal{A}(\vek{v})=\lambda\vek{v}\]
+ \[\mathcal{A}(\vek{u}+\vek{v}) = \lambda\vek{u}+\lambda\vek{v} = \lambda(\vek{u}+\vek{v}) \quad \checkmark\]
+ \[\mathcal{A}(\mu\vek{u}) =  \mu\lambda\vek{u} = \lambda(\mu\vek{u}) \quad \checkmark\]
+\end{biz}
+
+Hogy találjuk meg $\mathcal{A}: V\to V$ sajátértékeit? Legyen $\mathcal{B}$ bázis $V$-ben. $\vek{v}\in V$. Tudjuk, hogy, ha $A = [\mathcal{A}]_{\mathcal{B},\mathcal{B}}$, akkor:
+\[[\mathcal{A}(\vek{v})]_\mathcal{B} = A\cdot [\vek{v}]_{\mathcal{B}}\]
+Szeretnénk, ha $\vek{v}$ sajátvektor lenne, tehát:
+\[\mathcal{A}(\vek{v}) = \lambda\vek{v}\]
+Vegyük mindkét vektornak $\mathcal{B}$-beli koordináta-vektorát:
+\[[\mathcal{A}(\vek{v})]_\mathcal{B} = [\lambda\vek{v}]_{\mathcal{B}} = \lambda\cdot[\vek{v}]_{\mathcal{B}}\]
+De tudjuk, hogy $[\mathcal{A}(\vek{v})]_\mathcal{B} = A\cdot [\vek{v}]_{\mathcal{B}}$, tehát:
+\[A\cdot [\vek{v}]_{\mathcal{B}} = \lambda \cdot [\vek{v}]_{\mathcal{B}} = \lambda\cdot I\cdot [\vek{v}]_{\mathcal{B}} = (\lambda I)\cdot [\vek{v}]_{\mathcal{B}}\]
+\[(A-\lambda I)\cdot [\vek{v}]_{\mathcal{B}} = \vek{0}\]
+Szeretnénk, ha lenne olyan $\vek{v}$, hogy $[\vek{v}]_{\mathcal{B}}$ nem csupa nulla (hiszen $\vek{v}\neq\vek{0}$), tehát a fenti egyenletnek legyen több megoldása, azaz $\det(A-\lambda I) = 0$. Tehát:
+
+\begin{tetel}
+ \[\boxed{\lambda \hbox{ sajátérték} \quad \Leftrightarrow \quad \det(A-\lambda I) = 0 }\]
+\end{tetel}
+\addtocounter{biz}{1}
+\emph{Megjegyzés}: A fenti egyenlet egy $n$-edfokú polinomhoz vezet ($\lambda$ a változó), amit \textbf{karakterisztikus polinomnak} nevezünk. Ha meghatározunk egy sajátértéket, akkor a sajátvektorok meghatározásához a $A-\lambda I\,|\, 0$ egyenletrendszert (itt $\lambda$ már egy konkrét szám) kell megoldani.\\
+
+Például: az $x$ tengelyre való vetítésnél $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
+\[\det(A-\lambda I) = \det\begin{pmatrix} 1-\lambda & 0 \\ 0 & -\lambda \end{pmatrix} = (1-\lambda)\cdot(-\lambda) = 0\]
+Ennek a polinomnak a gyökeit kell meghatározni: $\lambda_1 = 0, \lambda_2 = 1$. Sajátvektorok meghatározása:
+\[\lambda = 0 \qquad \Rightarrow \qquad \begin{array}{cc|c}1 & 0 & 0 \\ 0 & 0 & 0\end{array} \quad \Rightarrow \quad \vek{v} = (0, y)\]
+\[\lambda = 1 \qquad \Rightarrow \qquad \begin{array}{cc|c}0 & 0 & 0 \\ 0 & -1 & 0\end{array} \quad \Rightarrow \quad \vek{v} = (x, 0)\]
+
+\section{Komplex számok}
+
+A valós számokat számegyenesen, a komplex számokat síkon tudjuk ábrázolni.
+\[\boxed{a+b\cdot i \; \in \; \mathbb{C}} \qquad a, b \in \R\]
+$a$-t \textbf{valós rész}nek, a $b$-t \textbf{képzetes rész}nek hívjuk. Definíció alapján $\boxed{i^2 = -1}$.\\
+A fenti alakot \textbf{algebrai alak}nak, vagy \textbf{kanonikus alak}nak nevezzük.
+
+\subsection{Műveletek}
+
+\[(a+bi)+(c+di) = (a+c)+(b+d)i\]
+\[(a+bi)\cdot(c+di) = ac + bd\cdot i^2 + (bc+ad)i = (ac-bd)+(bc+ad)i\]
+\[\frac{a+bi}{c+di} = \frac{a+bi}{c+di}\cdot \frac{c-di}{c-di} = \frac{(a+bi)(c-di)}{c^2+d^2} = \frac{ac+bd}{c^2+d^2}+\frac{bc-ad}{c^2+d^2}\cdot i\]
+
+\subsection{Konjugált}
+
+\begin{defi}
+ Ha $z = a+bi \in\mathbb{C}$, akkor $\overline{z} = a-bi$. $\overline{z}$ a $z$ komplex szám \textbf{konjugált}ja.
+\end{defi}
+
+Jó tudni a következő azonosságokat:
+\[\overline{z+w} = \overline{z}+\overline{w}\]
+\[\overline{z-w} = \overline{z}-\overline{w}\]
+\[\overline{z\cdot w} = \overline{z} \cdot \overline{w}\]
+\[\overline{\left(\frac{z}{w}\right)} = \frac{\overline{z}}{\overline{w}}\]
+
+\subsection{Trigonometrikus alak}
+
+$z = a+bi$. Ekkor $|z| = \sqrt{a^2+b^2} = r$ (a vektor hossza - minden komplex számot a síkon egy helyvektorral jellemezhetünk). Illetve:
+\[a = \cos\alpha\cdot r\]
+\[b = \sin\alpha\cdot r\]
+A fentiek felhasználásával felírhatjuk a \textbf{trigonometrikus alak}ot:
+\[\boxed{z = r(\cos \alpha + i\cdot \sin\alpha)}\]
+
+\subsection{Szorzás, hatványozás, gyökvonás trigonometrikus alakban}
+
+Nagy előnye a trigonometrikus alakban, hogy könnyű kiszámolni két komplex szám szorzatát, illetve valós kitevőjű hatványát és gyökét. Ha $z=r(\cos \alpha + i\cdot \sin\alpha)$ és $w=s(\cos \beta + i\cdot \sin\beta)$:
+\[z\cdot w = r(\cos \alpha + i\cdot \sin\alpha)\cdot s(\cos \beta + i\cdot \sin\beta) = \]
+\[ = rs\Big[\underbrace{(\cos\alpha\cos\beta-\sin\alpha\sin\beta)}_{\cos(\alpha+\beta)}+\underbrace{(\cos\alpha\sin\beta+\sin\alpha\cos\beta)}_{\sin(\alpha+\beta)}\cdot i\Big] = \]
+\[ = \boxed{rs(\cos(\alpha+\beta)+i\cdot \sin(\alpha+\beta))}\]
+
+Hatványozás a szorzás alapján:
+
+\[\boxed{z^n = r^n(\cos (n\cdot\alpha)+i\cdot \sin (n\cdot\alpha))}\]
+
+Gyökvonás, már kicsit bonyolultabb: $\sqrt[n]{z} = x \quad \Leftrightarrow \quad x^n = z$
+\[x = t(\cos\gamma+i\cdot\sin\gamma)\]
+\[x^n = t^n(\cos (n\cdot\gamma)+i\cdot\sin(n\cdot \gamma)) = r(\cos \alpha+i\cdot \sin\alpha)\]
+Tehát:
+\[t^n = r \quad \Rightarrow \quad t = \sqrt[n]{r}\]
+\[\alpha - n\cdot \gamma = 2\pi\cdot k' \quad k' \in \mathbb{Z}\]
+\[\gamma = \frac{\alpha + 2\pi\cdot k}{n} \quad \Rightarrow \quad \hbox{$n$ darab gyök!}\]
+Vagyis:
+\[\boxed{\sqrt[n]{z} = \sqrt[n]{r}\left[\cos\left(\frac{\alpha}{n}+\frac{k\cdot 2\pi}{n}\right)+i\cdot \sin\left(\frac{\alpha}{n}+\frac{k\cdot 2\pi}{n}\right)\right]} \quad (k = 0, 1, \ldots, n-1)\]
+
+\subsubsection{Egységgyökök}
+
+\[\sqrt[n]{1} = \cos\left(\frac{k\cdot 2\pi}{n}\right)+i\cdot \sin\left(\frac{k\cdot 2\pi}{n}\right) \quad (k = 0, 1, \ldots, n-1)\]
+
+
+
+
+
+
+
+
+\chapter{Kombinatorika - elemi leszámlálások}
+
+\section{Ismétlés nélküli}
+
+\subsection{Permutáció}
+
+$n$ darab vizsgát pontosan egyszer szeretnénk letenni. Hány féle sorrendben tehetjük meg?
+
+\[n\cdot(n-1)\cdot(n-2)\cdot \ldots \cdot 2\cdot 1 = \boxed{n!} \]
+
+\subsection{Variáció}
+
+$n$ darab vizsgából $k\leqslant n$ darabot teszünk le. Hány féle sorrendben tehetjük meg?
+
+\[\underbrace{n\cdot(n-1)\cdot\ldots(n-k+1)}_{\hbox{$k$ darab}} = \boxed{\frac{n!}{(n-k)!}}\]
+
+\subsection{Kombináció}
+
+$n$ darab vizsgából $k\leqslant n$ darabot teszünk le, de a sorrend nem számít. Hány féle képpen választhatunk ki $k$ vizsgát?
+
+\[\frac{n!}{(n-k)!\cdot k!} = \boxed{\binom{n}{k}}\]
+
+\emph{Megjegyzés}: a $k!$ azért kerül be, mert először megszámoljuk úgy, hogy a sorrend számít, de mindenféle kiválasztás $k!$-sor szerepel, csak mindig más sorrendben (lásd permutáció).
+
+\section{Ismétléses}
+
+Maradva a vizsgás analógiánál: Tegyük fel, hogy $n$ vizsgánk van, de ezek közül $n_1, n_2, \ldots n_k$ egyforma, ezeket nem különböztetjük meg, tehát mondjuk 3 db BSz, 1 db Mikmak, 2 db Anal és 1 db Prog (Tehát $n=7, n_1 = 3, n_2 = 1, n_3 = 2$ és $n_4=1$).
+
+\subsection{Permutáció}
+
+Hány féle képpen tehetjük sorba az $n$ vizsgát, amiből $n_1, n_2, \ldots n_k$ egyforma -- tehát nem különböztetjük meg:
+
+\[\boxed{\frac{n!}{n_1!\cdot n_2! \cdot \ldots n_k!}}\]
+
+\emph{Megjegyzés}: Először sorbarakjuk, mintha mindegyik különböző lenne (lásd permutáció), majd megszámoljuk, hogy mit hányszor számoltunk (leosztunk az azonos típusú elemek permutációjá\-val)
+
+A fenti példát kiszámolva: $\dfrac{7!}{3!\cdot 2!}$
+
+\subsection{Variáció}
+
+$n$ viszga $k\leqslant n$ darab vizsgát teszünk le, de egy vizsgát többször is lehetetünk:
+\[\underbrace{n\cdot n\cdot \ldots \cdot n}_{\hbox{$k$ darab vizsga}} = n^k\]
+
+\subsection{Kombináció}
+
+$n$ vizsgából $k$-t válaszunk ki, úgy, hogy a sorrend nem számít de akárhányszor bármelyiket kiválaszthatjuk:
+\[\boxed{\frac{(n+k-1)!}{(n-1)!\cdot k!} = \binom{n+k-1}{k}}\]
+
+\emph{Megjegyzés}: A logika a következő: Vegyünk fel $k$ darab bogyót és $n-1$ elválasztót. Minden egyes esetet megtudunk feleltetni az előző elemek egy-egy permutációjával, hiszen az első vizsgából annyit választunk, amennyi bogyó van az első elválasztó előtt, {\ldots},  az utolsó vizsgából annyit választunk, amennyi az utolsó elválasztó után van. Ezek permutációja: $(n-1+k)!$ viszont a bogyók és az elválasztók nem számítanak különbözőnek, hiszen a sorrend nem számít (márpedig a permutáció miatt így vettük) ezért leosztunk $(n-1)!$-al és $k!$-al.
+
+\section{Binomiális együtthatók}
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \vspace{-25pt}
+  \begin{center}
+\psframebox[linestyle=dotted]{
+\begin{tabular}{rccccccccc}
+$n=0$:&    &    &    &    &  1\\\noalign{\smallskip\smallskip}
+$n=1$:&    &    &    &  1 &    &  1\\\noalign{\smallskip\smallskip}
+$n=2$:&    &    &  1 &    &  2 &    &  1\\\noalign{\smallskip\smallskip}
+$n=3$:&    &  1 &    &  3 &    &  3 &    &  1\\\noalign{\smallskip\smallskip}
+$n=4$:&  1 &    &  4 &    &  6 &    &  4 &    &  1\\\noalign{\smallskip\smallskip}
+$\ldots$~~~&    &    &    &    & 
+\end{tabular}}\vspace{4pt}
+Pascal-háromszög
+\end{center}
+\vspace{-20pt}
+\end{wrapfigure}
+
+Hasznos azonosságok, melyeket akár a képletből, akár a Pascal-háromszög alapján bebizonyíthatunk:
+
+\[\boxed{\binom{n}{k} = \binom{n}{n-k}}\]
+\[\boxed{\binom{n-1}{k-1} + \binom{n-1}{k} = \binom{n}{k}}\]
+
+\begin{tetel} $\boxed{$Binomiális-tétel$}$
+\[(a+b)^n = \binom{n}{0}a^n + \binom{n}{1}a^{n-1}\cdot b + \binom{n}{2}a^{n-2}\cdot b^2 + \ldots + \binom{n}{n-1}a\cdot b^{n-1} + \binom{n}{n}b^n\]
+\end{tetel}
+\addtocounter{biz}{1} % most nem bizonyítjuk
+
+Ha $a=b=1$, akkor:
+\[2^n = (1+1)^n = \binom{n}{0}+\binom{n}{1}+\ldots+\binom{n}{n-1}+\binom{n}{n} = \sum^{n}_{i=0} \binom{n}{i}\]
+
+Illetve, ha $a=1, b=-1$, akkor:
+\[0 = (1-1)^n = \binom{n}{0}-\binom{n}{1} + \binom{n}{2}-\ldots = \sum^{n}_{i=0} \binom{n}{i}\cdot(-1)^i\]
+
+\chapter{Halmazok}
+
+\emph{Megjegyzés}: Sokat merítettem a \texttt{http://cs.bme.hu/\textasciitilde sali/halmaz.pdf} jegyzetből.
+
+\section{Halmazok számossága}
+
+\begin{defi}
+ $f$ \textbf{bijekció} (kölcsönösen egyértelmű hozzárendelés), ha $a\in A\neq b\in B$, akkor $f(a)\neq f(b)$ és $c\in B : \exists a\in A$, hogy $f(a) = c$
+\end{defi}
+
+\begin{defi}
+$A$ és $B$ azonos számosságú ($|A| = |B|$) , ha $\exists$ bijekció a két halmaz között.
+\end{defi}
+
+\begin{defi}
+ $|A|\leqslant |B|$, ha $\exists f: A \to B$, ami injektív, tehát $\forall a,b\in A$-ra, ha $a\neq b$, akkor $f(a)\neq f(b)$.\\
+ \emph{Megjegyzés}: Úgy is meglehet a fentit fogalmazni, hogy $|A|\leqslant |B|$, ha $\exists B_1\subseteq B$, amire $|A|=|B_1|$.
+\end{defi}
+
+\begin{defi}
+ Egy halmaz \textit{véges} számosságú, ha $\exists k$ véges szám, hogy $A$ és $\{1,2,\ldots,k\}$ azonos számosságúak, ilyenkor: $|A| = k$.
+\end{defi}
+
+\begin{tetel}
+ \[|A|=|B| \quad \Leftrightarrow \quad |A|\leqslant |B| \hbox{ és }  |B|\leqslant |A|\]
+\end{tetel}
+\begin{bizNL}
+ $\Rightarrow \; \checkmark$\\ 
+ $\Leftarrow$ Cantor-Bernstein tétel. $\checkmark$
+\end{bizNL}
+
+\begin{defi} $|A| < |B| \; \hbox{ ha } \; |A| \leqslant |B| \; \hbox{ és }\; |A| \neq |B|$.\end{defi}
+
+\subsection{Kis kitérő}
+
+\subsubsection{1 emeletes mókás szálloda}
+
+Amennyiben 1 szintű a szállodánk és véges sok ($k\in\N$) szoba van, akkor ha megtelik, akkor nem tudunk több szobát kiadni. De ha végtelen sok szobánk van, akkor vajon be tudunk-e költöztetni egy újabb embert, ha már végtelen sok szobában vannak? Ha minden ember egy szobával arréb költözik, akkor az első szobába be tudjuk költöztetni az új embert. Ha egyszerre $k\in\N$ ember jön, akkor hasonló logikával, mindenkit megkérünk, hogy $k$ szobával költözzön arrébb, így a felszabaduló $k$ szobába be tudjuk költöztetni őket.\\
+
+Ha végtelen sok ember jön, akkor mi a helyzet? Nagyon egyszerű: megkérünk mindenkit, hogy a $2k.$ szobába költözzön át (ahol $k$ annak a szobának a sorszáma, ahol éppen lakik), így végtelen sok hely felszabadul, viszont a bentlakóknak továbbra is marad szobájuk.
+
+\subsubsection{Több emeletes szálloda}
+
+Itt sincs különösebb nehézség, pusztán egy adott szisztéma alapján meg kell számoznunk a bentlakókat, és ezután őket egy megadott szabály szerint át lehet költöztetni, hogy új lakókat tudjunk elszállásolni.\\
+
+Tehát láthatjuk, hogy $\N = \{1,2,3,\ldots\}$ és $\{2, 3, 4, \ldots\}$ azonos számosságú, hiszen annyi történt, hogy mindegyik elemhez 1-et hozzáadtunk. Hasonlóan $\N$ és $\{2,4,6,\ldots\}$ is az, hiszen mindegyik elemet megszoroztuk 2-vel.
+
+\subsection{Megszámlálhatóan végtelen halmazok}
+
+\begin{defi}
+ Egy halmaz \textit{megszámlálhatóan végtelen} (röviden: megszámlálható), ha a termé\-szetes számok $\N = \{1,2,\ldots\}$ halmazával egyenlő számosságú. Tehát elemei sorbarendezetőek, hiszen ez éppen egy kölcsönös megfeleletetés a halmaz és $\mathbb{N}$ elemei között.\\
+ \emph{Megjegyzés}: $|\N| = \aleph_0$ (alef-null)
+\end{defi}
+
+\begin{tetel}
+ Egy $A$ megszámlálható és tőle diszjunkt $B$ véges halmaz uniója is megszámlálható.
+\end{tetel}
+\begin{biz}
+ Mivel $A = \{a_1, a_2, \ldots\}$ és $B = \{b_1, \ldots, b_k\}$ sorbarendezhető, ezért $A\cup B$ a következőképp rendezhető sorba:
+ \[A\cup B = \{b_1, \ldots, b_k, a_1, a_2, \ldots\}\]
+ Tehát $A\cup B$ $i$. eleme $b_i$, ha $i\leqslant k$, illetve $a_{i-k}$, ha $i> k$.
+\end{biz}
+
+\begin{tetel}\label{3.allitas}
+ Véges sok ($k$) $A_i$ diszjunkt megszámlálható halmazok uniója is megszámlálható.
+\end{tetel}
+\begin{biz}
+ \[A_1 = \{a_{11}, a_{12}, a_{13}, \ldots\}\]
+ \[A_2 = \{a_{21}, a_{22}, a_{23}, \ldots\}\]
+ \[\vdots\]
+ \[A_k = \{a_{k1}, a_{k2}, a_{k3}, \ldots\}\]
+ Ekkor sorbarendezhetjük ezen elemeket például így:
+ \[\bigcup^{k}_{i=1} A_i = \{a_{11}, a_{21}, \ldots, a_{k1}, a_{12}, a_{22}, \ldots, a_{k2}, \ldots\}\]
+ Vagyis először vesszük a halmazok első elemeit sorrendben, utána a második elemeit és így tovább\ldots
+\end{biz}
+
+\begin{tetel}
+ Megszámlálhatóan sok $A_i$ diszjunkt megszámlálható halmazok uniója is megszámlálható.
+\end{tetel}
+\begin{biz}
+ \[A_1 = \{a_{11}, a_{12}, a_{13}, \ldots\}\]
+ \[A_2 = \{a_{21}, a_{22}, a_{23}, \ldots\}\]
+ \[\vdots\]
+ Ekkor ha ezeket felrajzoljuk, akkor egy képzeletbeli kígyóvonal mentén, sorrendbe rendezhetjük az elemeket:
+ \[
+\begin{array}{cccccccccccc}
+\rnode{1}{a_{11}} & \, & \rnode{2}{a_{12}} & \, & \rnode{6}{a_{13}} & \, & \rnode{7}{a_{14}} & \, & \rnode{15}{\ldots} \\
+\\
+\rnode{3}{a_{21}} & \, & \rnode{5}{a_{22}} &\, & \rnode{8}{a_{23}} &\, & \rnode{14}{\ldots}\\
+\\
+\rnode{4}{a_{31}} &\, & \rnode{9}{a_{32}} &\, & \rnode{13}{\ldots}\\
+\\
+\rnode{10}{a_{41}} &\, & \rnode{12}{\ldots} \\
+\\
+\rnode{11}{a_{51}} &\, & \ldots \\
+\vdots
+ \end{array}
+\ncline[nodesep=3pt]{->}{1}{2} \ncline[nodesep=3pt]{->}{2}{3} \ncline[nodesep=3pt]{->}{3}{4} \ncline[nodesep=3pt]{->}{4}{5}  
+\ncline[nodesep=3pt]{->}{5}{6} \ncline[nodesep=3pt]{->}{6}{7} \ncline[nodesep=3pt]{->}{7}{8} \ncline[nodesep=3pt]{->}{8}{9}  
+\ncline[nodesep=3pt]{->}{9}{10} \ncline[nodesep=3pt]{->}{10}{11} \ncline[nodesep=3pt]{->}{11}{12}
+\ncline[nodesep=3pt,linestyle=dotted]{->}{12}{13} \ncline[nodesep=3pt,linestyle=dotted]{->}{13}{14}
+\]
+Tehát:
+\[\bigcup^{\infty}_{i=1} A_i = \{a_{11}, a_{12}, a_{21}, a_{31}, a_{22}, a_{13}, a_{14}, a_{23} \ldots\}\]
+\end{biz}
+
+\begin{tetel}
+ A racionális számok $\mathbb{Q}$ halmaza megszámlálható.
+\end{tetel}
+\begin{biz}
+ Bontsuk fel a $\mathbb{Q}$ halmazt megszámlálhatóan sok megszámlálható, diszjunkt halmazra. Ha ez sikerült, akkor a fenti tétel alapján ezek uniója is megszámlálható, tehát kész vagyunk.
+ \[A_1 = \{0,1,-1,2,-2,3,-3,\ldots\}\]
+ \[A_2 = \left\{\frac{1}{2},-\frac{1}{2},\frac{3}{2},-\frac{3}{2},\frac{5}{2},-\frac{5}{2},\ldots\right\}\]
+ \[A_3 = \left\{\frac{1}{3},-\frac{1}{3},\frac{2}{3},-\frac{2}{3},\frac{4}{3},-\frac{4}{3},\ldots\right\}\]
+ \[\vdots\]
+ Tehát $A_1$ tartalmazza az összes egész számot, $A_2$ az összes tovább nem egyszerűsíthető 2 nevezőjű racionális számot és így tovább{\ldots} Ezek mindegyike megszámlálható (fel tudjuk sorolni az elemeket), tehát uniójuk is megszámlálható.
+\end{biz}
+
+\subsection{Kontínuum számosságú halmazok}
+
+Felmerülhet, hogy vajon $|\N|\overset{?}{=}|\R|$? Ez nem igaz:
+
+\begin{tetel}
+ A $(0,1)$ intervallumba tartozó valós számok halmaza megszámlálhatónál nagyobb számosságú.
+\end{tetel}
+\begin{biz}
+ Indirekt bizonyítjuk; tfh: $|\N| = |(0,1)|$. Írjuk fel az összes $(0,1)$ intervallumba eső valós számokat végtelen tizedestört alakban (ez így önmagában nem lenne egyértelmű, hiszen $0,001000\ldots = 0,000999\ldots$, ezért az utóbbi felírást zárjuk ki), majd rendezzük sorba (indirekt feltételünk alapján ezt megtehetjük):
+ \[1. \; 0,\pscirclebox[boxsep=false,linestyle=dashed,framesep=0pt]{a_{11}}a_{12}a_{13}\ldots\]
+ \[2. \; 0,a_{21}\pscirclebox[boxsep=false,linestyle=dashed,framesep=0pt]{a_{22}}a_{23}\ldots\]
+ \[3. \; 0,a_{31}a_{32}\pscirclebox[boxsep=false,linestyle=dashed,framesep=0pt]{a_{33}}\ldots\]
+ \[\vdots\]
+ \[i. \; 0,a_{i1}a_{i2}a_{i3}\ldots\]
+ \[\vdots\]
+ Vegyük a következő $w = 0,w_1w_2w_3\ldots$ számot, melynek jegyeit a következőképp kapjuk: $w_i := 2$, ha $a_{ii}\neq 2$ és $w_i := 1$, ha $a_{ii}=2$. Ez a szám biztosan mindegyik fentebb felsorolt számtól legalább a tizedesvesszőtől mért $i$. jegyben különbözik. Tehát őt biztosan nem soroltuk fel, viszont kétségkívül $w\in(0,1)$, tehát ellentmondásra jutottunk.
+\end{biz}
+
+Fenti tételből következik, hogy $\R$ szintén nem megszámlálható, hiszen $(0,1)$ ennek egy részhalma\-za. Ezt a számosságot \textbf{kontínuum} számosságnak nevezzük.
+
+\begin{tetel}
+ Egy $A$ véges vagy megszámlálhatóan végtelen halmaz és egy tőle diszjunkt, kontínuum számosságú $B$ halmaz uniója is kontínuum számosságú, vagyis $|A\cup B| = |B|$
+\end{tetel}
+\begin{biz}
+ Legyen $B_1$ a $B$-nek egy megszámlálhatóan végtelen részhalmaza, $B_2 := B\setminus B_1$. Ekkor \aref{3.allitas}. tétel alapján tudjuk, hogy $|A\cup B_1| = |B_1|$, vagyis létezik $f$ függvény, ami $A\cup B_1$ elemeit kölcsönösen egyértelműen $B_1$-re képezi, ekkor:
+  \[g(x) = \begin{cases}
+    f(x), \hbox{ ha } x\in A\cup B_1\\
+    x, \hbox{ ha } x\in B_2
+\end{cases}\]
+függvény $A\cup B$ elemeit kölcsönösen egyértelműen $B$-re képezi.
+\end{biz}
+
+\begin{tetel}
+ Egy $(a,b)$ nyílt intervallumba eső valós számok halmaza kontínuum számosságú. ($b>a$)
+\end{tetel}
+\begin{biz}
+ Adjunk meg egy kölcsönösen egyértelmű függvényt ami az $(a,b)$-t $\R$-be képezi. Először az $(a,b)$ intervallumot képezzük az $x \mapsto \frac{\pi(x-a)}{b-a}-\frac{\pi}{2}$ kölcsönösen egyértelmű függvénnyel a $(-\frac{\pi}{2},\frac{\pi}{2})$ intervallumra, majd az $x \mapsto \arctg^{-1} x$ függvénnyel az $\R$-be.
+\end{biz}
+
+\subsection{Hatványhalmaz}
+
+\begin{defi} Egy $H$ halmaz hatványhalmaza $H$ összes lehetséges részhalmazának halmaza. $|P(H)|$ = $2^{|H|}$ (hiszen egy elem vagy benne van, vagy nincs egy részhalmazban).\\
+\emph{Példa}: $H = \{1,2,3\}$, $P(H) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1,2\},\{1,3\},\{2,3\}, \{1,2,3\}\}$.
+\end{defi}
+
+\begin{tetel} $\boxed{$Cantor-tétel$}$
+ \[|H|<|P(H)| \quad \forall H \hbox{-ra}\]
+\end{tetel}
+\begin{biz}
+ 2 dolgot kell belátnunk: \begin{inparaenum}[1.)]
+\item $|H| \leqslant |P(H)|$
+\item $|H| \neq |P(H)|$
+\end{inparaenum}. Az első elég egyszerűen belátható, hiszen keresünk egy $f: H \to P(H)$ injektív függvényt: $\underset{x\in H}{f(x)} = \{x\}$.\\
+A másodikat indirekt bizonyítjuk; tfh: $|H|=|P(H)|$, tehát $\exists g: H \to P(H)$ bijektív függvény. $G := \{h\in H\;|\; h\notin g(h)\}$. Nyílván $G \in P(H)$, illetve mivel $g$ bijektív, ezért $\exists j\in H$, hogy $g(j)=G$. Ekkor viszont $G$ definíciója alapján: $j\in G \Leftrightarrow j\notin g(j)=G$, ami ellentmondás.
+\end{biz}
+
+\emph{Megjegyzés}: Fenti tételből az is következik, hogy nincs ``legnagyobb'' számosság, hiszen bármely számosságú halmaznál a hatványhalmaza nála nagyobb számosságú.
+
+\begin{tetel}
+Megszámlálható halmaz hatványhalmaza kontínuum számosságú.
+\end{tetel}
+\begin{biz}
+ Elég belátnunk, hogy $|(0,1)|=|P(\N)|$. Írjuk fel a $[0,1)$ számokat végtelen kettedestört alakban (itt nem probléma, hogy $\frac{1}{4}=0,01000\ldots = 0,011111\ldots$). Tehát minden $[0,1)$ közti számhoz hozzárendeltünk 1 vagy 2 végtelen kettedestört alakot. Mivel $[0,1)$ számossága kontínuum, így ezen sorozatok halmaza is kontínuum számosságú. Gondoljuk meg, hogy ezen sorozatok kölcsönösen egyértelmű hozzárendelést biztosítanak $P(\N)$ elemei között, hiszen egy adott sorozat ($0,a_1a_2a_3\ldots$) egyértelműen meghatározza $\N$ halmaz egy $X_a$ részhalmazát, hiszen $i\in X_a \Leftrightarrow a_i = 1$, illetve minden részhalmaz előáll ilyen sorozatként. Viszont $|[0,1)|=|(0,1)|$.
+\end{biz}
+
+\textbf{Kontínuum-hipotézis}: Nincs olyan halmaz, aminek számossága nagyobb, mint $|\mathbb{Z}|$, de kisebb, mint $|\mathbb{R}|$. (Ezt se cáfolni, se bizonyítani nem lehet)
+
+\chapter{Gráfok}
+
+\section{Gráf-fogalmak, definíciók}
+
+\SetUpEdge[lw         = 1.5pt,
+            labelstyle = {draw,sloped}]
+\tikzset{node distance = 2cm}
+\tikzset{VertexStyle/.style = {draw,
+  shape = \VertexShape,
+  color = \VertexLineColor,
+  fill = \VertexDarkFillColor,
+  inner sep = 0pt,
+  outer sep = 0pt,
+  text = \VertexTextColor,
+  minimum size = 3pt,
+  line width = \VertexLineWidth}}
+\tikzset{EdgeStyle/.style = {line width = 0.8pt,\EdgeColor}}
+
+\begin{defi}
+ A $G=(V,E)$ pár egyszerű gráf, ha $V\neq \emptyset$, és $E:=\{\{u,v\}:u,v\in V, u\neq v\}$ elemei $V$ bizonyos kételemű részhalmazai. Például, az alábbi gráf:\\
+  $G=(V,E); V=\{1,2,3,4\}, E=\{\{1,2\}, \{2,3\}, \{3,4\}, \{1,4\}, \{2,4\}\}$ a következőképpen rajzolható fel diagram segítségével:
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexLabelOut
+  \Vertex[Lpos=180]{1}
+  \EA(1){2}
+  \SO[Lpos=180](1){4}
+  \SO(2){3}
+  \Edge[style={bend right}](1)(2)
+  \Edge[style={bend left}](3)(2)
+  \Edge[style={bend right}](3)(4)
+  \Edge[style={bend left}](1)(4)
+  \Edge(2)(4)
+ \end{tikzpicture}
+\end{center}
+\emph{Megjegyzés}: A gráfban lehetnek hurok (két végpont megegyezik), irányított és párhuzamos (két pont között több él) élek, ezt nem tudjuk a fenti definícióval megadni. Módosítani kéne az $E$ halmazt multihalmazra, illetve megkéne engedni, hogy a két végpont azonos lehessen, továbbá az irányításhoz jelölni kéne, hogy az él melyik csúcsból indul és hova érkezik. Nem törekedünk absztrakt formalizmusra.
+\end{defi}
+
+\begin{defi}
+ Egy csúcs \textbf{foka} a csúcsra állított élek száma (hurok él esetében 2x számoljuk). $v$ csúcs fokszáma. $d(v)$.\\
+ \[\sum_{v\in V} d(v) = 2|E| \qquad \hbox{hiszen minden élnek 2 végpontja van}\]
+\end{defi}
+
+\begin{defi}
+ $G=(V,E)$-nek $G'=(V',E')$ \textbf{részgráf}ja, ha $V' \subseteq V$, illetve $E' \subseteq E$ és az $E'$ beli élek végpontja benne vannak $V'$-ben. (Ilyet úgy kaphatunk, ha csúcsok törlése mellett éleket is törlünk)
+\begin{center}
+  \begin{tikzpicture}[>=latex']
+
+  \tikzset{node distance = 1cm}
+  \SetVertexNoLabel
+  \begin{scope}[node distance=1cm,rotate=-135]
+  \Vertices*{circle}{1,2,3,4}
+  \end{scope}
+
+  \SOEA(1){5}
+  \Edges(1,2,3,4,1)
+  \Edge(1)(5)
+  \Edge(1)(3)
+  \Edge(2)(5)
+
+  \tikzset{node distance = 1.41cm}
+  \EA(3){6}
+  \EA(6){7}
+  \SO(6){8}
+  \tikzset{node distance = 1cm}
+  \SOEA(8){9}
+  \Edges(6,7,8,9)
+\end{tikzpicture}
+\end{center}
+\end{defi}
+
+\begin{defi}
+ $G=(V,E)$-nek $G'=(V',E')$ \textbf{feszített részgráf}ja, ha $V' \subseteq V$, illetve $E'$-ben az összes olyan $G$ beli él be van húzva, aminek végpontja benne van $V'$-ben. (Ilyet úgy kaphatunk, hogy letörlünk csúcsokat a gráfból)
+\end{defi}
+
+\begin{defi}
+ \textbf{Izomorfia}: 2 gráf mikor tekinthető gráfelméleti szempontból ugyanannak?
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexLabelOut
+  \tikzset{node distance = 3cm}
+  \tikzset{node distance = 1.41cm}
+  \Vertex[Lpos=180]{1}
+  \EA(1){2}
+  \SO(2){3}
+  \WE[Lpos=180](3){4}
+  \tikzset{node distance = 1cm}
+  \SOEA(4){5}
+
+  \Edges(1,2,3,4,1)
+  \Edge(2)(4)
+  \Edge(4)(5)
+  \Edge(3)(5)
+ \end{tikzpicture}
+\hspace*{2cm}
+ \begin{tikzpicture}[>=latex']
+  \SetVertexLabelOut
+  \tikzset{node distance = 1.41cm}
+  \EA[Lpos=180](2){A}
+  \EA(A){B}
+  \SO(B){C}
+  \WE[Lpos=180](C){D}
+  \tikzset{node distance = 1cm}
+  \NOEA[Lpos=90](A){E}
+  \Edges(A,E,B,C,D,A)
+  \Edges(B,A,C)
+ \end{tikzpicture}
+\end{center}
+$G=(V,E)$ és $G'=(V',E')$ izomorf, ha $\exists$ köztük izomorfizmus: $f: V\to V'$, azaz:
+  \begin{itemize*}
+   \item $f$ kölcsönösen egyértelműen
+   \item $(x,y)\in E \Leftrightarrow (f(x),f(y))\in E'$
+   \item $(x,y)$ $k$-szoros él $G$-ben $\Leftrightarrow$ $(f(x),f(y))$ $k$-szoros él $G'$-ben
+  \end{itemize*}
+\emph{Megjegyzés}: A nem izomorfiát általában könnyebb ellenőrizni: összevetjük a tulajdonságokat és ha valamelyik nem egyezik, akkor nem izomorf (pl.: csúcsok száma, élek száma, fokszám sorozatok, stb.)
+\end{defi}
+
+\begin{defi}
+ \textbf{Teljes gráf}: Az összes lehetséges élt behúzzuk, úgy, hogy még egyszerű maradjon. Jelölése: $K_n$, ahol $n$ a csúcsok száma. Élek száma: $\binom{n}{2}$ (hány féle képpen tudunk 2 csúcsot kiválasztani?) Például a $K_5$ egy diagramja:\\
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexNoLabel
+  \begin{scope}[node distance=1.2cm,rotate=18]
+  \Vertices*{circle}{1,2,3,4,5}
+  \foreach \a in {2,3,4,5}{\Edge(1)(\a)}
+  \foreach \a in {3,4,5}{\Edge(2)(\a)}
+  \foreach \a in {4,5}{\Edge(3)(\a)}
+  \Edge(4)(5)
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{defi}
+
+\begin{defi}
+ \textbf{Komplementer gráf}: A $G$ egyszerű gráf komplementere: $\overline{G} := \left(V, \binom{V}{2}\setminus E\right)$. Tehát a csúcshalmaz azonos, az élhalmaz pedig azon élek a teljesgráf élhalmazából, amik nincsenek $E$-ben.
+\end{defi}
+
+\begin{defi}
+ \textbf{Üres gráf}: Csak csúcsokból áll, minden csúcsa izolált (fokszáma 0) pont.
+\end{defi}
+
+\begin{defi}
+ \textbf{Élsorozat} (séta): $(v_1,e_1,v_2,e_2,v_3,\ldots, v_n)$ sorozat, amire $e_i\in E$ és $e_i = v_iv_{i+1}$. Speciális élsorozatok:
+\begin{itemize*}
+ \item \emph{út}: bármely csúcs max. csak egyszer fordul elő 
+ \item \emph{zárt}: ha $v_0 \equiv v_n$
+ \item \emph{kör}: olyan zárt élsorozat, ahol $v_0 \equiv v_n$-et leszámítva nincs ismétlődés.
+\end{itemize*}
+\end{defi}
+
+\begin{defi}
+ \textbf{Összefüggő gráf}: Bármely két csúcsa között létezik élsorozat.
+\end{defi}
+
+\begin{defi}
+ A gráf \textbf{komponensei} tartalmazásra nézve maximális összefüggő feszített rész\-gráfjai. Azok a csúcsok tartoznak egy komponensbe, amik elérhetőek egymásból.
+\end{defi}
+
+\begin{tetel}
+ $G$ összefüggő gráf, $C$ egy köre, akkor $C$-ből bármely élt elhagyva $G$ összefüggő marad.
+\end{tetel}
+\begin{bizNL}
+ \begin{itemize*}
+  \item ha az élsorozatot nem használtuk, akkor $\checkmark$
+  \item ha használtuk, akkor az őt körré kiegészítő élsorozatot használjuk helyette.
+ \end{itemize*}
+\end{bizNL}
+
+\section{Fák és alaptulajdonságai}
+
+\begin{defi}
+ \textbf{Erdő}nek hívjuk a körmentes gráfot, \textbf{fá}nak pedig az összefüggő körmentes gráfot. (Tehát az erdő fák uniója)
+\end{defi}
+
+\begin{defi}
+ $F$ \textbf{feszítőfa} olyan fa részgráfja $G$-nek, ami minden $G$-beli csúcsot tartalmaz.
+\end{defi}
+
+\begin{tetel}
+ $\boxed{G$-nek létezik feszítőfája $\Leftrightarrow$ $G$ összefüggő$}$
+\end{tetel}
+\begin{bizNL}
+$\Rightarrow$ Mivel a feszítőfa összefüggő (hiszen fa) ,ezért az eredeti gráf is az. $\checkmark$\\
+$\Leftarrow$ ha körmentes, akkor az definíció alapján feszítőfa (összefüggő, körmentes), ha nem, akkor addig hagyunk el a körökből éleket, amíg van kör.
+\end{bizNL}
+
+\begin{tetel}
+ Egy $n$ csúcsú körmentes gráf összefüggő $\Leftrightarrow$ ha éleinek száma $n-1$.
+\end{tetel}
+\begin{bizNL}
+ $\Rightarrow$ Építsük fel a gráfot $n$ pontú üresgráfból. Kezdetben nincsen él, tehát $n$ komponensből áll. Ahhoz, hogy ne legyen kör, egy új él behúzásakor csak két különböző kompnensbeli csúcsot köthetünk össze. Ha behúzunk egy élt, akkor az élek száma 1-el nő, a komponensek száma 1-el csökken, mivel végül a komponensek száma 1-re csökkent (összefüggő a gráfunk), ezért $n-1$ élt húztunk be.\\
+ $\Leftarrow$ Ha $n-1$ élt húztunk be, akkor $n-(n-1)=1$ komponensből fog állni a gráfunk, tehát összefüggő.
+\end{bizNL}
+
+\begin{tetel}
+ $n$-pontú $(n-1)$-élű, összefüggő gráf $\Rightarrow$ körmentes.
+\end{tetel}
+\begin{biz}
+ Hasonlóan az előző bizonyításnál, itt is üresgráfból induljunk ki. Ahhoz, hogy $n-1$ él behúzása után a gráfunk összefüggő marad, szükségszerűen csak két addigi komponens közé húzhattunk be élt, így végig körmentes marad a gráf.
+\end{biz}
+
+Az előző két tételből következik, hogy ha az alábbi tulajdonságokból 2-vel bír egy gráf, akkor a harmadikkal is így \textbf{fá}ról beszélünk:
+\begin{itemize*}
+ \item $n-1$ darab él
+ \item összefüggő
+ \item körmentes
+\end{itemize*}
+
+\begin{tetel}
+ Minden fának (ami legalább 2 csúcsú) legalább 2 elsőfokú csúcs van (\textit{levél}).
+\end{tetel}
+\begin{biz}
+ Vegyük a maximális hosszúságú utat. Ennek 2 végpontja biztosan 1 fokszámú, hiszen ha az egyik nem lenne az, akkor létezne az imént kiválasztott útnál hosszabb út.
+\end{biz}
+
+Mielőtt rátérnénk a \textbf{Cayley-tétel}re, nézzük meg, hogy mi az a \textit{Prüfer-kód}, szükségünk lesz rá.\\
+
+\begin{wrapfigure}{r}{0.30\textwidth}
+\vspace*{-25pt}
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexLabelOut
+  %\draw[help lines] (0,0) grid (4,3);
+  \Vertices[x=2,y=0,Lpos=-90]{8}  
+  \Vertices[x=2,y=1]{7}  
+  \Vertices[x=3,y=2,Lpos=90]{6}  
+  \Vertices[x=4,y=1]{5}  
+  \Vertices[x=1,y=2]{3}  
+  \Vertices[x=2,y=3]{1}  
+  \Vertices[x=0,y=3,Lpos=90]{2}  
+  \Vertices[x=0,y=1,Lpos=-90]{4}  
+  \Edges(2,3,7,6,5)
+  \Edge(1)(3)
+  \Edge(4)(3)
+  \Edge(8)(7)
+\end{tikzpicture}
+\end{center}
+\vspace*{-35pt}
+\end{wrapfigure}
+
+%\begin{defi}
+\refstepcounter{defi}
+\textbf{Definíció \arabic{chapter}.\arabic{defi}} \textbf{Prüfer-kód}: Vegyük az $n$ csúcsú fagráfunkat. Letöröljük a legkisebb sorszámú levelet, majd felírjuk a szomszédját. Ezt addig folytatjuk, amíg az utolsó előtti csúcsot is letöröltük, ennek is leírtuk a szomszédját: a legnagyobb sorszámú csúcsot. Tehát egy $n$ csúcsú fagráfból kapunk egy $n-1$ hosszú \textit{Prüfer-kód}ot. Mivel az utolsó jegy minden esetben $n$ (legnagyobb sorszám), ezért szokás csak az első $n-2$ számot a Prüfer-kódnak tekinteni, mi is így cselekszünk.\\
+%\end{defi}
+
+Az ábrán látható fagráf Prüfer-kódja a következő: 333767.\\ Visszakódolásra is nézzünk egy példát: 43323. Ebből építsük fel a gráfot: Mivel $n-2$ hosszú a kód, ezért tudjuk, hogy 7 csúcsú gráfunk van, írjuk be őket egy táblázatba, de a táblázat végére rakjuk oda a legnagyobb sorszámú csúcsot is:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+4 & 3 & 3 & 2 & 3 & \textbf{7}\\\hline
+ &  &  &  &  & \\\hline
+\end{tabular}
+\end{center}
+
+A táblázat alsó sorába írjuk azokat az elemeket, amiket akkor töröltünk le, amikor a felette lévő csúcsot leírtuk. Legyen a felső sor elemei $a_1,a_{2},\ldots,a_{n-2},n$, az alsó sor elemei (amiket keresünk): $b_1,b_2,\ldots b_{n-2}, b_{n-1}$. $b_1$-et letöröltük, leírtuk $a_1$-et. Adott $b_i$ csúcs az a csúcs, amit most törlünk le, ő biztosan nem lehet egyenlő a következőkkel: $b_1,b_2,\ldots,b_{i-1}$, hiszen őket már letöröltük, illetve $a_{i},a_{i+1},\ldots,a_{n-2},n$-el, hiszen őket még le fogjuk írni, tehát nem töröltük még le. Így a megmaradt számokból keressük a legkisebbet és ez lesz $b_i$. Ez alapján a kitöltés:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+4 & 3 & 3 & 2 & 3 & \textbf{7}\\\hline
+\textbf{1} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{2} & \textbf{3} \\\hline
+\end{tabular}
+\end{center}
+
+Vegyük észre, hogy ilyenkor az alsó sor és a felső sor utolsó eleme tartalmazza mind az $n$ csúcsot. Egymás alatt lévő csúcsok között élek mennek, hiszen amikor egy csúcsot törlünk, akkor a szomszédját írjuk le. Tehát az élpárok: $(4,1), (3,4), (3,5), (2,6), (3,2), (7,3)$. Érdemes azt is meggondolni, hogy a Prüfer-kód alapján tudjuk, hogy melyik csúcsnak mennyi a fokszáma, hiszen a leveleket sose írtuk le, a 2 fokszámúakat egyszer, és így tovább. Tehát ha egy szám $d$-szer szerepel, akkor annak fokszáma $d+1$. Praktikus okokból az élpárokon visszafelé haladva építjük fel a gráfot:
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexLabelOut
+  %\draw[help lines] (0,0) grid (4,3);
+  \Vertices[x=1,y=0]{7}  
+  \Vertices[x=0,y=1,Lpos=180]{5}  
+  \Vertices[x=1,y=1,Lpos=45]{3}  
+  \Vertices[x=1,y=2]{4}  
+  \Vertices[x=1,y=3]{1}  
+  \Vertices[x=2,y=1,Lpos=-90]{2}  
+  \Vertices[x=3,y=1]{6}  
+  \Edges(5,3,2,6)
+  \Edges(7,3,4,1)
+\end{tikzpicture}
+\end{center}
+
+\begin{tetel}
+ $\boxed{$Minden fához kölcsönösen egyértelműen hozzárendelhetünk egy \textit{Prüfer-kód}ot.$}$
+\end{tetel}
+\begin{biz}
+ Tehát azt kell belátni, hogy (1) különböző fákhoz különböző Prüfer-kódok tartoznak, illetve (2) minden Prüfer-kódhoz (tetszőleges $n-2$ hosszúságú $1,2,\ldots,n$ számokat tartalmazó sorozatohoz) létezik olyan fa, aminek ez a Prüfer-kódja.\\
+ \textit{(1)-es bizonyítása}: A fenti példa kifejtése alapján következik, hogy adott Prüfer-kód sorozatot egyértelműen meg tudunk feleltetni egy fagráffal, ezalapján viszont különböző fákhoz, különböző kód tartozik.\\
+ \textit{(2)-es bizonyítása}: Használjuk a fent már taglalt jelölésrendszert, tehát a táblázatunk így néz ki:
+\[
+\begin{array}{|c|c|c|c|c|c|c|c|c|}\hline
+a_1 & a_2 & a_3 & \ldots & a_i & a_{i+1} & \ldots & a_{n-2} & n \\\hline
+b_1 & b_2 & b_3 & \ldots & b_i & b_{i+1} & \ldots & b_{n-2} & b_{n-1} \\\hline
+\end{array}
+\]
+Már említettük, de továbbra is fontos, hogy a $b_1, b_2, \ldots, b_{n-2}, b_{n-1}, n$ szám $n$ darab különböző szám (1-1 csúcs sorszám).\\
+
+$T_{n-1}$ legyen az $(n, b_{n-1})$ élből és a két csúcsból álló gráf.\\
+$T_{n-2}$ legyen $T_{n-1}$-hez hozzávéve a $b_{n-2}$ csúcsot és a hozzá tartozó élt $(b_{n-2}, a_{n-2})$.
+\begin{center}$\vdots$\end{center}
+$T_i$ legyen a $b_i, b_{i+1}, \ldots, b_{n-2}, b_{n-1}, n$ csúcsokból és a megfelelő élekből álló gráf.\\
+
+\textit{Állítások}:
+\begin{enumerate*}
+ \renewcommand{\labelenumi}{\alph{enumi})}
+ \item $\forall i$-re $T_i$ fa $\Rightarrow T_1$  is fa, tehát a Prüfer-kódból visszakódolt gráfunk fa.
+ \item $\forall i$-re $b_i$ elsőfokú $T_i$-ben.
+ \item $\forall i$-re $b_i$ a legkisebb indexű levél $T_i$-ben.
+\end{enumerate*}
+Ha a fentieket belátjuk, akkor bizonyítottuk (2)-őt, hiszen ezen állítások együttese biztosítja, hogy a visszakódolt gráfunk fa, aminek a kódja valóban az éppen vizsgált Prüfer-kód.\\
+a)-t és b)-t egyszerre bizonyítjuk, teljes indukcióval:\\
+$T_{n-1}$-re igaz az állítás, hiszen 2 csúcsunk van, köztük egy él; ez fa, és mindkét csúcs elsőfokú. Tegyük fel, hogy $T_{i+1}$-re igaz az állítás, bizonyítsuk be, hogy ekkor $T_i$-re is: Tehát adott egy fa, amihez hozzáveszünk 2 csúcsot és a köztük futó élt. Amit szeretnénk: az egyik csúcs már szerepeljen a gráfban, de a másik ne: ekkor elérjük, hogy összefüggő gráfot kapunk, de körmenteset, vagyis továbbra is fa marad. Ez viszont igaz, hiszen az él, amit hozzáveszünk a gráfhoz: $(a_i, b_i)$. Vizsgáljuk meg a két csúcsot:
+\begin{itemize*}
+ \item $b_i$ nem egyezik semelyik másik $b_j$-vel, illetve $n$-el, viszont $a_i, a_{i+1}, \ldots, a_{n-2}$-vel se, hiszen így választottuk. Ezzel szemben a $T_{i+1}$ gráfban csak $a_{i+1}, a_{i+2}, \ldots, a_{n-2}$, illetve $b_{i+1}, b_{i+2}, \ldots, b_{n-1}, n$ sorszámú csúcsok szerepelnek, tehát $b_i$ biztosan nem szerepel $T_{i+1}$-ben. (későbbiekben láthatjuk, hogy $a_{i+1}, a_{i+2}, \ldots, a_{n-2}$ mindegyike megegyezik $b_{i+2}, \ldots, b_{n-1}, n$ valamelyikével)
+ \item $a_i$ viszont szerepel $T_{i+1}$-ben, hiszen $a_i$ megegyezik $b_{i+1}, b_{i+2}, \ldots, b_{n-1}, n$ valamelyikével, hiszen a Prüfer-kód generálásakor azért írtuk le $a_i$-t, mert töröltük egy szomszédját, őt magát még nem (vagyis nem szerepelhet $b_1, b_2, \ldots, b_i$ között).
+\end{itemize*}
+A fentiek alapján az is nyilvánvaló, hogy mivel $b_i$ nem szerepelt $T_{i+1}$-ben, ezért $T_i$-ben elsőfokú lesz. Márcsak c)-t kell belátni:\\
+Tegyük fel, hogy létezik $b_i$-nél kisebb indexű elem $T_i$-ben. Nem őt írtuk a Prüfer-kódba $b_i$ helyére, tehát a kérdéses csúcs vagy:
+\begin{itemize*}
+ \item szerepel $b_1, b_2, \ldots, b_{i-1}$-ben, ez azt jelenti, hogy $T_i$-ben a csúcs foka 0, vagy
+ \item $a_i, a_{i+1}, \ldots, a_{n-2}, n$-ben szerepel, ekkor $T_i$-ben legalább másodfokú.
+\end{itemize*}
+Tehát nem lehet $b_i$-től különböző kisebb indexű csúcs, aminek a elsőfokú.
+\end{biz}
+
+\begin{tetel} $\boxed{$Cayley-tétel$}$\\
+ Rögzített $\{1,2,3,\ldots,n\}$ csúcshalmazon megadható fák száma: $n^{n-2}$.
+\end{tetel}
+\begin{biz}
+ Az előző tétel alapján, minden fához kölcsönösen egyértelműen hozzárendelhetünk egy \textit{Prüfer-kód}ot. Mivel a Prüfer-kód $n$ csúcsú fagráf esetén $n-2$ jegyből áll és mindegyik $n$ féle szám lehet, ezért összesen $n^{n-2}$ féle \textit{Prüfer-kód} lehetséges (ismétléses variáció). Tehát adott $\{1,2,3,\ldots,n\}$ csúcshalmazon $n^{n-2}$ fát adhatunk meg.
+\end{biz}
+
+\section{Síkba rajzolható gráfok}
+
+\begin{defi}
+ Egy diagram a gráfnak egy \textbf{síkbeli lerajzolása}, ha az élek nem keresztezik egymást.
+\end{defi}
+
+\begin{defi}
+ Egy gráf akkor \textbf{síkba rajzolható}, ha létezik \textit{síkbeli lerajzolása}.
+\end{defi}
+
+Az első diagram egy \textit{síkba \textbf{rajzolható}} gráf, a második ennek egy \textit{síkba \textbf{rajzolt}} diagramja:
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexNoLabel
+  %\draw[help lines] (0,0) grid (4,3);
+  \begin{scope}
+  \begin{scope}[node distance=1.2cm,rotate=45]
+  \Vertices*{circle}{1,2,3,4}
+  \end{scope}
+  \Edges(1,2,3,4,1)
+  \Edge(2)(4)
+  \Edge(1)(3)
+  \end{scope}
+
+  \begin{scope}[xshift=4cm]
+ %\draw[help lines] (0,0) grid (4,3);
+  \begin{scope}[node distance=1.2cm,rotate=45]
+  \Vertices*{circle}{1,2,3,4}
+  \end{scope}
+  \Edges(1,2,3,4,1)
+  \Edge(2)(4)
+  \draw [thick] (1) .. controls +(-45:2cm) and +(-45:2cm) .. (3);
+  \end{scope}
+ \end{tikzpicture}
+\vspace*{-20pt}
+\end{center}
+
+\begin{tetel}
+ $G$ síkba rajzolható $\Leftrightarrow$ $G$ gömbre rajzolható
+\end{tetel}
+\begin{biz} \textit{Sztereografikus projekcióval}.\\
+ Helyezzük el úgy a gömböt, hogy a sík a déli sarkon érintse. Ekkor az északi sarkból (egyenes) vetítéssel a sík pontjai bijektíven megfelelnek az északisark-mentes gömbfelszín pontjainak. Ez alapján mindkét irány bizonyított, lényeg, hogy úgy válasszuk az északi sarkot (a gömböt úgy gördítsük a síkon kicsit arréb), hogy azon ne legyen gráf-csúcs. Ha a gömbön nem metszették egymást az élek, akkor a síkon se fogják (a bijekció miatt).
+\end{biz}
+
+\begin{defi}
+ Egy \emph{síkba \textbf{rajzolt} gráf} esetén a sík 2 pontja egy \textbf{tartomány}ban van, ha a 2 pont között van olyan törött vonal, ami nem metsz gráfélt. Az ábrán
+ \begin{tikzpicture}[>=latex']
+  \SetVertexSimple[Shape=star,FillColor=white,MinSize=7pt]
+  \SetVertexNoLabel
+  \Vertex{1}
+ \end{tikzpicture}-al jelöltük a tartományokat:
+
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexNoLabel
+  \begin{scope}
+ %\draw[help lines] (0,0) grid (4,3);
+  \begin{scope}[node distance=1.2cm,rotate=45]
+  \Vertices*{circle}{1,2,3,4}
+  \end{scope}
+  \Vertex[x=0,y=2]{5}
+  \Edges(1,2,3,4,1)
+  \Edges(1,5,2)
+  \Edge(2)(4)
+  \draw [thick] (1) .. controls +(-45:3cm) and +(-45:3cm) .. (3);
+  \SetVertexSimple[Shape=star,FillColor=white,MinSize=7pt]
+  \Vertex[x=0,y=1.2]{6}
+  \Vertex[x=0.3,y=0.3]{7}
+  \Vertex[x=-0.3,y=-0.3]{8}
+  \Vertex[x=1.2,y=-1.2]{9}
+  \Vertex[x=1.3,y=1.3]{10}
+  \end{scope}
+ \end{tikzpicture}
+\vspace*{-35pt}
+\end{center}
+\end{defi}
+
+\begin{tetel} $\boxed{$Euler-tétel$}$\\
+ $G$ összefüggő, síkba rajzolt gráf:
+ \[n+t = e+2\]
+ Azaz a csúcsok és a tartományok száma megegyezik az élek száma $+2$-vel.
+\end{tetel}
+\begin{bizNL}
+ \begin{enumerate*}
+  \item $\nexists$ kör $\Rightarrow$ fa, tehát $e=n-1, t=1$:
+  \[n+1 = e+2 \quad \checkmark\]
+  \item $\exists$ kör: a körökből hagyjunk el 1-1 élet: ekkor a tartományok és élek száma 1-el csökken. A végén fa lesz, ekkor igaz az állítás, de mivel mindkét oldalból egyenlően vettünk el egyesével 1-et, ezért eredetileg is igaz volt.
+ \end{enumerate*}
+ \emph{Megjegyzés}: Ha $G$ nem feltétlen összefüggő, akkor: $n+t = e+k+1$, ha $k$-val jelöljük a komponensek számát, hiszen ha összefüggő, akkor rendben van ($k=1$), ha nem, akkor 2 komponensből 1 él behúzásával tudunk 1 komponenst csinálni, úgy, hogy ne növeljük a tartományok számát, tehát $k$ komponens esetén $k-1$ él behúzásával összefüggő gráfot kapunk, erre igaz, hogy:
+  \[n+t = e'+2\]
+ De $e' = e+k-1$, hiszen $k-1$ éllel növeltük az élek számát.
+\end{bizNL}
+
+\begin{tetel}
+ Egyszerű, síkba rajzolható legalább 3-csúcsú egyszerű gráf esetén:
+  \[e \leqslant 3n-6\]
+\end{tetel}
+\begin{biz} Az állítást elég összefüggő gráfokra bizonyítani; vegyünk egy egyszerű síkba rajzolt összefüggő gráfot. Mivel a gráf egyszerű, minden tartományát legalább 3 él határolja, ugyanakkor egy él legfeljebb két tartományt határolhat. Összegezzük minden tartományra az őket határoló élek számát. Az előbbiek miatt ez az érték legalább $3t$, legfeljebb $2e$, tehát: $3t \leqslant 2e$. Ebből $t \leqslant \frac{2e}{3}$, felhasználva Euler-tételét (összefüggő, síkba rajzolt gráf):
+\[n+t = e+2\]
+\[n+\frac{2e}{3} \geqslant e+2 \qquad /\cdot 3 \]
+\[3n+2e \geqslant 3e+6\]
+\[3n-6 \geqslant e\]
+\emph{Megjegyzés}: Ha a gráf nem összefüggő, akkor igaz, hogy $n+t = e+k+1$, emiatt az is igaz, hogy $n+t \geqslant e+2$ ($k\geqslant 1$). Ebből kiindulva ugyanúgy a bizonyítandó állításhoz jutunk.
+\end{biz}
+
+\textbf{Következmény}: $K_5$ nem síkbarajzolható, hiszen tfh az, ekkor igaznak kéne lennie, hogy $e \leqslant 3n-6$, viszont $e=10, n=5$, így ez ellentmondás.\\
+\textbf{Következmény}: $K_{3,3}$ sem síkbarajzolható, hiszen tfh az. Mivel nem tartalmaz 3 hosszú kört, ezért egy tartományt legalább 4 él fog közre:
+\[4t \leqslant 2e \qquad \Rightarrow \qquad t \leqslant \frac{e}{2}\]
+Felhasználva Euler-tételét:
+\[n+\frac{e}{2} \geqslant e+2\]
+\[2n-4 \geqslant e\]
+De jelen esetben $n=6, e=9$, így ez nem igaz, tehát ellentmondásra jutottunk.\\
+\emph{Megjegyzés}: A $K_{3,3}$ gráfot szokás ``3 ház, 3 kút'' problémának hívni. Bármely házból bármelyik kút és fordítva 1 hosszú úton elérhető, de bármelyik két ház, ill. két kút között nincs 1 hosszú út. Emiatt van az, hogy nincsen benne 3 hosszú kör, hiszen ha lenne, akkor a kérdéses 3 csúcs közül kettő azonos típusú (ház/kút) lenne, de ekkor ellent mondanánk annak a feltételnek, hogy két azonos típusú csúcs között nincs 1 hosszú út.\\
+
+\textbf{Állítás}: Nyílvánvaló, hogy a síkba rajzolhatóságot nem befolyásolja, ha egy élt egy 2 hosszú úttal helyettesítünk, vagy ha egy másodfokú csúcsra illeszkedő éleket egybeolvasztjuk, és a csúcsot elhagyjuk. Példák:
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexNoLabel
+  %\draw[help lines] (0,0) grid (4,3);
+  \begin{scope}
+  \Vertex[x=0,y=0]{1}
+  \Vertex[x=1,y=0]{2}
+  \Vertex[x=1,y=1]{3}
+  \Vertex[x=0,y=1]{4}
+  \Vertex[x=0.5,y=1]{5}
+  \Edges(1,2,3,5,4,1)
+  \end{scope}
+
+  \begin{scope}[xshift=2cm]
+  \Vertex[x=0,y=0]{1}
+  \Vertex[x=1,y=0]{2}
+  \Vertex[x=1,y=1]{3}
+  \Vertex[x=0,y=1]{4}
+  \Edges(1,2,3,4,1)
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+\begin{center}
+ \begin{tikzpicture}[>=latex']
+
+  \SetVertexNoLabel
+  %\draw[help lines] (0,0) grid (4,3);
+  \begin{scope}
+  \Vertex[x=0,y=0]{1}
+  \Vertex[x=1,y=0]{2}
+  \Vertex[x=1,y=1]{3}
+  \Vertex[x=0,y=1]{4}
+  \Vertex[x=0.5,y=1.2]{5}
+  \Vertex[x=0.5,y=0.8]{6}
+  \Edges(1,2,3,5,4,1)
+  \Edges(3,6,4)
+  \end{scope}
+
+  \begin{scope}[xshift=2cm]
+  \Vertex[x=0,y=0]{1}
+  \Vertex[x=1,y=0]{2}
+  \Vertex[x=1,y=1]{3}
+  \Vertex[x=0,y=1]{4}
+  \Vertex[x=0.5,y=1.2]{5}
+  \Edges(1,2,3,5,4,1)
+  \Edge[style={bend left}](3)(4)
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\begin{defi}
+ $G$ és $G'$ \textbf{topologikusan izomorf}, ha véges sok fenti művelettel (él felosztása, v. másodfokú csúcs eltörlése) egymással izomorf gráfokba vihetőek.
+\end{defi}
+
+\begin{tetel}$\boxed{$Kuratowski-tétel$}$\\
+ $G$ síkbarajzolható $\Leftrightarrow$ nem létezik $K_{3,3}$-al és $K_5$-tel topologikusan izomorf részgráfja
+\end{tetel}
+\begin{biz}
+ $\Rightarrow$ Már láttuk, hogy $K_{3,3}$ és $K_5$ nem síkbarajzolható, így, ha $G$ síkbarajzolható, akkor biztos nem tartalmaz $K_{3,3}$-al és $K_5$-tel topologikusan izomorf részgráfot.\\
+ $\Leftarrow$ Ezt az irányt nem bizonyítjuk.
+\end{biz}
+
+\begin{tetel}$\boxed{$Fáry-Wagner-tétel$}$\\
+ $G$ egyszerű, síkbarajzolható gráf $\Rightarrow$ van olyan síkbeli lerajzolása, ahol minden él egy egyenes szakasz
+\end{tetel}
+\addtocounter{biz}{1}
+
+\section{Síkgráfok duálitása}
+
+\begin{defi}
+ Egy gráf ($G$) duálisa az a gráf ($G^*$), aminek csúcsainak az eredeti gráf tartományait feleltetjük meg és két csúcsa között akkor van él, ha az eredeti gráfban a megfelelő két tartomány közös egy élben. Példa:
+ \begin{center}
+ \vspace*{-30pt}
+  \begin{tikzpicture}[>=latex']
+   \SetVertexNoLabel
+   %\draw[help lines] (0,0) grid (4,3);
+   \begin{scope}[node distance=1.2cm,rotate=-30]   
+    \Vertices*{circle}{1,2,3}
+    \Vertex{4}
+    \Edges(1,2,3,1)
+    \Edge(4)(1)
+    \Edge(4)(2)
+    \Edge(4)(3)
+   \end{scope}
+
+   \begin{scope}[xshift=4cm,node distance=1.2cm,rotate=-30]
+    \Vertex[x=0.4,y=0.8]{D}
+    \begin{scope}[node distance=0.4cm,rotate=60]
+    \Vertices*{circle}{A,B,C}
+    \Edges(A,B,C,A)
+    \Edges(A,D)
+    \draw [thick] (B) .. controls +(120:2cm) and +(60:2cm) .. (D);
+    \draw [thick] (C) .. controls +(-120:2cm) and +(-60:2cm) .. (D);
+    \end{scope}
+    \tikzset{VertexStyle/.style = {draw,
+  shape = circle,
+  color = lightgray,
+  fill = lightgray,
+  inner sep = 0pt,
+  outer sep = 0pt,
+  text = \VertexTextColor,
+  minimum size = 3pt,
+  line width = \VertexLineWidth}}
+    \Vertices*{circle}{1,2,3}
+    \Vertex{4}
+    \tikzset{EdgeStyle/.style= {line width = \EdgeLineWidth,lightgray}}
+
+    \Edges(1,2,3,1)
+    \Edge(4)(1)
+    \Edge(4)(2)
+    \Edge(4)(3)
+   \end{scope}
+
+  \end{tikzpicture}
+ \vspace*{-30pt}
+ \end{center}
+\end{defi}
+
+A duális nem egyértelmű, ugyanazon gráf különböző síkbarajzolásának különböző duálisai lehetnek. Példa (egyik duálisban van, a másikban nincs 4 fokszámú csúcs):
+ \begin{center}
+\vspace*{-15pt}
+  \begin{tikzpicture}[>=latex']
+   \SetVertexNoLabel
+   %\draw[help lines] (0,0) grid (4,3);
+   \begin{scope}[node distance=1.2cm,rotate=45]   
+    \Vertices*{circle}{1,2,3,4}
+    \Edges(1,2,3,4,1)
+    \Edge(2)(4)
+    \draw [thick] (2) .. controls +(180:2.5cm) and +(-180:2.5cm) .. (4);
+   \end{scope}
+
+   \begin{scope}[xshift=4cm,node distance=1.2cm]
+    
+    \Vertex[x=0.4,y=0.4]{A}
+    \Vertex[x=-0.4,y=-0.4]{B}
+    \Vertex[x=-1.1,y=-1.1]{C}
+    \Vertex[x=1.1,y=1.1]{D}
+    \Edge(A)(B)
+    \draw [thick] (C) .. controls +(135:1cm) and +(135:1cm) .. (B);
+    \draw [thick] (C) .. controls +(-45:1cm) and +(-45:1cm) .. (B);
+    \draw [thick] (D) .. controls +(135:1cm) and +(135:1cm) .. (A);
+    \draw [thick] (D) .. controls +(-45:1cm) and +(-45:1cm) .. (A);
+
+    \draw [thick] (D) .. controls +(0:3cm) and +(-90:3cm) .. (C);
+
+    \tikzset{VertexStyle/.style = {draw,
+  shape = circle,
+  color = lightgray,
+  fill = lightgray,
+  inner sep = 0pt,
+  outer sep = 0pt,
+  text = \VertexTextColor,
+  minimum size = 3pt,
+  line width = \VertexLineWidth}}
+    \begin{scope}[node distance=1.2cm,rotate=45]   
+    \Vertices*{circle}{1,2,3,4}
+    \tikzset{EdgeStyle/.style= {line width = \EdgeLineWidth,lightgray}}
+    \Edges(1,2,3,4,1)
+    \Edge(2)(4)
+    \draw [thick,lightgray] (2) .. controls +(180:2.5cm) and +(-180:2.5cm) .. (4);
+   \end{scope}
+   \end{scope}
+  \end{tikzpicture}
+\end{center}
+\vspace*{-110pt}
+\begin{center}
+  \begin{tikzpicture}[>=latex']
+   \SetVertexNoLabel
+   %\draw[help lines] (0,0) grid (4,3);
+   \begin{scope}[node distance=1.2cm,rotate=45]   
+    \Vertices*{circle}{1,2,3,4}
+    \Edges(1,2,3,4,1)
+    \Edge[style={bend right}](2)(4)
+    \Edge[style={bend left}](2)(4)
+   \end{scope}
+
+   \begin{scope}[xshift=4cm,node distance=1.2cm]
+    
+    \Vertex[x=0,y=0]{A}
+    \Vertex[x=0.5,y=0.5]{B}
+    \Vertex[x=-0.5,y=-0.5]{C}
+    \Vertex[x=1.25,y=-1.27]{D}
+    \Edges(C,B,A)
+    \draw [thick] (C) .. controls +(180:2.5cm) and +(225:2.5cm) .. (D);
+    \draw [thick] (D) .. controls +(210:0.75cm) and +(-90:0.75cm) .. (C);
+    \draw [thick] (B) .. controls +(0:0.75cm) and +(60:0.75cm) .. (D);
+    \draw [thick] (D) .. controls +(45:2.5cm) and +(90:2.5cm) .. (B);
+
+    \tikzset{VertexStyle/.style = {draw,
+  shape = circle,
+  color = lightgray,
+  fill = lightgray,
+  inner sep = 0pt,
+  outer sep = 0pt,
+  text = \VertexTextColor,
+  minimum size = 3pt,
+  line width = \VertexLineWidth}}
+    \begin{scope}[node distance=1.2cm,rotate=45]   
+    \Vertices*{circle}{1,2,3,4}
+    \tikzset{EdgeStyle/.style= {line width = \EdgeLineWidth,lightgray}}
+    \Edges(1,2,3,4,1)
+    \Edge[style={bend right}](2)(4)
+    \Edge[style={bend left}](2)(4)
+   \end{scope}
+   \end{scope}
+
+  \end{tikzpicture}
+\vspace*{-30pt}
+ \end{center}
+
+\begin{defi}
+ $G=(V,E)$ és $G'=(V',E')$ \textbf{gyengén izomorfak}, ha $\exists f: E \to E'$ bijekció, ami körtartó (kört alkotó élek képe kört alkot, nem kört alkotó élek képe nem alkot kört). Példa két gyengén izomorf gráf:
+  \begin{center}
+  \begin{tikzpicture}[>=latex']
+   \SetVertexNoLabel
+   %\draw[help lines] (0,0) grid (4,3);
+   \begin{scope}[node distance=1.2cm]
+    \Vertex[x=0,y=0]{1}
+    \Vertex[x=0,y=1]{2}
+    \Vertex[x=1,y=1]{3}
+    \Vertex[x=1,y=0]{4}
+    \Vertex[x=2,y=0]{5}
+    \Edges(1,2,3,4)
+    \Edge(3)(5)
+   \end{scope}
+
+   \begin{scope}[xshift=5cm,node distance=1.2cm]
+    \Vertex[x=0,y=0]{1}
+    \Vertex[x=0,y=1]{2}
+    \Vertex[x=1,y=0]{3}
+    \Vertex[x=1,y=1]{4}
+    \Vertex[x=2,y=1]{5}
+    \Vertex[x=2,y=0]{6}
+    \Vertex[x=3,y=0]{7}
+    \Edges(1,2)
+    \Edges(3,4)
+    \Edges(5,6,7)
+   \end{scope}
+
+  \end{tikzpicture}
+ \end{center}
+\end{defi}
+
+\begin{tetel}$\boxed{$Whitney-tétele$}$\\
+$G$ síkbarajzolható, $H$ gyengén izomorf $G$-vel, ekkor:
+\begin{enumerate*}
+ \item $H$ is síkbarajzolható
+ \item $G^*$ és $H^*$ is gyengén izomorf
+ \item $G^{**}$ gyengén izomorf $G$-vel
+\end{enumerate*}
+\end{tetel}
+\addtocounter{biz}{1}
+
+\end{document}

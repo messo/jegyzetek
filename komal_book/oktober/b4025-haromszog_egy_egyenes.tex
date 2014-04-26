@@ -1,0 +1,111 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4025.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Az $ABC$ háromszög $BC$ oldalára kifelé, $CA$ oldalára pedig befelé emelt szabályos három\-szög harmadik csúcsa $A^*$ és $B^*$. A $C$ pontnak az $AB$ egyenesre való tükörképe $C'$. Bizonyítsuk be, hogy az $A^*$, $B^*$ és $C'$ pontok egy egyenesre illeszkednek.\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.54,-2.92)(5.85,4.86)
+\psline(-1.94,0.7)(4.18,-0.1)
+\psline(4.18,-0.1)(0.86,3.12)
+\psline(0.86,3.12)(-1.94,0.7)
+\psline(0.86,3.12)(5.31,4.39)
+\psline(5.31,4.39)(4.18,-0.1)
+\psline(0.86,3.12)(1.56,-0.51)
+\psline(1.56,-0.51)(-1.94,0.7)
+\psline(0.86,3.12)(0.14,-2.36)
+\pscustom[fillcolor=black,fillstyle=transp,transpalpha=0.1]{\parametricplot{-0.12998194480441091}{1.440814381990486}{0.6*cos(t)+0.5|0.6*sin(t)+0.38}\lineto(0.5,0.38)\closepath}
+\psellipse*[fillcolor=black,fillstyle=transp,transpalpha=0.1](0.78,0.6)(0.04,0.04)
+\psline(1.56,-0.51)(5.31,4.39)
+\psline[linestyle=dashed,dash=5pt 5pt](0.14,-2.36)(1.56,-0.51)
+\pscustom[fillcolor=black,fillstyle=transp,transpalpha=0.1]{\parametricplot{-0.7701088349938099}{0.27708871620278774}{0.6*cos(t)+0.86|0.6*sin(t)+3.12}\lineto(0.86,3.12)\closepath}
+\pscustom[fillcolor=black,fillstyle=transp,transpalpha=0.1]{\parametricplot{-2.428863239189862}{-1.3816656879932638}{0.6*cos(t)+0.86|0.6*sin(t)+3.12}\lineto(0.86,3.12)\closepath}
+\psdots(-1.94,0.7)
+\rput[bl](-2.28,0.86){$A$}
+\psdots(4.18,-0.1)
+\rput[bl](4.34,-0.5){$B$}
+\psdots(0.86,3.12)
+\rput[bl](0.56,3.44){$C$}
+\psdots(5.31,4.39)
+\rput[bl](5.38,4.5){$A^*$}
+\psdots(1.56,-0.51)
+\rput[bl](1.78,-0.72){$B^*$}
+\psdots(0.14,-2.36)
+\rput[bl](0.1,-2.76){$C'$}
+\psdots[linecolor=darkgray](0.5,0.38)
+\rput[bl](1.24,2.84){$60°$}
+\rput[bl](0.36,2.4){$60°$}
+\end{pspicture*}}
+
+$C$ körül forgassuk el $A$-t $+60°$-al, ekkor $B^*$-ot kapjuk, hiszen a feladat szövege szerint $ACB^*$ szabályos háromszög. Hasonlóképpen, ha $B$-t forgatjuk el $+60°$-al $C$ körül, akkor $A^*$-ot kapjuk, hiszen $CBA^*$ a feladat szövege alapján szabályos háromszög. Tehát, ha az $AB$ egyenesét elforgatjuk $C$ körül $+60°$-al, akkor $B^*A^*$ egyenesét kapjuk. Tehát ha az állításunk az, hogy $C'$ rajta van a $B^*A^*$ egyenesén, akkor ezt úgy is megfogalmazhatjuk, hogy $C'$ $C$ körüli $-60°$-al való elforgatottja rajta van az $AB$ egyenesén. Ha ezt belátjuk, akkor készen vagyunk.
+
+\centerline{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-4.86,-3)(4.72,3.64)
+\psline(-1.94,0.7)(4.18,-0.1)
+\psline(4.18,-0.1)(0.86,3.12)
+\psline(0.86,3.12)(-1.94,0.7)
+\psline(0.86,3.12)(0.14,-2.36)
+\pscustom[fillcolor=black,fillstyle=transp,transpalpha=0.1]{\parametricplot{-0.12998194480441091}{1.440814381990486}{0.6*cos(t)+0.5|0.6*sin(t)+0.38}\lineto(0.5,0.38)\closepath}
+\psellipse*[fillcolor=black,fillstyle=transp,transpalpha=0.1](0.78,0.6)(0.04,0.04)
+\psline[linestyle=dashed,dash=5pt 5pt](-4.24,1)(0.86,3.12)
+\psline[linestyle=dashed,dash=5pt 5pt](-4.24,1)(-1.94,0.7)
+\psline[linestyle=dashed,dash=2pt 2pt](-4.24,1)(0.14,-2.36)
+\psdots(-1.94,0.7)
+\rput[bl](-2.22,0.24){$A$}
+\psdots(4.18,-0.1)
+\rput[bl](4.38,-0.42){$B$}
+\psdots(0.86,3.12)
+\rput[bl](0.8,3.34){$C$}
+\psdots(0.14,-2.36)
+\rput[bl](0.1,-2.76){$C'$}
+\psdots(0.5,0.38)
+\rput[bl](0.6,-0.2){$T_c$}
+\psdots(-4.24,1)
+\rput[bl](-4.62,0.46){$C''$}
+\end{pspicture*}
+}
+
+Forgassuk el $C'$-t $C$ körül $-60°$-al, így $C''$-t kapjuk. Ebbõl következik, hogy $CC'C''$ szabályos háromszög (hiszen egy olyan egyenlõ szárú háromszög, aminek az alappal szem\-köz\-ti szöge 60°). Mivel $T_c$ felezõpontja a $CC'$-nek (a tengelyes tükrözés miatt), ezért $C''T_c$ súlyvonala a $CC'C''$ háromszögnek. Viszont egy szabályos háromszögben a súlyvonal merõleges az oldalra, tehát $C''T_cC\sphericalangle = 90°$. Mivel $C''T_cC\sphericalangle$ és a $CT_cB\sphericalangle$ 180°-ra egészítik ki egymást, ezért $C''$ rajta van $T_cB$ egyenesén, azaz az $AB$ egyenesén.\\
+
+Mivel $C'$ $-60°$-os elforgatottja $C$ körül rajta lesz az $AB$ egyenesén, ezért $C'$ rajta lesz az $AB$ egyenesének $C$ körül $+60°$-os elforgatottján azaz a $B^*A^*$-n, tehát beláttuk az állítást, \textbf{hogy $\mathbf{A^*, B^*}$ és $\mathbf{C'}$ egy egyenesre illeszkednek}.
+
+\end{document}

@@ -1,0 +1,144 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 40pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{B. 3980.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\textbf{Feladat:} Az ábrán (1. ábra) felülnézetben látható poliéder ,,alaplapjai'' párhuzamos téglalapok, oldalélei egyenlõ hosszúak, magassága m. Valaki a poliéder térfogatára a következõ képletet találta:
+\[V= \frac{m}{6} \big[(2a+c)b+ (2c+a)d\big]\]
+Igaz-e, hogy a képlet megadja a test térfogatát?\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+\begin{figure}[ht]
+\centerline{\includegraphics{polieder.eps}}
+\caption{}
+\end{figure}
+
+Bontsuk szét a testet 9 db testre a \emph{2. ábrán} berajzolt síkokkal:
+
+\begin{figure}[ht]
+\centerline{\includegraphics{polieder2.eps}}
+\caption{}
+\end{figure}
+
+Az ábrán azonos számokkal jelöljük az azonos testeket. A (2)-essel jelölt háromszög alapú hasábok nyilvánvalóan egybevágóak, hiszen alapjaik megegyeznek, illetve a magasságuk is (jelen esestben ez a magasság a $c$ oldal hossza). Hasonlóképpen a (3)-assal jelölt hasábok is egybevágóak. A szélén lévõ 4 darab gúla szintén egybevágó, hiszen: magasságuk egyenlõ ($m$), illetve mindegyik megfelelõ él egymással egyenlõ (illetve a lapok azonos szögeket zárnak be) (még egy megjegyzés: tulajdonképpen nekünk az is elég, hogy az alapok, illetve a magasságok egyenlõek a 4 szélén lévõ gúlában, hiszen ez kell a térfogat képlethez). \\
+
+Tehát a 9 testet 4 különbözõ csoportba csoportosíthatjuk:
+\begin{itemize}
+\item (1) 1 db téglatest
+\item (2) 2 db háromszög alapú hasáb
+\item (3) 2 db háromszög alapú hasáb
+\item (4) 4 db téglalap alapú gúla
+\end{itemize}
+Nem kell mást tennünk mint kiszámoljuk 1-1 testnek a térfogatát, és beszorozzuk annyival amennyi van belõle.\\
+
+(1) Téglatest:\\
+A téglatest térfogatának kiszámolása nem okoz gondot: Ismerjük az alapjának két oldalát és magasságát: $V_{\hbox{téglatest}}=cdm$\\
+
+(2) Háromszög alapú hasáb:\\
+Az $b$ és $d$ oldal által határolt trapéz egyenlõszárú a feladat szövege szerint, így ismerjük a háromszög alapú hasáb alapját: egyik oldala a poliéder magassága ($m$), a másik pedig $\displaystyle{\frac{b-d}{2}}$, illetve a magassága/hossza pedig $c$.
+
+\psset{unit=2cm,Beta=20,Alpha=140}
+\begin{pspicture}(-1,-1)(1,1)
+\pstThreeDCoor[xMax=2.5,yMax=2.5,zMax=2.5,drawing=false]
+\pstThreeDLine{-}(0,0,0)(3,0,0)
+\pstThreeDLine{-}(3,0,0)(3,1,0)
+\pstThreeDLine{-}(3,1,0)(0,1,0)
+\pstThreeDLine{-}(0,1,0)(0,0,0)
+
+\pstThreeDLine{-}(0,0,0)(0,1,1)
+\pstThreeDLine{-}(3,0,0)(3,1,1)
+\pstThreeDLine{-}(0,1,1)(3,1,1)
+
+\pstThreeDLine{-}(3,1,0)(3,1,1)
+\pstThreeDLine{-}(0,1,0)(0,1,1)
+\uput[0](1,-0.5){$c$}
+\uput[0](3,0){$m$}
+\uput[0](2.4,-0.8){$\displaystyle{\frac{b-d}{2}}$}
+\end{pspicture}
+\vskip 10pt
+Térfogata könnyen kiszámolható: $\displaystyle{V=T\cdot h=\frac{(b-d)\cdot m}{4}\cdot c}$ ($T$ a hasáb alapjának területe, $h$ a ma\-gassága)\\
+
+(3) Háromszög alapú hasáb:\\
+Az $a$ és $c$ oldal által határolt trapéz egyenlõszárú a feladat szövege szerint, így ismerjük a háromszög alapú hasáb alapját: egyik oldala a poliéder magassága ($m$), a másik pedig $\displaystyle{\frac{a-c}{2}}$, illetve a magassága/hossza pedig $d$.\\
+
+\psset{unit=2cm,Beta=20,Alpha=140}
+\begin{pspicture}(-1,-1)(1,1)
+\pstThreeDCoor[xMax=2.5,yMax=2.5,zMax=2.5,drawing=false]
+\pstThreeDLine{-}(0,0,0)(2,0,0)
+\pstThreeDLine{-}(2,0,0)(2,1.3,0)
+\pstThreeDLine{-}(2,1.3,0)(0,1.3,0)
+\pstThreeDLine{-}(0,1.3,0)(0,0,0)
+
+\pstThreeDLine{-}(0,0,0)(0,1.3,1)
+\pstThreeDLine{-}(2,0,0)(2,1.3,1)
+\pstThreeDLine{-}(0,1.3,1)(2,1.3,1)
+
+\pstThreeDLine{-}(2,1.3,0)(2,1.3,1)
+\pstThreeDLine{-}(0,1.3,0)(0,1.3,1)
+\uput[0](0.8,-0.4){$d$}
+\uput[0](2.5,0.2){$m$}
+\uput[0](1.9,-0.45){$\displaystyle{\frac{a-c}{2}}$}
+\end{pspicture}
+\vskip 10pt
+Térfogata könnyen kiszámolható: $\displaystyle{V=T\cdot h=\frac{(a-c)\cdot m}{4}\cdot d}$ ($T$ a hasáb alapjának területe, $h$ a ma\-gassága)\\
+
+(4) Téglalap alapú gúla:\\
+A térfogatához ismernünk kell az alapjának a területét és a magasságát. A magassága természetesen $m$, az alapjának a területe pedig: $\displaystyle{\Big(\frac{b-d}{2}\Big)\Big(\frac{a-c}{2}\Big)}$
+
+\psset{unit=2cm,Beta=20,Alpha=140}
+\begin{pspicture}(-1,-1)(1,1)
+\pstThreeDCoor[xMax=2.5,yMax=2.5,zMax=2.5,drawing=false]
+\pstThreeDLine{-}(0,0,0)(0,-1,0)
+\pstThreeDLine{-}(0,-1,0)(1.5,-1,0)
+\pstThreeDLine{-}(1.5,-1,0)(1.5,0,0)
+\pstThreeDLine{-}(1.5,0,0)(0,0,0)
+
+\pstThreeDLine{-}(0,0,0)(0,0,0.85)
+\pstThreeDLine{-}(0,-1,0)(0,0,0.85)
+\pstThreeDLine{-}(1.5,-1,0)(0,0,0.85)
+\pstThreeDLine{-}(1.5,0,0)(0,0,0.85)
+
+\uput[0](-0.4,-0.7){$\displaystyle{\frac{a-c}{2}}$}
+\uput[0](-0.3,0.2){$m$}
+\uput[0](0.6,-0.7){$\displaystyle{\frac{b-d}{2}}$}
+\end{pspicture}
+
+Térfogata: $\displaystyle{V=\frac{Tm}{3}=\frac{\big(\frac{b-d}{2}\big)\big(\frac{a-c}{2}\big)m}{3}}$\\
+
+Már csak annyi a dolgunk, hogy a kiszámolt térfogatokat beszorozzuk a darabszámmal, majd összeadjuk õket:
+
+\[V_{\hbox{poliéder}}=cdm+2\cdot \frac{(b-d)\cdot m}{4}\cdot c+2\cdot \frac{(a-c)\cdot m}{4}\cdot d+4\cdot\frac{\big(\frac{b-d}{2}\big)\big(\frac{a-c}{2}\big)m}{3} \]
+Kiemelünk $m$-et, illetve egyszerûsítünk ahol lehet:
+\[V=m\Big[cd+\frac{b-d}{2}\cdot c+\frac{a-c}{2}\cdot d+\frac{\big(b-d\big)\big(a-c\big)}{3}\Big] \]
+Kiemelünk $\frac{1}{6}$-ot:
+\[V=\frac{m}{6}\Big[6cd+3(b-d)\cdot c+3(a-c)\cdot d+2(b-d)(a-c)\Big] \]
+\[V=\frac{m}{6}\big[6cd+3bc-3dc+3ad-3cd+ 2ba+2dc-2bc-2ad\big] \]
+\[V=\frac{m}{6}\big[2cd+bc+ad+2ba\big] \]
+\[V=\frac{m}{6}\big[(2a+c)b+(2c+a)d\big] \]
+
+Ugyanazt kaptuk, ami a feladatban volt, tehát igaz, a képlet megadja a poliéder térfogatát.
+\end{document}

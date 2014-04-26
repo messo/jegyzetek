@@ -1,0 +1,438 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 0pt
+
+\begin{document}
+
+\textbf{Kriván Bálint}\\
+\textbf{Házi dolgozat}\\
+
+\textbf{Feladat:}\\ Két idegen egyeneshez és körhöz, szerkesszük meg azokat a köröket, melyek érintik mindhárom alakzatot.\\
+\hrule
+\hskip 10pt
+
+\textbf{Megoldás:}\\
+
+\centerline{
+\scriptsize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-3.48,-4.26)(3.79,0.47)
+\psplot{-3.48}{3.79}{(--1.2--4.72*x)/4.78}
+\psplot{-3.48}{3.79}{(-36.49-1.34*x)/11.08}
+\pscircle(1.9,-1.8){1.38}
+\rput[bl](-3.03,-2.2){$a$}
+\rput[bl](-2.82,-3.4){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.13,-1.74){$E$}
+\rput[bl](2.52,-0.93){$k$}
+\end{pspicture*}
+}}
+
+Ahogy a korábbi feladatoknál csináltuk, most is azt szeretnénk, ha pont lenne valamelyik alakzat. Ezt úgy érhetjük el, ha a körbõl pontot csinálunk. Ha a körbõl pont lesz, akkor a majd megszerkesztendõ kör az eredeti kör ($k$) sugarával nagyobb lesz, mint ha nem csinálnánk belõle pontot. Így, ahhoz, hogy érintse az egyeneseket, el kell õket tolni, mégpedig a következõ ábra szerint:\\
+
+\centerline{
+\footnotesize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-7.21,-6.15)(3.81,0.95)
+\psplot[linestyle=dotted]{-7.21}{3.81}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-7.21}{3.81}{(-36.49-1.34*x)/11.08}
+\pscircle(1.9,-1.8){1.38}
+\psplot{-7.21}{3.81}{(--10.45--4.72*x)/4.78}
+\psplot{-7.21}{3.81}{(-51.84-1.34*x)/11.08}
+\pscircle[linewidth=1.2pt,linestyle=dashed,dash=3pt 3pt](-0.64,-2.03){2.55}
+\pscircle(-0.64,-2.03){1.18}
+\rput[lt](-4.89,-5.05){\parbox{5.85 cm}{$k_1$ lenne a megszerkesztendõ kör, \\ de az $r$-et fogjuk helyette megszerkeszteni.}}
+\psline{->}(-0.78,-3.2)(-0.95,-4.57)
+\psline{->}(-1.47,-1.2)(-2.44,-0.22)
+\pscustom{\parametricplot{-1.6911504536025512}{-0.12035412680765312}{0.6*cos(t)+-0.78|0.6*sin(t)+-3.2}\lineto(-0.78,-3.2)\closepath}
+\pscustom{\parametricplot{0.7790824578990108}{2.349878784693908}{0.6*cos(t)+-1.47|0.6*sin(t)+-1.2}\lineto(-1.47,-1.2)\closepath}
+\rput[bl](-6.1,-5.35){$a$}
+\rput[bl](-6.79,-2.87){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](1.98,-1.67){$E$}
+\rput[bl](2.23,-0.28){$k$}
+\rput[bl](-6.62,-4.76){$e$}
+\rput[bl](-6.81,-3.58){$f$}
+\rput[bl](-1.25,0.22){$r$}
+\psdots[linecolor=darkgray](-0.64,-2.03)
+\rput[bl](-0.57,-1.91){\darkgray{$O_1$}}
+\rput[bl](-1.27,-1.38){$k_1$}
+\rput[bl](-0.71,-3.54){$90°$}
+\rput[bl](-1.62,-0.9){$90°$}
+\end{pspicture*}
+}}
+
+
+Az ábrán az $a$ egyenes eltoltja $e$ a $b$ egyenes eltolja $f$. Mostantól az $e$-vel és $f$-el dolgozunk, így $a$-t és $b$-t pontozott vonallal jelöljük.\\
+
+Nincs más dolgunk, mint az $e$ és $f$ egyeneseket invertáljuk egy $E$ középpontú körre. Az egyszerûség kedvéért az alapkörünk érintse valamelyik egyenest, hogy könnyebb legyen a szerkesztés (papíron, hiszen számítógépen nincs jelentõsége).
+
+\centerline{
+\scriptsize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-5.77,-5.64)(5.27,2.59)
+\psplot[linestyle=dotted]{-5.77}{5.27}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-5.77}{5.27}{(-36.49-1.34*x)/11.08}
+\pscircle(1.9,-1.8){1.38}
+\psplot{-5.77}{5.27}{(--10.45--4.72*x)/4.78}
+\psplot{-5.77}{5.27}{(-51.84-1.34*x)/11.08}
+\pscircle(1.9,-1.8){3.09}
+\pscircle(1.71,-3.33){1.54}
+\pscircle(1.1,-0.99){1.14}
+\rput[bl](-5.68,-5.05){$a$}
+\rput[bl](-5.39,-2.46){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.13,-1.74){$E$}
+\rput[bl](2.52,-0.93){$k$}
+\rput[bl](-5.63,-3.09){$e$}
+\rput[bl](-5.3,-3.9){$f$}
+\psdots(1.48,-4.86)
+\rput[bl](1.5,-4.69){$I$}
+\rput[bl](0.43,1.21){$g$}
+\psdots(3.4,-5.09)
+\rput[bl](3.46,-4.99){$J$}
+\psdots(2.99,-4.2)
+\rput[bl](3.13,-4.21){$K$}
+\rput[bl](0.36,-2.94){$h$}
+\psdots(-3.06,-0.84)
+\rput[bl](-3.28,-0.64){$L$}
+\psdots(-1.71,0.5)
+\rput[bl](-2.03,0.81){$M$}
+\psdots(0.02,-0.6)
+\rput[bl](0.17,-0.6){$N$}
+\psdots(0.05,-1.44)
+\rput[bl](0.15,-1.39){$O$}
+\rput[bl](0.53,-0.24){$p$}
+\psdots(1.1,-0.99)
+\rput[bl](1.22,-0.97){$P$}
+\psdots(1.71,-3.33)
+\rput[bl](1.86,-3.42){$H$}
+\end{pspicture*}
+}}
+
+Amint látható az ábrán, invertáltuk a két egyenest: Az $f$ egyenesen kijelöltünk egy $J$ pontot. A $J$ pontot invertálva kaptuk $K$-t. Tudjuk, hogy az $f$ képének fix pontja $I$, illetve, hogy átmegy a póluson, azaz az $E$-n, így az $f$ képe az $I$, $K$, $E$ pontokon átmenõ kör ($h$). Az $e$ egyenes nem érinti a kört, így 2 pontot jelöltünk ki rajta: $L$ és $M$. Ezeket invertáltuk ($O$, $N$), és szintén tudjuk, hogy az $e$ egyenes képe átmegy majd a póluson, így a képe az $N$, $O$, $E$ pontokon átmenõ kör ($p$).\\
+
+Hogy megkapjuk a megoldást, ennek a két körnek meg kell húznunk a közös érintõit, majd visszainvertálni:
+
+\centerline{
+\scriptsize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-5.83,-5.81)(6.44,4.52)
+\psplot[linestyle=dotted]{-5.83}{6.44}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-5.83}{6.44}{(-36.49-1.34*x)/11.08}
+\pscircle(1.9,-1.8){1.38}
+\psplot{-5.83}{6.44}{(--10.45--4.72*x)/4.78}
+\psplot{-5.83}{6.44}{(-51.84-1.34*x)/11.08}
+\pscircle(1.9,-1.8){3.09}
+\pscircle(1.71,-3.33){1.54}
+\pscircle(1.1,-0.99){1.14}
+\psplot{-5.83}{6.44}{(--4.15-2.18*x)/0.98}
+\psplot{-5.83}{6.44}{(-0.33-2.38*x)/0.22}
+\pscircle[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](7.73,0.83){6.4}
+\pscircle[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](-0.64,-2.03){2.55}
+\rput[bl](-5.75,-5.12){$a$}
+\rput[bl](-5.45,-2.46){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.13,-1.74){$E$}
+\rput[bl](2.41,-0.39){$k$}
+\rput[bl](-5.7,-3.16){$e$}
+\rput[bl](-5.37,-3.88){$f$}
+\psdots(1.48,-4.86)
+\rput[bl](1.5,-4.69){$I$}
+\rput[bl](0.43,1.21){$g$}
+\psdots(3.4,-5.09)
+\rput[bl](3.46,-4.99){$J$}
+\psdots(2.99,-4.2)
+\rput[bl](3.13,-4.21){$K$}
+\rput[bl](0.36,-2.94){$h$}
+\psdots(-3.06,-0.84)
+\rput[bl](-3.28,-0.64){$L$}
+\psdots(-1.71,0.5)
+\rput[bl](-2.03,0.81){$M$}
+\psdots(0.02,-0.6)
+\rput[bl](0.17,-0.6){$N$}
+\psdots(0.05,-1.44)
+\rput[bl](0.15,-1.39){$O$}
+\rput[bl](0.53,-0.24){$p$}
+\psdots(1.1,-0.99)
+\rput[bl](1.22,-0.97){$P$}
+\psdots(1.71,-3.33)
+\rput[bl](1.86,-3.42){$H$}
+\rput[bl](0.1,4.27){$e_2$}
+\rput[bl](-0.41,4.27){$e_1$}
+\psdots(1,2)
+\rput[bl](1.07,2.1){$Q$}
+\psdots(-0.25,1.24)
+\rput[bl](-0.18,1.34){$R$}
+\psdots(1.34,0.57)
+\rput[bl](1.06,0.57){$Q'$}
+\psdots(0.42,0.29)
+\rput[bl](0.45,0.42){$R'$}
+\psdots(1.35,1.24)
+\rput[bl](1.42,1.34){$U$}
+\psdots(-0.18,0.48)
+\rput[bl](-0.13,0.65){$V$}
+\psdots(0.26,-4.42)
+\rput[bl](-0.25,-4.47){$W$}
+\psdots(3.81,-4.22)
+\rput[bl](4.05,-4.23){$Z$}
+\rput[bl](4.53,5.94){$q$}
+\rput[bl](-1.93,-0.19){$r$}
+\end{pspicture*}
+}}
+
+A közös érintõket ($e_1$ és $e_2$) úgy invertáltuk, hogy mindkettõn felvettünk 1-1 pontot ($R$ és $Q$), és ezeket invertáltuk, melyeknek képei $R'$ és $Q'$. Mivel mindkét egyenes metszi az alapkört, ezért a 2 metszéspont fix pont. Így a két érintõ inverze az $R'$, $V$, $W$, illetve a $Q'$, $U$, $Z$ pontokon átmenõ körök.
+
+Távolítsuk el a fölösleges vonalakat:
+
+\centerline{\scriptsize{
+\psset{xunit=0.49982380908484975cm,yunit=0.49881782591308776cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-7.62,-7.85)(14.63,7.99)
+\psplot[linestyle=dotted]{-7.62}{14.63}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-7.62}{14.63}{(-36.49-1.34*x)/11.08}
+\psellipse(1.9,-1.8)(1.38,1.38)
+\psplot{-7.62}{14.63}{(--10.45--4.72*x)/4.78}
+\psplot{-7.62}{14.63}{(-51.84-1.34*x)/11.08}
+\psellipse[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](7.73,0.83)(6.4,6.4)
+\psellipse[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](-0.64,-2.03)(2.55,2.55)
+\rput[bl](-7.46,-6.53){$a$}
+\rput[bl](-6.9,-2.13){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.03,-1.6){$E$}
+\rput[bl](3.47,-0.15){$k$}
+\rput[bl](-7.37,-4.55){$e$}
+\rput[bl](-6.74,-3.58){$f$}
+\rput[bl](2.5,4.15){$q$}
+\rput[bl](-1.93,-0.46){$r$}
+\psdots[linecolor=darkgray](-0.64,-2.03)
+\rput[bl](-0.52,-1.85){\darkgray{$O_1$}}
+\psdots[linecolor=darkgray](7.73,0.83)
+\rput[bl](7.84,1.01){\darkgray{$O_2$}}
+\end{pspicture*}}}
+
+Már csak annyit kell tennünk, hogy az eredeti 2 egyenest érintse, ne pedig az eltoltjukat. Ez csak annyit jelent, hogy az eredeti kör (amihez kellett érintõ köröket rajzolni) sugarával csökkentjük a két szaggatott kör sugarát:
+
+\centerline{
+\scriptsize{
+\psset{xunit=0.4821714312623632cm,yunit=0.49946906108343464cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-6.27,-6.5)(14.47,7.52)
+\psplot[linestyle=dotted]{-6.27}{14.47}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-6.27}{14.47}{(-36.49-1.34*x)/11.08}
+\psellipse(1.9,-1.8)(1.38,1.38)
+\psplot{-6.27}{14.47}{(--10.45--4.72*x)/4.78}
+\psplot{-6.27}{14.47}{(-51.84-1.34*x)/11.08}
+\psellipse[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](7.73,0.83)(6.4,6.4)
+\psellipse[linewidth=1pt,linestyle=dashed,dash=2pt 2pt](-0.64,-2.03)(2.55,2.55)
+\psellipse(7.73,0.83)(5.02,5.02)
+\psellipse(-0.64,-2.03)(1.18,1.18)
+\rput[bl](-6.11,-5.21){$a$}
+\rput[bl](-5.54,-2.29){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.03,-1.6){$E$}
+\rput[bl](3.47,-0.15){$k$}
+\rput[bl](-6.02,-3.2){$e$}
+\rput[bl](-5.39,-3.73){$f$}
+\rput[bl](2.5,4.15){$q$}
+\rput[bl](-1.93,-0.46){$r$}
+\psdots[linecolor=darkgray](-0.64,-2.03)
+\rput[bl](-0.52,-1.85){$O_1$}
+\psdots[linecolor=darkgray](7.73,0.83)
+\rput[bl](7.84,1.01){$O_2$}
+\end{pspicture*}
+}
+}\normalsize
+
+Meg is kaptuk azt a két megszerkesztendõ kört, ami nem tartalmazza az $k$ kört.\\
+
+\centerline{\scriptsize{
+\psset{xunit=0.49902150816131685cm,yunit=0.4961699566861093cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-4.19,-5.43)(13.34,6.26)
+\psplot{-4.19}{13.34}{(--1.2--4.72*x)/4.78}
+\psplot{-4.19}{13.34}{(-36.49-1.34*x)/11.08}
+\psellipse(1.9,-1.8)(1.38,1.38)
+\psellipse(7.73,0.83)(5.02,5.02)
+\psellipse(-0.64,-2.03)(1.18,1.18)
+\rput[bl](-3,-2){$a$}
+\rput[bl](-2.65,-3.7){$b$}
+\psdots(1.9,-1.8)
+\rput[bl](2.03,-1.6){$E$}
+\rput[bl](2.06,-0.06){$k$}
+\psdots[linecolor=darkgray](-0.64,-2.03)
+\rput[bl](-0.52,-1.85){$O_1$}
+\psdots[linecolor=darkgray](7.73,0.83)
+\rput[bl](7.84,1.01){$O_2$}
+\end{pspicture*}
+}}
+
+De van egy olyan eset, amikor a két érintõ kör, olyan, hogy belülrõl érinti a $k$ kört, azaz tartalmazza. Ennek a lépéseit csak röviden írjuk le, mert lényegében azonosak az elõzõ megoldásmenettel.
+
+A fontos változtatás, hogy az egyeneseket, most a $k$ kör felé toljuk el, nem pedig tõle el.
+
+\centerline{\scriptsize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.64,-5.14)(5.39,1.3)
+\psplot[linestyle=dotted]{-2.64}{5.39}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-2.64}{5.39}{(-36.49-1.34*x)/11.08}
+\pscircle(2.97,-1.27){1.51}
+\psplot{-2.64}{5.39}{(-8.91--4.72*x)/4.78}
+\psplot{-2.64}{5.39}{(-19.68-1.34*x)/11.08}
+\psline{->}(0.74,0.98)(1.8,-0.09)
+\psline{->}(2.69,-3.62)(2.87,-2.13)
+\rput[bl](-2.47,-1.73){$a$}
+\rput[bl](-2.33,-2.62){$b$}
+\psdots(2.97,-1.27)
+\rput[bl](3.05,-1.16){$E$}
+\rput[bl](2.21,-0.36){$k$}
+\rput[bl](-2.05,-4.26){$e$}
+\rput[bl](-2.47,-1.14){$f$}
+\end{pspicture*}
+}}
+
+Ezek után invertáljuk a két eltolt egyenest ($f$ és $e$) egy $E$ középpontú alapkörre ($g$):\\
+
+\centerline{\footnotesize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.93,-9.06)(9.45,2.98)
+\psplot[linestyle=dotted]{-2.93}{9.45}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-2.93}{9.45}{(-36.49-1.34*x)/11.08}
+\pscircle(2.97,-1.27){1.51}
+\psplot{-2.93}{9.45}{(-8.91--4.72*x)/4.78}
+\psplot{-2.93}{9.45}{(-19.68-1.34*x)/11.08}
+\pscircle(2.97,-1.27){2.36}
+\pscircle[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](2.58,-4.51){3.26}
+\pscircle[linestyle=dashed,dash=1pt 3pt 5pt 3pt ](1.79,-0.08){1.68}
+\psplot{-2.93}{9.45}{(--13.38-3.62*x)/2.15}
+\psplot{-2.93}{9.45}{(--0.42-4.14*x)/-0.77}
+\rput[bl](-2.23,-2.34){$a$}
+\rput[bl](-2.12,-2.83){$b$}
+\psdots(2.97,-1.27)
+\rput[bl](2.98,-1.64){$E$}
+\rput[bl](2.22,-0.4){$k$}
+\rput[bl](-2.14,-4.32){$e$}
+\rput[bl](-2.61,-1){$f$}
+\rput[bl](1.77,0.32){$g$}
+\psdots(0.61,-1.27)
+\rput[bl](0.09,-1.32){$N$}
+\psdots(2.99,1.09)
+\rput[bl](2.92,1.3){$O$}
+\psdots(0.68,-1.86)
+\rput[bl](0.51,-2.36){$P$}
+\psdots(5.05,-2.39)
+\rput[bl](4.98,-2.89){$Q$}
+\rput[bl](-0.02,-3.02){$h$}
+\rput[bl](0.56,1.36){$p$}
+\psdots(1.1,-1.61)
+\rput[bl](1.05,-1.45){$R$}
+\rput[bl](1.68,2.53){$e_2$}
+\rput[bl](0.71,2.38){$e_1$}
+\end{pspicture*}
+}}
+
+Az így keletkezett két szaggatott körnek ($h$ és $p$) meghúztuk a két külsõ érintõjét (csak külsõ lesz, hiszen ahogy már fentebb írtuk, vagy érintik vagy metszik egymást). Ezeket visszainvertáljuk:
+
+\centerline{\footnotesize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.93,-4.96)(8.07,2.98)
+\psplot[linestyle=dotted]{-2.93}{8.07}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-2.93}{8.07}{(-36.49-1.34*x)/11.08}
+\pscircle(2.97,-1.27){1.51}
+\psplot{-2.93}{8.07}{(-8.91--4.72*x)/4.78}
+\psplot{-2.93}{8.07}{(-19.68-1.34*x)/11.08}
+\pscircle(2.97,-1.27){2.36}
+\psplot{-2.93}{8.07}{(--13.38-3.62*x)/2.15}
+\psplot{-2.93}{8.07}{(--0.42-4.14*x)/-0.77}
+\pscircle[linestyle=dashed,dash=3pt 3pt](2.07,-1.11){0.91}
+\pscircle[linestyle=dashed,dash=3pt 3pt](4.86,-0.15){2.2}
+\rput[bl](-2.23,-2.34){$a$}
+\rput[bl](-1.99,-2.83){$b$}
+\psdots(2.97,-1.27)
+\rput[bl](2.98,-1.64){$E$}
+\rput[bl](2.22,-0.4){$k$}
+\rput[bl](-2.14,-4.32){$e$}
+\rput[bl](-2.61,-0.49){$f$}
+\rput[bl](1.77,0.32){$g$}
+\rput[bl](1.68,2.53){$e_2$}
+\rput[bl](0.71,2.38){$e_1$}
+\psdots(-0.03,-0.72)
+\rput[bl](-0.48,-0.85){$A$}
+\psdots(-0.37,-2.56)
+\rput[bl](-0.19,-2.7){$B$}
+\psdots(1.17,-0.94)
+\rput[bl](0.88,-1.3){$A'$}
+\psdots(1.51,-1.83)
+\rput[bl](1.64,-1.77){$B'$}
+\psdots(5.08,-2.34)
+\rput[bl](5.28,-2.15){$H$}
+\psdots(3.05,1.09)
+\rput[bl](3.32,1.13){$I$}
+\end{pspicture*}
+}}
+
+Megint eltüntetjük a felesleges vonalakat, köröket:
+
+\centerline{\footnotesize{
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.93,-4.96)(8.07,2.98)
+\psplot[linestyle=dotted]{-2.93}{8.07}{(--1.2--4.72*x)/4.78}
+\psplot[linestyle=dotted]{-2.93}{8.07}{(-36.49-1.34*x)/11.08}
+\pscircle(2.97,-1.27){1.51}
+\psplot{-2.93}{8.07}{(-8.91--4.72*x)/4.78}
+\psplot{-2.93}{8.07}{(-19.68-1.34*x)/11.08}
+\pscircle[linestyle=dashed,dash=3pt 3pt](2.07,-1.11){0.91}
+\pscircle[linestyle=dashed,dash=3pt 3pt](4.86,-0.15){2.2}
+\rput[bl](-2.23,-2.34){$a$}
+\rput[bl](-1.99,-2.83){$b$}
+\psdots(2.97,-1.27)
+\rput[bl](2.98,-1.64){$E$}
+\rput[bl](3.56,-0.3){$k$}
+\rput[bl](-2.14,-4.32){$e$}
+\rput[bl](-2.61,-0.49){$f$}
+\rput[bl](1.03,-0.45){$m$}
+\rput[bl](3.64,1.32){$n$}
+\psdots(4.86,-0.15)
+\rput[bl](5.11,0.04){$O_3$}
+\psdots(2.07,-1.11)
+\rput[bl](2.2,-1){$O_4$}
+\end{pspicture*}
+}}
+
+Nincs más dolgunk, mint a két szaggatott körnek a sugarát megnagyobbítani $k$ kör sugarával, azért, hogy a két eredeti egyenest ($a$ és $b$) érintsék, illetve ne az $E$-n menjenek át, hanem érintsék a $k$ kört:
+
+\centerline{\scriptsize{
+\psset{xunit=0.7cm,yunit=0.7cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.72,-5.27)(9.43,4.81)
+\psplot{-2.72}{9.43}{(--1.2--4.72*x)/4.78}
+\psplot{-2.72}{9.43}{(-36.49-1.34*x)/11.08}
+\pscircle(2.97,-1.27){1.05}
+\pscircle(2.07,-1.11){1.69}
+\pscircle(4.86,-0.15){2.59}
+\rput[bl](-2.02,-2.13){$a$}
+\rput[bl](-1.78,-2.85){$b$}
+\psdots(2.97,-1.27)
+\rput[bl](2.98,-1.64){$E$}
+\rput[bl](3.22,-0.15){$k$}
+\psdots(4.86,-0.15)
+\rput[bl](5.11,0.04){$O_3$}
+\psdots(2.07,-1.11)
+\rput[bl](2.2,-1){$O_4$}
+\rput[bl](0.41,0.21){$k_4$}
+\rput[bl](3,2.57){$k_3$}
+\end{pspicture*}
+}}
+
+\end{document}

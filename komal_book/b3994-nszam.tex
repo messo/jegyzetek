@@ -1,0 +1,61 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 20pt 
+\hoffset - 60pt 
+\textwidth 450pt
+\textheight 700pt
+\parindent 10pt
+
+\begin{document}
+
+\noindent\textbf{B. 3994.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 10. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Határozzuk meg az összes olyan $n$ nemnegatív egész számot, amelyhez találhatók olyan $a$ és $b$ egész számok, hogy $n^2=a+b$ és $n^3=a^2+b^2$.\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+\begin{eqnarray}
+n^2=a+b\\
+n^3=a^2+b^2
+\end{eqnarray}
+
+Az $n$ az nemnegatív egész szám, így $n\geqslant 0$. Nézzük meg az elsõ pár $n$ számra: $n=0; 1; 2; 3$. Ha $n=0$, akkor nyilvánvalóan, $a=0$ és $b=0$-ra teljesül a két egyenlet. Hasonlóan $n=1$, ekkor például $a=1$ és $b=0$. Ha $n=2$, akkor pedig $a=2$ és $b=2$ teljesíti az egyenleteket.
+
+Viszont $n=3$ esetében nem találunk megoldásokat. Bárhogy választjuk $a$-t és $b$-t, $a^2+b^2$ mindig nagyobb lesz mint $3^3=27$. Tehát a sejtésünk az az, hogy $n\geqslant 3$, $n\in\mathbb{Z}$ esetekben, nem találunk $a$ és $b$ egészeket, melyekre teljesülnek a fenti egyenletek.\\
+
+Mivel $n^2=a+b$, ezért $a=\frac{n^2}{2}+y$, illetve $b=\frac{n^2}{2}-y$, ahol $y$ racionális szám.\\
+
+Sejtésünk, hogy a (2)-nek a jobb oldala, mindig nagyobb lesz mint a bal oldal, ha $n\geqslant 3$.\\
+
+\[a^2+b^2 = \left(\frac{n^2}{2}+y\right)^2+\left(\frac{n^2}{2}-y\right)^2 = \frac{n^4}{2}+2y^2\]
+
+\[n^3 = \frac{n^4}{2}+2y^2\]
+
+Azt akarjuk bebizonyítani, a sejtés alapján, hogy $n\geqslant 3$ esetben a jobb oldal nagyobb lesz mint a bal oldal. Ehhez vegyük a jobb oldal minimumát és úgy vizsgáljuk az egyenlõtlenséget (ami a sejtésbõl ered). Látható, hogy a minimum ott van, ahol $y=0$:
+
+\[n^3 < \frac{n^4}{2}\]
+
+Leoszthatunk $n^3$-el, hiszen $n$ nemnegatív egész, illetve $n\ne 0$, mivel $n=0$ esetet már vizsgáltuk.
+
+\[1< \frac{n}{2}\]
+\[2 < n\]
+
+Innen látható, hogy $n>2$ esetben a jobb oldal biztosan nagyobb mint a bal (hiszen a jobb oldalon még ott van egy $2y^2$, ami nem negatív), tehát sejtésünket igazoltuk. Természetesen az $n>2$ ekvivalens az $n\geqslant 3$-al, hiszen egész számokról van szó. $0\leqslant n\leqslant 2$ esetekben viszont megtaláltunk minden megoldást: $n=\{ 0; 1; 2 \}$.
+
+\end{document}

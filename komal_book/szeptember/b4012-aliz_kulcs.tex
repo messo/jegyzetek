@@ -1,0 +1,64 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[latin2]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[,dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-3dplot}
+\usepackage{pst-plot}
+\usepackage{pst-math}
+\usepackage{pst-xkey}
+\pagestyle{empty}
+
+\marginparwidth = 0pt
+\voffset - 60pt 
+\hoffset - 60pt 
+\textwidth 455pt
+\textheight 700pt
+\parindent 10pt
+
+\makeatletter
+\define@key[psset]{}{transpalpha}{\pst@checknum{#1}\pstranspalpha}
+\psset{transpalpha=1}
+\def\psfs@transp{%
+  \addto@pscode{/Normal .setblendmode \pstranspalpha .setshapealpha }%
+  \psfs@solid}
+
+\begin{document}
+
+\large
+
+\noindent\textbf{B. 4012.}\\
+Kriván Bálint\\
+Budapest, Berzsenyi D. Gimn., 11. o. t.\\
+redhat24@freemail.hu\\
+
+\noindent\textbf{Feladat:}\\ Alíznak 8 kulcsa van felfûzve egy karikára. A kulcsok ránézésre megkülönböztethetetlenek és a két oldaluk is egyforma. Alíz, hogy meg tudja a kulcsokat különböztetni, mindegyikre egy-egy színes sapkát húz. Hány színre van szüksége?\\
+\hrule
+\hskip 10pt
+
+\noindent\textbf{Megoldás:}\\
+
+Az nyílvánvaló, hogy 1 színbõl nem oldható meg, hiszen akkor ugyanúgy megkülönböz\-tet\-he\-tet\-le\-nek lesznek, ahogy eddig.
+
+Próbáljuk meg 2 színnel, íme egy lehetséges színezés:
+
+\centerline{\includegraphics{lanc.png}}
+
+Nézzük meg, hogy melyik kulcsot hogy tudjuk megkülönböztetni:\\
+Az 1-es kulcs az egyetlen olyan fekete kulcs, ami mellett egy másik fekete, illetve 4 fehér (5, 6, 7, 8) kulcs van. \\
+A 2-es kulcs az egyetlen olyan fekete kulcs, ami mellett egy másik fekete, illetve 1 fehér kulcs van. \\
+A 3-as kulcs az egyetlen olyan fehér kulcs, ami mellett egy-egy fekete kulcs van.\\
+A 4-es kulcs az egyetlen olyan fekete kulcs, ami mellett egy-egy fehér kulcs van.\\
+Az 5-ös kulcs az egyetlen olyan fehér kulcs, ami mellett egy fekete, illetve 3 fehér (6, 7, 8) kulcs van.\\
+A 6-os kulcs az egyetlen olyan fehér kulcs, ami mellett egy fehér (5), illetve 2 fehér (7, 8) kulcs van, amit 2 fekete (1, 2) kulcs követ.\\
+A 7-es kulcs az egyetlen olyan fehér kulcs, ami mellett egy fehér (8) \textendash{} amit 2 fekete (1, 2) kulcs követ \textendash{} illetve 3 fehér kulcs van.\\
+A 8-as kulcs az egyetlen olyan fehér kulcs, ami mellett két fekete (1, 2), illetve 3 fehér (6, 7, 8) kulcs van.\\
+
+Megjegyzés: Természetesen a fehér és a fekete szín helyett használhatunk másik két színt.\\
+
+\textbf{Tehát legalább 2 szín kell, de természetesen megoldható, ennél több színnel is.}
+
+\end{document}
